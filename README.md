@@ -2,7 +2,7 @@
 
 <img width="114" height="48" alt="whoareyou" src="https://github.com/user-attachments/assets/54454f48-6eaa-422f-bd35-8e403945af60" />
 
-**WAU**는 AI 필터를 이용하여 나만의 특별한 명함을 만들고, 인생네컷을 찍을 수 있는 서비스입니다.
+**WRU**는 AI 필터를 이용하여 나만의 특별한 명함을 만들고, 인생네컷을 찍을 수 있는 서비스입니다.
 
 실제 다양한 서비스 환경에서 운영되기보다 특정 환경(축전 및 대회 부스 운영 등)에서 시연을 목적으로 합니다.
 
@@ -27,7 +27,7 @@ pnpm dev
 ## 🛠 Tech Stack
 
 ### Frontend
-- **React 18** - UI 라이브러리
+- **React 19** - UI 라이브러리
 - **TypeScript** - 타입 안정성
 - **Vite** - 빌드 도구
 - **Tailwind CSS v4** - 스타일링
