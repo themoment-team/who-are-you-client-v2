@@ -6,7 +6,7 @@
   "printWidth": 80,
   "useTabs": false,
   "endOfLine": "lf",
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "bracketSpacing": true,
   "jsxSingleQuote": false
 }
