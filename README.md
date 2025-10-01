@@ -10,10 +10,10 @@
 
 ```bash
 # 저장소 클론
-git clone https://github.com/your-username/who-are-you-v2.git
+git clone https://github.com/themoment-team/who-are-you-client-v2.git
 
 # 프로젝트 디렉토리로 이동
-cd who-are-you-v2
+cd who-are-you-client-v2
 
 # 의존성 설치
 pnpm install
