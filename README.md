@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Who Are You?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img width="114" height="48" alt="whoareyou" src="https://github.com/user-attachments/assets/54454f48-6eaa-422f-bd35-8e403945af60" />
 
-Currently, two official plugins are available:
+**WAU**는 AI 필터를 이용하여 나만의 특별한 명함을 만들고, 인생네컷을 찍을 수 있는 서비스입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+실제 다양한 서비스 환경에서 운영되기보다 특정 환경(축전 및 대회 부스 운영 등)에서 시연을 목적으로 합니다.
 
-## React Compiler
+## 🚀 Quick Start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# 저장소 클론
+git clone https://github.com/your-username/who-are-you-v2.git
 
-## Expanding the ESLint configuration
+# 프로젝트 디렉토리로 이동
+cd who-are-you-v2
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# 의존성 설치
+pnpm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 개발 서버 실행
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+개발 서버가 실행되면 [http://localhost:5173](http://localhost:5173)에서 확인할 수 있습니다.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠 Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Frontend
+- **React 18** - UI 라이브러리
+- **TypeScript** - 타입 안정성
+- **Vite** - 빌드 도구
+- **Tailwind CSS v4** - 스타일링
+
+### Form & Validation
+- **React Hook Form** - 폼 상태 관리
+- **Zod** - 스키마 기반 검증
+
+### Development Tools
+- **pnpm** - 패키지 매니저
+- **ESLint** - 코드 품질 관리
+- **Prettier** - 코드 포맷팅
+
+## 💻 Development Guide
+
+### 코드 스타일
+
+프로젝트는 ESLint와 Prettier를 사용하여 일관된 코드 스타일을 유지합니다.
+
+```bash
+# 린트 검사
+pnpm lint
+
+# 린트 자동 수정
+pnpm lint:fix
+
+# 코드 포맷팅
+pnpm format
+
+# 포맷 검사
+pnpm format:check
 ```
