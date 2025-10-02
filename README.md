@@ -27,16 +27,19 @@ pnpm dev
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **React 19** - UI 라이브러리
 - **TypeScript** - 타입 안정성
 - **Vite** - 빌드 도구
 - **Tailwind CSS v4** - 스타일링
 
 ### Form & Validation
+
 - **React Hook Form** - 폼 상태 관리
 - **Zod** - 스키마 기반 검증
 
 ### Development Tools
+
 - **pnpm** - 패키지 매니저
 - **ESLint** - 코드 품질 관리
 - **Prettier** - 코드 포맷팅
