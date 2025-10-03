@@ -13,7 +13,7 @@ const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
 
   return (
-    <div className="h-screen bg-[#f8f8f8]">
+    <div className="flex h-screen items-center justify-center bg-[#f8f8f8]">
       {step === STEP.START && <StartPage setStep={setStep} />}
       {step === STEP.CAMERA && <CameraPage setStep={setStep} />}
       {step === STEP.AI_CONVERSION && <AiConversionPage setStep={setStep} />}

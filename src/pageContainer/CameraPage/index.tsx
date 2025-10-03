@@ -6,9 +6,11 @@ interface CameraPageProps {
 
 const CameraPage = ({ setStep }: CameraPageProps) => {
   return (
-    <div>
+    <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
       <h1>Camera Page</h1>
-      <button onClick={() => setStep(STEP.AI_CONVERSION)}>Go to AI Conversion</button>
+      <div className="inline-flex flex-col">
+        <button onClick={() => setStep(STEP.AI_CONVERSION)}>Go to AI Conversion(다음으로)</button>
+      </div>
     </div>
   );
 };
