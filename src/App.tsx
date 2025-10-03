@@ -14,11 +14,11 @@ const App = () => {
 
   return (
     <div className="h-screen bg-[#f8f8f8]">
-      {step === STEP.START && <StartPage />}
-      {step === STEP.CAMERA && <CameraPage />}
-      {step === STEP.AI_CONVERSION && <AiConversionPage />}
-      {step === STEP.INFO_INPUT && <InfoInputPage />}
-      {step === STEP.THEME_SELECT && <ThemeSelectPage />}
+      {step === STEP.START && <StartPage setStep={setStep} />}
+      {step === STEP.CAMERA && <CameraPage setStep={setStep} />}
+      {step === STEP.AI_CONVERSION && <AiConversionPage setStep={setStep} />}
+      {step === STEP.INFO_INPUT && <InfoInputPage setStep={setStep} />}
+      {step === STEP.THEME_SELECT && <ThemeSelectPage setStep={setStep} />}
     </div>
   );
 };
