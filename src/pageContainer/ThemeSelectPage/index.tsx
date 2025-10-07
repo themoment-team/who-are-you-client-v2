@@ -6,17 +6,37 @@ import {
   BusinessCardTheme2,
   BusinessCardTheme3,
   BusinessCardTheme4,
+  FourCutTheme1,
+  FourCutTheme2,
+  FourCutTheme3,
+  FourCutTheme4,
+  FourCutTheme5,
+  FourCutTheme6,
+  FourCutTheme7,
 } from '../../components';
-import { STEP, type Step } from '../../types';
+import { type CardType, STEP, type Step } from '../../types';
 
 interface ThemeSelectPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
+  cardType: CardType | undefined;
 }
 
-const ThemeSelectPage = ({ setStep }: ThemeSelectPageProps) => {
+const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   const [currentTheme, setCurrentTheme] = useState(0);
 
-  const themes = [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4];
+  const themes =
+    cardType === 'BUSINESS_CARD'
+      ? [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4]
+      : [
+          FourCutTheme1,
+          FourCutTheme2,
+          FourCutTheme3,
+          FourCutTheme4,
+          FourCutTheme5,
+          FourCutTheme6,
+          FourCutTheme7,
+        ];
+
   const CurrentThemeComponent = themes[currentTheme];
 
   const handlePrevTheme = () => {
@@ -30,7 +50,13 @@ const ThemeSelectPage = ({ setStep }: ThemeSelectPageProps) => {
   return (
     <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
       <div
-        className={`${currentTheme > 1 ? 'mb-[2.1563rem]' : 'mb-[6.875rem]'} flex flex-col gap-4`}
+        className={`${
+          cardType === 'BUSINESS_CARD' && currentTheme > 1
+            ? 'mb-[2.1563rem]'
+            : cardType === 'FOUR_CUT'
+              ? 'mb-[3rem]'
+              : 'mb-[6.875rem]'
+        } flex flex-col gap-4`}
       >
         <h1 className="text-[2.25rem]/[2.25rem] font-black">명함 테마 선택</h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
