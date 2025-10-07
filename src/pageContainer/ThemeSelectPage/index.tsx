@@ -1,4 +1,12 @@
+import { useState } from 'react';
+
 import { Arrow, Dot } from '../../assets';
+import {
+  BusinessCardTheme1,
+  BusinessCardTheme2,
+  BusinessCardTheme3,
+  BusinessCardTheme4,
+} from '../../components';
 import { STEP, type Step } from '../../types';
 
 interface ThemeSelectPageProps {
@@ -6,9 +14,24 @@ interface ThemeSelectPageProps {
 }
 
 const ThemeSelectPage = ({ setStep }: ThemeSelectPageProps) => {
+  const [currentTheme, setCurrentTheme] = useState(0);
+
+  const themes = [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4];
+  const CurrentThemeComponent = themes[currentTheme];
+
+  const handlePrevTheme = () => {
+    setCurrentTheme((prev) => (prev - 1 + themes.length) % themes.length);
+  };
+
+  const handleNextTheme = () => {
+    setCurrentTheme((prev) => (prev + 1) % themes.length);
+  };
+
   return (
     <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
-      <div className="mb-[6.875rem] flex flex-col gap-4">
+      <div
+        className={`${currentTheme > 1 ? 'mb-[2.1563rem]' : 'mb-[6.875rem]'} flex flex-col gap-4`}
+      >
         <h1 className="text-[2.25rem]/[2.25rem] font-black">명함 테마 선택</h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
           인쇄하실 명함의 테마를 선택해주세요.
@@ -17,15 +40,18 @@ const ThemeSelectPage = ({ setStep }: ThemeSelectPageProps) => {
         </p>
       </div>
       <div className="mb-[3rem] flex items-center justify-between px-[3.25rem]">
-        <Arrow />
-        <div className="h-[11.8125rem] w-[21.25rem] rounded-lg bg-white shadow-[0_2px_6px_0_rgba(209,209,209,0.25)]"></div>
-        <Arrow flip />
+        <button onClick={handlePrevTheme}>
+          <Arrow />
+        </button>
+        <CurrentThemeComponent />
+        <button onClick={handleNextTheme}>
+          <Arrow flip />
+        </button>
       </div>
       <div className="mb-[3rem] flex justify-center gap-4">
-        <Dot active />
-        <Dot />
-        <Dot />
-        <Dot />
+        {themes.map((_, index) => (
+          <Dot key={index} active={index === currentTheme} />
+        ))}
       </div>
       <div className="flex items-center justify-end gap-6">
         <button
