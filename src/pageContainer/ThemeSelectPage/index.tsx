@@ -58,11 +58,15 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
               : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
-        <h1 className="text-[2.25rem]/[2.25rem] font-black">명함 테마 선택</h1>
+        <h1 className="text-[2.25rem]/[2.25rem] font-black">
+          {cardType === 'BUSINESS_CARD' ? '명함' : '인생네컷'} 테마 선택
+        </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
-          인쇄하실 명함의 테마를 선택해주세요.
+          인쇄하실 {cardType === 'BUSINESS_CARD' ? '명함' : '인생네컷'}의 테마를 선택해주세요.
           <br />
-          명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.
+          {cardType === 'BUSINESS_CARD'
+            ? '명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.'
+            : '사진을 선택해서 교체할 수도 있어요.'}
         </p>
       </div>
       <div className="mb-[3rem] flex items-center justify-between px-[3.25rem]">
