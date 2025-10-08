@@ -69,7 +69,13 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
             : '사진을 선택해서 교체할 수도 있어요.'}
         </p>
       </div>
-      <div className="mb-[3rem] flex items-center justify-between px-[3.25rem]">
+      <div
+        className={`${
+          (cardType === 'BUSINESS_CARD' && currentTheme > 1) || cardType === 'FOUR_CUT'
+            ? 'mb-[2.25rem]'
+            : 'mb-[3rem]'
+        } flex items-center justify-between px-[3.25rem]`}
+      >
         <button onClick={handlePrevTheme}>
           <Arrow />
         </button>
