@@ -84,8 +84,16 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         <button onClick={handlePrevTheme}>
           <Arrow />
         </button>
-        <div ref={contentRef}>
+        <div
+          ref={contentRef}
+          className={`flex items-center gap-4 ${cardType === 'BUSINESS_CARD' && currentTheme < 2 ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
+        >
           <CurrentThemeComponent />
+          {cardType === 'BUSINESS_CARD' && (
+            <div className="hidden print:block">
+              <CurrentThemeComponent />
+            </div>
+          )}
         </div>
         <button onClick={handleNextTheme}>
           <Arrow flip />

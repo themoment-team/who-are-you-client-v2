@@ -2,7 +2,7 @@ import { GSMLogo, ShortBar } from '../../../assets';
 
 const BusinessCardTheme1 = () => {
   return (
-    <div className="relative flex h-[11.8125rem] w-[21.25rem] justify-between bg-white p-[1.75rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)]">
+    <div className="relative flex h-[11.8125rem] w-[21.25rem] justify-between bg-white p-[1.75rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)] print:border print:border-[#CFCFCF] print:shadow-none">
       <GSMLogo top={16.5} left={17} />
       <div className="z-10 flex flex-col justify-between">
         <div className="flex flex-col gap-[.1875rem]">
