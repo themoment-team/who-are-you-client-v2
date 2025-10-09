@@ -6,8 +6,10 @@ export interface BusinessCardProps {
   email: string;
   tel: string;
   imageSrc: string;
+  onImageClick: () => void;
 }
 
 export interface FourCutProps {
   imageSrcs: string[];
+  onImageClick: () => void;
 }
