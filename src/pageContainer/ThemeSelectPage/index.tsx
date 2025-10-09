@@ -27,7 +27,14 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   const [currentTheme, setCurrentTheme] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const reactToPrintFn = useReactToPrint({ contentRef });
+  const pageStyle =
+    cardType === 'BUSINESS_CARD'
+      ? currentTheme < 2
+        ? '@page {size: portrait;}'
+        : '@page {size: landscape;}'
+      : '@page {size: portrait;}';
+
+  const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
   const themes =
     cardType === 'BUSINESS_CARD'
