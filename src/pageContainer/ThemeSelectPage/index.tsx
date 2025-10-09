@@ -16,7 +16,13 @@ import {
   FourCutTheme6,
   FourCutTheme7,
 } from '../../components';
-import { type CardType, STEP, type Step } from '../../types';
+import {
+  type BusinessCardProps,
+  type CardType,
+  type FourCutProps,
+  STEP,
+  type Step,
+} from '../../types';
 
 interface ThemeSelectPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
@@ -51,6 +57,23 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
 
   const CurrentThemeComponent = themes[currentTheme];
 
+  const businessCardData: BusinessCardProps = {
+    name: '홍길동',
+    major: 'UI/UX Designer',
+    email: 'honggildong@gmail.com',
+    tel: '010-1234-5678',
+    imageSrc: '/public/images/example.jpg',
+  };
+
+  const fourCutData: FourCutProps = {
+    imageSrcs: [
+      '/public/images/example.jpg',
+      '/public/images/example.jpg',
+      '/public/images/example.jpg',
+      '/public/images/example.jpg',
+    ],
+  };
+
   const handlePrevTheme = () => {
     setCurrentTheme((prev) => (prev - 1 + themes.length) % themes.length);
   };
@@ -60,7 +83,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   };
 
   return (
-    <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
+    <div className="relative h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
       <div
         className={`${
           cardType === 'BUSINESS_CARD' && currentTheme > 1
@@ -95,10 +118,14 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
           ref={contentRef}
           className={`printable flex items-center gap-4 ${cardType === 'BUSINESS_CARD' && currentTheme < 2 ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
         >
-          <CurrentThemeComponent />
+          {cardType === 'BUSINESS_CARD' ? (
+            <CurrentThemeComponent {...businessCardData} />
+          ) : (
+            <CurrentThemeComponent {...fourCutData} />
+          )}
           {cardType === 'BUSINESS_CARD' && (
             <div className="hidden print:block">
-              <CurrentThemeComponent />
+              <CurrentThemeComponent {...businessCardData} />
             </div>
           )}
         </div>
