@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+
+import { useReactToPrint } from 'react-to-print';
 
 import { Arrow, Dot } from '../../assets';
 import {
@@ -23,6 +25,9 @@ interface ThemeSelectPageProps {
 
 const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   const [currentTheme, setCurrentTheme] = useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const reactToPrintFn = useReactToPrint({ contentRef });
 
   const themes =
     cardType === 'BUSINESS_CARD'
@@ -79,7 +84,9 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         <button onClick={handlePrevTheme}>
           <Arrow />
         </button>
-        <CurrentThemeComponent />
+        <div ref={contentRef}>
+          <CurrentThemeComponent />
+        </div>
         <button onClick={handleNextTheme}>
           <Arrow flip />
         </button>
@@ -96,7 +103,10 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         >
           이전으로
         </button>
-        <button className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]">
+        <button
+          className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]"
+          onClick={reactToPrintFn}
+        >
           인쇄하기
         </button>
       </div>
