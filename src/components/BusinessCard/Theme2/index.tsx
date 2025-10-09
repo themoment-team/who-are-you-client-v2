@@ -2,9 +2,9 @@ import { GSMLogo, LongBar } from '../../../assets';
 
 const BusinessCardTheme2 = () => {
   return (
-    <div className="relative flex h-[11.8125rem] w-[21.25rem] justify-between rounded-lg bg-white p-[1.75rem] pl-[1.4375rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)]">
+    <div className="relative flex h-[11.8125rem] w-[21.25rem] justify-between bg-white p-[1.75rem] pl-[1.4375rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)]">
       <GSMLogo top={112} left={32} />
-      <div className="flex gap-[.8125rem]">
+      <div className="z-10 flex gap-[.8125rem]">
         <LongBar />
         <div className="flex flex-col justify-between">
           <div className="flex flex-col gap-[.1875rem]">
