@@ -1,4 +1,9 @@
-const GSMLogo = () => (
+type GSMLogoProps = {
+  top?: number;
+  left?: number;
+};
+
+const GSMLogo = ({ top = 0, left = 0 }: GSMLogoProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -6,6 +11,7 @@ const GSMLogo = () => (
     height={54}
     viewBox="0 0 120 54"
     fill="none"
+    style={{ position: 'absolute', top, left }}
   >
     <path opacity={0.5} d="M120 0H0V54H120V0Z" fill="url(#pattern0_291_1031)" fillOpacity={0.15} />
     <defs>
