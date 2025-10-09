@@ -1,14 +1,22 @@
 import { GSMLogo, ShortBar } from '../../../assets';
 import type { BusinessCardProps } from '../../../types';
 
-const BusinessCardTheme4 = ({ name, major, email, tel, imageSrc }: BusinessCardProps) => {
+const BusinessCardTheme4 = ({
+  name,
+  major,
+  email,
+  tel,
+  imageSrc,
+  onImageClick,
+}: BusinessCardProps) => {
   return (
     <div className="relative flex h-[21.25rem] w-[11.8125rem] flex-col gap-[2.25rem] bg-white p-[1.75rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)] print:border print:border-[#CFCFCF] print:shadow-none">
       <GSMLogo top={264} left={24} />
       <img
         src={imageSrc}
         alt="image"
-        className="h-[8.3125rem] w-[8.3125rem] rounded-full object-cover object-center"
+        className="h-[8.3125rem] w-[8.3125rem] cursor-pointer rounded-full object-cover object-center"
+        onClick={onImageClick}
       />
       <div className="z-10 flex h-full flex-col justify-between">
         <div className="flex flex-col gap-[.1875rem]">

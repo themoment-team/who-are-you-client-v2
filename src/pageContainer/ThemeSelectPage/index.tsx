@@ -31,7 +31,7 @@ interface ThemeSelectPageProps {
 }
 
 const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -65,6 +65,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
     email: 'honggildong@gmail.com',
     tel: '010-1234-5678',
     imageSrc: '/public/images/example.jpg',
+    onImageClick: () => setIsModalOpen(true),
   };
 
   const fourCutData: FourCutProps = {
@@ -74,6 +75,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       '/public/images/example.jpg',
       '/public/images/example.jpg',
     ],
+    onImageClick: () => setIsModalOpen(true),
   };
 
   const handlePrevTheme = () => {

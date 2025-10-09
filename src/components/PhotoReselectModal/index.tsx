@@ -3,7 +3,7 @@ import type { CardType } from '../../types';
 
 interface PhotoReselectModalProps {
   cardType: CardType | undefined;
-  onClose: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
 }
 
 const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
@@ -53,7 +53,7 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
         <div className="flex justify-end">
           <button
             className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]"
-            onClick={() => onClose(false)}
+            onClick={onClose}
           >
             확인
           </button>
