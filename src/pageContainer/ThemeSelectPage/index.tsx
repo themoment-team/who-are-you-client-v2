@@ -93,7 +93,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         </button>
         <div
           ref={contentRef}
-          className={`flex items-center gap-4 ${cardType === 'BUSINESS_CARD' && currentTheme < 2 ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
+          className={`printable flex items-center gap-4 ${cardType === 'BUSINESS_CARD' && currentTheme < 2 ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
         >
           <CurrentThemeComponent />
           {cardType === 'BUSINESS_CARD' && (
