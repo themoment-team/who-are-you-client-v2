@@ -91,12 +91,12 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       </div>
       <div className="flex items-center justify-end gap-6">
         <button
-          className="underline-offset-from decoration-skip-ink-none text-[1.25rem]/[1.875rem] font-medium text-[#888] underline [text-underline-position:from-font]"
+          className="underline-offset-from decoration-skip-ink-none cursor-pointer text-[1.25rem]/[1.875rem] font-medium text-[#888] underline [text-underline-position:from-font]"
           onClick={() => setStep(STEP.INFO_INPUT)}
         >
           이전으로
         </button>
-        <button className="rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]">
+        <button className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]">
           인쇄하기
         </button>
       </div>
