@@ -29,7 +29,7 @@ const BusinessCardTheme2 = () => {
       <img
         src="/public/images/example.jpg"
         alt="image"
-        className="h-[8.3125rem] w-[8.3125rem] object-cover object-center"
+        className="h-[8.3125rem] w-[8.3125rem] rounded-[.2875rem] object-cover object-center"
       />
     </div>
   );
