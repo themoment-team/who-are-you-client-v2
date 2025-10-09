@@ -15,6 +15,7 @@ import {
   FourCutTheme5,
   FourCutTheme6,
   FourCutTheme7,
+  PhotoReselectModal,
 } from '../../components';
 import {
   type BusinessCardProps,
@@ -30,6 +31,7 @@ interface ThemeSelectPageProps {
 }
 
 const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [currentTheme, setCurrentTheme] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -84,6 +86,9 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
 
   return (
     <div className="relative h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
+      {isModalOpen && (
+        <PhotoReselectModal cardType={cardType} onClose={() => setIsModalOpen(false)} />
+      )}
       <div
         className={`${
           cardType === 'BUSINESS_CARD' && currentTheme > 1
@@ -93,7 +98,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
               : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
-        <h1 className="text-[2.25rem]/[2.25rem] font-black">
+        <h1 className="text-[2.25rem]/[2.25rem] font-black text-[#222]">
           {cardType === 'BUSINESS_CARD' ? '명함' : '인생네컷'} 테마 선택
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
