@@ -1,29 +1,30 @@
 import { GSMLogoWithText } from '../../../assets';
+import type { FourCutProps } from '../../../types';
 
-const FourCutTheme6 = () => {
+const FourCutTheme6 = ({ imageSrcs }: FourCutProps) => {
   return (
     <div className="flex h-[32.5rem] w-[21.5rem] flex-col gap-7 bg-[#F6E3C8] px-[1rem] pt-[1.5rem] pb-[1.6875rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:shadow-none">
       <div className="flex flex-col gap-2">
         <div className="flex gap-2">
           <img
-            src="/public/images/example.jpg"
+            src={imageSrcs[0]}
             alt="image 1"
             className="h-[11.875rem] w-[9.5rem] object-cover object-center"
           />
           <img
-            src="/public/images/example.jpg"
+            src={imageSrcs[1]}
             alt="image 2"
             className="h-[11.875rem] w-[9.5rem] object-cover object-center"
           />
         </div>
         <div className="flex gap-2">
           <img
-            src="/public/images/example.jpg"
+            src={imageSrcs[2]}
             alt="image 3"
             className="h-[11.875rem] w-[9.5rem] object-cover object-center"
           />
           <img
-            src="/public/images/example.jpg"
+            src={imageSrcs[3]}
             alt="image 4"
             className="h-[11.875rem] w-[9.5rem] object-cover object-center"
           />
