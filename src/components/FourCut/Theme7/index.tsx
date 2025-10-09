@@ -2,7 +2,7 @@ import { GSMLogoWithText } from '../../../assets';
 
 const FourCutTheme7 = () => {
   return (
-    <div className="flex h-[32.5rem] w-[21.5rem] flex-col gap-7 bg-[#444] px-[1rem] pt-[1.5rem] pb-[1.6875rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:border print:border-[#CFCFCF] print:shadow-none">
+    <div className="flex h-[32.5rem] w-[21.5rem] flex-col gap-7 bg-[#444] px-[1rem] pt-[1.5rem] pb-[1.6875rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:shadow-none">
       <div className="flex flex-col gap-2">
         <div className="flex gap-2">
           <img
