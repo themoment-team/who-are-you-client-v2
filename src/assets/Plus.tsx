@@ -1,4 +1,4 @@
-const PlusIcon = () => (
+const Plus = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 28 28" fill="none">
     <path
       d="M2 14H26M14 2V26"
@@ -10,4 +10,4 @@ const PlusIcon = () => (
   </svg>
 );
 
-export default PlusIcon;
+export default Plus;
