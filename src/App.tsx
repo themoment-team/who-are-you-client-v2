@@ -11,7 +11,7 @@ import { type CardType, STEP, type Step } from './types';
 
 const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
-  const [cardType, setCardType] = useState<CardType | undefined>('FOUR_CUT');
+  const [cardType, setCardType] = useState<CardType | undefined>('BUSINESS_CARD');
 
   return (
     <div className="flex h-screen items-center justify-center bg-[#f8f8f8]">
