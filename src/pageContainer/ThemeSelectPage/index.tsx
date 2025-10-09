@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { useReactToPrint } from 'react-to-print';
 
@@ -55,7 +55,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
           FourCutTheme7,
         ];
 
-  const CurrentThemeComponent = themes[currentTheme];
+  const CurrentThemeComponent = themes[currentTheme] as React.FC<BusinessCardProps | FourCutProps>;
 
   const businessCardData: BusinessCardProps = {
     name: '홍길동',
