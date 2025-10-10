@@ -40,6 +40,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   const PORTRAIT_THEME_MAX_INDEX = 2;
   const isPortraitBusinessCard = isBusinessCard && currentTheme < PORTRAIT_THEME_MAX_INDEX; // 가로 명함
   const isLandscapeBusinessCard = isBusinessCard && currentTheme >= PORTRAIT_THEME_MAX_INDEX; // 세로 명함
+  const cardTypeLabel = isBusinessCard ? '명함' : '인생네컷';
 
   const pageStyle = isBusinessCard
     ? isPortraitBusinessCard
@@ -101,10 +102,10 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         } flex flex-col gap-4`}
       >
         <h1 className="text-[2.25rem]/[2.25rem] font-black text-[#222]">
-          {isBusinessCard ? '명함' : '인생네컷'} 테마 선택
+          {cardTypeLabel} 테마 선택
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
-          인쇄하실 {isBusinessCard ? '명함' : '인생네컷'}의 테마를 선택해주세요.
+          인쇄하실 {cardTypeLabel}의 테마를 선택해주세요.
           <br />
           {isBusinessCard
             ? '명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.'
