@@ -37,9 +37,11 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
 
   const isBusinessCard = cardType === 'BUSINESS_CARD';
   const isFourCut = cardType === 'FOUR_CUT';
+  const isPortraitBusinessCard = isBusinessCard && currentTheme < 2; // 가로 명함
+  const isLandscapeBusinessCard = isBusinessCard && currentTheme >= 2; // 세로 명함
 
   const pageStyle = isBusinessCard
-    ? currentTheme < 2
+    ? isPortraitBusinessCard
       ? '@page {size: portrait;}'
       : '@page {size: landscape;}'
     : '@page {size: portrait;}';
@@ -94,11 +96,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       )}
       <div
         className={`${
-          isBusinessCard && currentTheme > 1
-            ? 'mb-[2.1563rem]'
-            : isFourCut
-              ? 'mb-[3rem]'
-              : 'mb-[6.875rem]'
+          isLandscapeBusinessCard ? 'mb-[2.1563rem]' : isFourCut ? 'mb-[3rem]' : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
         <h1 className="text-[2.25rem]/[2.25rem] font-black text-[#222]">
@@ -114,7 +112,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       </div>
       <div
         className={`${
-          (isBusinessCard && currentTheme > 1) || isFourCut ? 'mb-[2.25rem]' : 'mb-[3rem]'
+          isLandscapeBusinessCard || isFourCut ? 'mb-[2.25rem]' : 'mb-[3rem]'
         } flex items-center justify-between px-[3.25rem]`}
       >
         <button onClick={handlePrevTheme}>
@@ -122,7 +120,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         </button>
         <div
           ref={contentRef}
-          className={`printable flex items-center gap-4 ${isBusinessCard && currentTheme < 2 ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
+          className={`printable flex items-center gap-4 ${isPortraitBusinessCard ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
         >
           {isBusinessCard ? (
             <CurrentThemeComponent {...businessCardData} />
