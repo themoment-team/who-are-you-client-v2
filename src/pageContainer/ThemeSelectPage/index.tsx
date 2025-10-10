@@ -16,6 +16,7 @@ import {
   FourCutTheme6,
   FourCutTheme7,
   PhotoReselectModal,
+  StepButton,
 } from '../../components';
 import {
   type BusinessCardProps,
@@ -154,18 +155,12 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         ))}
       </div>
       <div className="flex items-center justify-end gap-6">
-        <button
-          className="decoration-skip-ink-none cursor-pointer text-[1.25rem]/[1.875rem] font-medium text-[#888] underline [text-underline-position:from-font]"
-          onClick={handlePreviousStep}
-        >
+        <StepButton variant="back" onClick={handlePreviousStep}>
           이전으로
-        </button>
-        <button
-          className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]"
-          onClick={reactToPrintFn}
-        >
+        </StepButton>
+        <StepButton variant="next" onClick={reactToPrintFn}>
           인쇄하기
-        </button>
+        </StepButton>
       </div>
     </div>
   );
