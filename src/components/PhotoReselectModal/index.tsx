@@ -21,7 +21,6 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
 
   const handleImageRegenerate = () => {
     // 이미지 재변환 로직 추가 예정
-    console.log('이미지 재변환 시작');
   };
 
   return (
