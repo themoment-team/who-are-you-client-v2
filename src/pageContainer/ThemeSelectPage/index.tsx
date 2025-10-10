@@ -64,16 +64,16 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
     major: 'UI/UX Designer',
     email: 'honggildong@gmail.com',
     tel: '010-1234-5678',
-    imageSrc: '/public/images/example.jpg',
+    imageSrc: '/images/example.jpg',
     onImageClick: () => setIsModalOpen(true),
   };
 
   const fourCutData: FourCutProps = {
     imageSrcs: [
-      '/public/images/example.jpg',
-      '/public/images/example.jpg',
-      '/public/images/example.jpg',
-      '/public/images/example.jpg',
+      '/images/example.jpg',
+      '/images/example.jpg',
+      '/images/example.jpg',
+      '/images/example.jpg',
     ],
     onImageClick: () => setIsModalOpen(true),
   };
