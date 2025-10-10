@@ -64,13 +64,17 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
 
   const CurrentThemeComponent = themes[currentTheme] as React.FC<BusinessCardProps | FourCutProps>;
 
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
   const businessCardData: BusinessCardProps = {
     name: '홍길동',
     major: 'UI/UX Designer',
     email: 'honggildong@gmail.com',
     tel: '010-1234-5678',
     imageSrc: '/images/example.jpg',
-    onImageClick: () => setIsModalOpen(true),
+    onImageClick: handleImageClick,
   };
 
   const fourCutData: FourCutProps = {
@@ -91,11 +95,11 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
     setCurrentTheme((prev) => (prev + 1) % themes.length);
   };
 
+  const handleModalClose = () => setIsModalOpen(false);
+
   return (
     <div className="relative h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
-      {isModalOpen && (
-        <PhotoReselectModal cardType={cardType} onClose={() => setIsModalOpen(false)} />
-      )}
+      {isModalOpen && <PhotoReselectModal cardType={cardType} onClose={handleModalClose} />}
       <div
         className={`${
           isLandscapeBusinessCard ? 'mb-[2.1563rem]' : isFourCut ? 'mb-[3rem]' : 'mb-[6.875rem]'
