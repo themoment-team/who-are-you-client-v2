@@ -17,7 +17,6 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
 
   const handleImageSelect = () => {
     // 이미지 선택 로직 추가 예정
-    console.log('이미지 선택됨');
   };
 
   const handleImageRegenerate = () => {
