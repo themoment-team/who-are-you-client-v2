@@ -14,6 +14,16 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
   const BUTTON_SIZE_CLASS = IMAGE_CLASS;
   const COMMON_BUTTON_CLASSES = `flex cursor-pointer flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8] ${BUTTON_SIZE_CLASS}`;
 
+  const handleImageSelect = () => {
+    // 이미지 선택 로직 추가 예정
+    console.log('이미지 선택됨');
+  };
+
+  const handleImageRegenerate = () => {
+    // 이미지 재변환 로직 추가 예정
+    console.log('이미지 재변환 시작');
+  };
+
   return (
     <div className="absolute top-0 left-0 z-20 flex h-[61.5rem] w-[50rem] items-end rounded-[1.5rem] bg-black/20">
       <div className="flex w-full flex-col gap-9 rounded-[1.5rem] bg-white p-12 pb-9">
@@ -28,16 +38,26 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
           </p>
         </div>
         <div className="flex justify-center gap-6">
-          <img
-            src="/images/example.jpg"
-            alt="example"
-            className={`cursor-pointer rounded-sm object-cover object-center ${IMAGE_CLASS}`}
-          />
-          <button className={COMMON_BUTTON_CLASSES}>
+          <button
+            onClick={handleImageSelect}
+            className={`cursor-pointer rounded-sm ${IMAGE_CLASS}`}
+            aria-label="이미지 선택"
+          >
+            <img
+              src="/images/example.jpg"
+              alt={`${cardTypeLabel} 이미지 예시`}
+              className={`h-full w-full rounded-sm object-cover object-center`}
+            />
+          </button>
+          <button
+            onClick={handleImageRegenerate}
+            className={COMMON_BUTTON_CLASSES}
+            aria-label="이미지 재변환"
+          >
             <p className="text-[1rem]/[1rem] font-bold text-[#666]">이미지 재변환</p>
             <Plus />
           </button>
-          <button className={COMMON_BUTTON_CLASSES}>
+          <button className={COMMON_BUTTON_CLASSES} aria-label="이미지 재변환 중">
             <p className="text-[1rem]/[1rem] font-bold text-[#666]">
               이미지
               <br />
@@ -48,8 +68,9 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
         </div>
         <div className="flex justify-end">
           <button
-            className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]"
             onClick={onClose}
+            className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]"
+            aria-label="모달 닫기"
           >
             확인
           </button>
