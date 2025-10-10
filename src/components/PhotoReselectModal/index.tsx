@@ -1,5 +1,6 @@
 import { Plus, Spin } from '../../assets';
 import type { CardType } from '../../types';
+import StepButton from '../StepButton';
 
 interface PhotoReselectModalProps {
   cardType: CardType | undefined;
@@ -67,13 +68,9 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
           </button>
         </div>
         <div className="flex justify-end">
-          <button
-            onClick={onClose}
-            className="cursor-pointer rounded-xl border border-[#222] px-[1.25rem] py-[1rem] text-[1.25rem]/[1.25rem] font-medium text-[#222]"
-            aria-label="모달 닫기"
-          >
+          <StepButton variant="next" onClick={onClose}>
             확인
-          </button>
+          </StepButton>
         </div>
       </div>
     </div>
