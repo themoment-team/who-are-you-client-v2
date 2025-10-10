@@ -23,7 +23,7 @@ const PhotoReselectModal = ({ cardType, onClose }: PhotoReselectModalProps) => {
         </div>
         <div className="flex justify-center gap-6">
           <img
-            src="/public/images/example.jpg"
+            src="/images/example.jpg"
             alt="example"
             className={`cursor-pointer rounded-sm object-cover object-center ${
               cardType === 'BUSINESS_CARD' ? 'h-[8rem] w-[8rem]' : 'h-[12.8125rem] w-[10.25rem]'
