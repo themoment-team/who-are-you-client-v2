@@ -37,8 +37,9 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
 
   const isBusinessCard = cardType === 'BUSINESS_CARD';
   const isFourCut = cardType === 'FOUR_CUT';
-  const isPortraitBusinessCard = isBusinessCard && currentTheme < 2; // 가로 명함
-  const isLandscapeBusinessCard = isBusinessCard && currentTheme >= 2; // 세로 명함
+  const PORTRAIT_THEME_MAX_INDEX = 2;
+  const isPortraitBusinessCard = isBusinessCard && currentTheme < PORTRAIT_THEME_MAX_INDEX; // 가로 명함
+  const isLandscapeBusinessCard = isBusinessCard && currentTheme >= PORTRAIT_THEME_MAX_INDEX; // 세로 명함
 
   const pageStyle = isBusinessCard
     ? isPortraitBusinessCard
