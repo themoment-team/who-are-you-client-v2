@@ -37,19 +37,9 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
 
   const isBusinessCard = cardType === 'BUSINESS_CARD';
   const isFourCut = cardType === 'FOUR_CUT';
-  const PORTRAIT_THEME_MAX_INDEX = 2;
-  const isPortraitBusinessCard = isBusinessCard && currentTheme < PORTRAIT_THEME_MAX_INDEX; // 가로 명함
-  const isLandscapeBusinessCard = isBusinessCard && currentTheme >= PORTRAIT_THEME_MAX_INDEX; // 세로 명함
   const cardTypeLabel = isBusinessCard ? '명함' : '인생네컷';
 
-  const pageStyle = isBusinessCard
-    ? isPortraitBusinessCard
-      ? '@page {size: portrait;}'
-      : '@page {size: landscape;}'
-    : '@page {size: portrait;}';
-
-  const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
-
+  const PORTRAIT_THEME_MAX_INDEX = 2;
   const themes = isBusinessCard
     ? [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4]
     : [
@@ -61,11 +51,36 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         FourCutTheme6,
         FourCutTheme7,
       ];
-
   const CurrentThemeComponent = themes[currentTheme] as React.FC<BusinessCardProps | FourCutProps>;
+
+  const isPortraitBusinessCard = isBusinessCard && currentTheme < PORTRAIT_THEME_MAX_INDEX;
+  const isLandscapeBusinessCard = isBusinessCard && currentTheme >= PORTRAIT_THEME_MAX_INDEX;
+
+  const pageStyle = isBusinessCard
+    ? isPortraitBusinessCard
+      ? '@page {size: portrait;}'
+      : '@page {size: landscape;}'
+    : '@page {size: portrait;}';
+  const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
   const handleImageClick = () => {
     setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handlePrevTheme = () => {
+    setCurrentTheme((prev) => (prev - 1 + themes.length) % themes.length);
+  };
+
+  const handleNextTheme = () => {
+    setCurrentTheme((prev) => (prev + 1) % themes.length);
+  };
+
+  const handlePreviousStep = () => {
+    setStep(STEP.INFO_INPUT);
   };
 
   const businessCardData: BusinessCardProps = {
@@ -84,18 +99,8 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       '/images/example.jpg',
       '/images/example.jpg',
     ],
-    onImageClick: () => setIsModalOpen(true),
+    onImageClick: handleImageClick,
   };
-
-  const handlePrevTheme = () => {
-    setCurrentTheme((prev) => (prev - 1 + themes.length) % themes.length);
-  };
-
-  const handleNextTheme = () => {
-    setCurrentTheme((prev) => (prev + 1) % themes.length);
-  };
-
-  const handleModalClose = () => setIsModalOpen(false);
 
   return (
     <div className="relative h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
@@ -121,7 +126,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
           isLandscapeBusinessCard || isFourCut ? 'mb-[2.25rem]' : 'mb-[3rem]'
         } flex items-center justify-between px-[3.25rem]`}
       >
-        <button onClick={handlePrevTheme}>
+        <button onClick={handlePrevTheme} aria-label="이전 테마">
           <Arrow />
         </button>
         <div
@@ -139,7 +144,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
             </div>
           )}
         </div>
-        <button onClick={handleNextTheme}>
+        <button onClick={handleNextTheme} aria-label="다음 테마">
           <Arrow flip />
         </button>
       </div>
@@ -151,7 +156,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       <div className="flex items-center justify-end gap-6">
         <button
           className="decoration-skip-ink-none cursor-pointer text-[1.25rem]/[1.875rem] font-medium text-[#888] underline [text-underline-position:from-font]"
-          onClick={() => setStep(STEP.INFO_INPUT)}
+          onClick={handlePreviousStep}
         >
           이전으로
         </button>
