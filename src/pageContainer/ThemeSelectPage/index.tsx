@@ -147,7 +147,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       </div>
       <div className="flex items-center justify-end gap-6">
         <button
-          className="underline-offset-from decoration-skip-ink-none cursor-pointer text-[1.25rem]/[1.875rem] font-medium text-[#888] underline [text-underline-position:from-font]"
+          className="decoration-skip-ink-none cursor-pointer text-[1.25rem]/[1.875rem] font-medium text-[#888] underline [text-underline-position:from-font]"
           onClick={() => setStep(STEP.INFO_INPUT)}
         >
           이전으로
