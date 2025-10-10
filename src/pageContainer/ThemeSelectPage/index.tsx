@@ -35,27 +35,28 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   const [currentTheme, setCurrentTheme] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const pageStyle =
-    cardType === 'BUSINESS_CARD'
-      ? currentTheme < 2
-        ? '@page {size: portrait;}'
-        : '@page {size: landscape;}'
-      : '@page {size: portrait;}';
+  const isBusinessCard = cardType === 'BUSINESS_CARD';
+  const isFourCut = cardType === 'FOUR_CUT';
+
+  const pageStyle = isBusinessCard
+    ? currentTheme < 2
+      ? '@page {size: portrait;}'
+      : '@page {size: landscape;}'
+    : '@page {size: portrait;}';
 
   const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
-  const themes =
-    cardType === 'BUSINESS_CARD'
-      ? [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4]
-      : [
-          FourCutTheme1,
-          FourCutTheme2,
-          FourCutTheme3,
-          FourCutTheme4,
-          FourCutTheme5,
-          FourCutTheme6,
-          FourCutTheme7,
-        ];
+  const themes = isBusinessCard
+    ? [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4]
+    : [
+        FourCutTheme1,
+        FourCutTheme2,
+        FourCutTheme3,
+        FourCutTheme4,
+        FourCutTheme5,
+        FourCutTheme6,
+        FourCutTheme7,
+      ];
 
   const CurrentThemeComponent = themes[currentTheme] as React.FC<BusinessCardProps | FourCutProps>;
 
@@ -93,29 +94,27 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       )}
       <div
         className={`${
-          cardType === 'BUSINESS_CARD' && currentTheme > 1
+          isBusinessCard && currentTheme > 1
             ? 'mb-[2.1563rem]'
-            : cardType === 'FOUR_CUT'
+            : isFourCut
               ? 'mb-[3rem]'
               : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
         <h1 className="text-[2.25rem]/[2.25rem] font-black text-[#222]">
-          {cardType === 'BUSINESS_CARD' ? '명함' : '인생네컷'} 테마 선택
+          {isBusinessCard ? '명함' : '인생네컷'} 테마 선택
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
-          인쇄하실 {cardType === 'BUSINESS_CARD' ? '명함' : '인생네컷'}의 테마를 선택해주세요.
+          인쇄하실 {isBusinessCard ? '명함' : '인생네컷'}의 테마를 선택해주세요.
           <br />
-          {cardType === 'BUSINESS_CARD'
+          {isBusinessCard
             ? '명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.'
             : '사진을 선택해서 교체할 수도 있어요.'}
         </p>
       </div>
       <div
         className={`${
-          (cardType === 'BUSINESS_CARD' && currentTheme > 1) || cardType === 'FOUR_CUT'
-            ? 'mb-[2.25rem]'
-            : 'mb-[3rem]'
+          (isBusinessCard && currentTheme > 1) || isFourCut ? 'mb-[2.25rem]' : 'mb-[3rem]'
         } flex items-center justify-between px-[3.25rem]`}
       >
         <button onClick={handlePrevTheme}>
@@ -123,14 +122,14 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         </button>
         <div
           ref={contentRef}
-          className={`printable flex items-center gap-4 ${cardType === 'BUSINESS_CARD' && currentTheme < 2 ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
+          className={`printable flex items-center gap-4 ${isBusinessCard && currentTheme < 2 ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
         >
-          {cardType === 'BUSINESS_CARD' ? (
+          {isBusinessCard ? (
             <CurrentThemeComponent {...businessCardData} />
           ) : (
             <CurrentThemeComponent {...fourCutData} />
           )}
-          {cardType === 'BUSINESS_CARD' && (
+          {isBusinessCard && (
             <div className="hidden print:block">
               <CurrentThemeComponent {...businessCardData} />
             </div>
