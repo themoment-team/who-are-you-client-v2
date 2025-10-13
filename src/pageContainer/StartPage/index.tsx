@@ -1,15 +1,40 @@
-import { STEP, type Step } from '../../types';
+import { StepButton } from '../../components';
+import { type CardType, STEP, type Step } from '../../types';
 
 interface StartPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
+  setCardType: React.Dispatch<React.SetStateAction<CardType | undefined>>;
 }
 
-const StartPage = ({ setStep }: StartPageProps) => {
+const StartPage = ({ setStep, setCardType }: StartPageProps) => {
+  const handleBusinessCardClick = () => {
+    setStep(STEP.CAMERA);
+    setCardType('BUSINESS_CARD');
+  };
+
+  const handleFourCutClick = () => {
+    setStep(STEP.CAMERA);
+    setCardType('FOUR_CUT');
+  };
+
   return (
-    <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
-      <h1>Start Page</h1>
-      <div className="inline-flex flex-col">
-        <button onClick={() => setStep(STEP.CAMERA)}>Go to Camera(다음으로)</button>
+    <div className="flex h-[61.5rem] w-[50rem] flex-col gap-[11.25rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] pt-[17.5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-[4rem]/[4rem] font-black text-[#222]">WHO ARE YOU</h1>
+        <p className="text-[1.25rem]/[1.75rem] font-medium text-[#666]">
+          AI로 변환한 사진으로 인생네컷을 찍거나
+          <br />
+          명함을 만들어 보세요. 약 5분동안 진행됩니다.
+        </p>
+      </div>
+
+      <div className="flex justify-end gap-5">
+        <StepButton variant="next" onClick={handleBusinessCardClick}>
+          명함 만들기
+        </StepButton>
+        <StepButton variant="next" onClick={handleFourCutClick}>
+          인생네컷 찍기
+        </StepButton>
       </div>
     </div>
   );
