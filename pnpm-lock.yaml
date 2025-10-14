@@ -39,6 +39,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.9
         version: 19.1.9(@types/react@19.1.16)
+      '@types/react-webcam':
+        specifier: ^3.0.0
+        version: 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@vitejs/plugin-react':
         specifier: ^5.0.3
         version: 5.0.4(vite@7.1.7(jiti@2.6.0)(lightningcss@1.30.1))
@@ -651,6 +654,10 @@ packages:
     resolution: {integrity: sha512-qXRuZaOsAdXKFyOhRBg6Lqqc0yay13vN7KrIg4L7N4aaHN68ma9OK3NE1BoDFgFOTfM7zg+3/8+2n8rLUH3OKQ==}
     peerDependencies:
       '@types/react': ^19.0.0
+
+  '@types/react-webcam@3.0.0':
+    resolution: {integrity: sha512-iX4G+V0HEvZhfMuk5qUp4ZJUpV6M9ZW4mxjmDxmXrIN1fDSUajX4wtGYX+9yh6KShFlEXOjGyOc24j7wJagG6w==}
+    deprecated: This is a stub types definition. react-webcam provides its own type definitions, so you do not need this installed.
 
   '@types/react@19.1.16':
     resolution: {integrity: sha512-WBM/nDbEZmDUORKnh5i1bTnAz6vTohUf9b8esSMu+b24+srbaxa04UbJgWx78CVfNXA20sNu0odEIluZDFdCog==}
@@ -2391,6 +2398,13 @@ snapshots:
   '@types/react-dom@19.1.9(@types/react@19.1.16)':
     dependencies:
       '@types/react': 19.1.16
+
+  '@types/react-webcam@3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      react-webcam: 7.2.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
 
   '@types/react@19.1.16':
     dependencies:
