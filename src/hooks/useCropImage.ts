@@ -2,7 +2,11 @@ export const cropImage = async (imageSrc: string, cropSize: number): Promise<str
   const image = new Image();
   image.src = imageSrc;
 
-  await image.decode();
+  try {
+    await image.decode();
+  } catch (err) {
+    throw new Error(`이미지 디코딩에 실패했습니다: ${(err instanceof Error ? err.message : String(err))}`);
+  }
 
   const canvas = document.createElement('canvas');
   canvas.width = cropSize;
