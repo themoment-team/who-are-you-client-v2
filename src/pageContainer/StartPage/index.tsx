@@ -20,7 +20,7 @@ const StartPage = ({ setStep, setCardType }: StartPageProps) => {
   return (
     <div className="flex h-[61.5rem] w-[50rem] flex-col gap-[11.25rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] pt-[17.5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
       <div className="flex flex-col gap-4">
-        <h1 className="text-[4rem]/[4rem] font-black text-[#222]">WHO ARE YOU</h1>
+        <h1 className="text-[4rem]/[4rem] font-extrabold text-[#222]">WHO ARE YOU</h1>
         <p className="text-[1.25rem]/[1.75rem] font-medium text-[#666]">
           AI로 변환한 사진으로 인생네컷을 찍거나
           <br />
