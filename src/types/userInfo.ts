@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import { z } from 'zod';
 
 import type { userInfoFormSchema } from '../schemas/userInfoFormSchema';
 
