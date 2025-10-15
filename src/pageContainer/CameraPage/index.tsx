@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import Webcam from 'react-webcam';
 
-import { CameraGuide } from '../../assets';
+import BusinessCardCameraGuide from '../../assets/BusinessCardCameraGuide';
 import { StepButton } from '../../components';
 import { cropImage } from '../../hooks/useCropImage';
 import { STEP, type Step } from '../../types';
@@ -55,7 +55,7 @@ const CameraPage = ({ setStep, setImageUrl }: CameraPageProps) => {
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 z-10 flex items-center justify-center">
-            <CameraGuide />
+            <BusinessCardCameraGuide />
           </div>
         </div>
       </div>

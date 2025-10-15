@@ -1,4 +1,4 @@
-const CameraGuide = () => (
+const BusinessCardCameraGuide = () => (
   <svg
     width="704"
     height="396"
@@ -25,4 +25,4 @@ const CameraGuide = () => (
   </svg>
 );
 
-export default CameraGuide;
+export default BusinessCardCameraGuide;
