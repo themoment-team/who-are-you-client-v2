@@ -36,19 +36,9 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
     setStep(STEP.THEME_SELECT);
   };
 
-  const inputFields: Array<{
-    name: keyof userInfoFormType;
-    title: string;
-    placeholder: string;
-    required: boolean;
-  }> = [
+  const inputFields = [
     { name: 'name', title: '이름', placeholder: '이름을 입력해주세요', required: true },
-    {
-      name: 'tel',
-      title: '전화번호',
-      placeholder: '전화번호를 입력해주세요',
-      required: true,
-    },
+    { name: 'tel', title: '전화번호', placeholder: '전화번호를 입력해주세요', required: true },
     { name: 'email', title: '이메일', placeholder: '이메일을 입력해주세요', required: false },
     {
       name: 'major',
@@ -56,7 +46,12 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
       placeholder: '전공 또는 직함을 입력해주세요',
       required: false,
     },
-  ] as const;
+  ] as const satisfies ReadonlyArray<{
+    name: keyof userInfoFormType;
+    title: string;
+    placeholder: string;
+    required: boolean;
+  }>;
 
   return (
     <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
