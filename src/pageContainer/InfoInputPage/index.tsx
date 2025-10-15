@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -8,8 +10,8 @@ import { STEP, type Step, type userInfoFormType } from '../../types';
 
 interface InfoInputPageProps {
   userInfo: userInfoFormType | null;
-  setUserInfo: React.Dispatch<React.SetStateAction<userInfoFormType | null>>;
-  setStep: React.Dispatch<React.SetStateAction<Step>>;
+  setUserInfo: Dispatch<SetStateAction<userInfoFormType | null>>;
+  setStep: Dispatch<SetStateAction<Step>>;
 }
 
 const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) => {
