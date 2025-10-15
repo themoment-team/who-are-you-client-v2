@@ -6,3 +6,4 @@ export { default as ShortBar } from './ShortBar';
 export { default as LongBar } from './LongBar';
 export { default as Plus } from './Plus';
 export { default as Spin } from './Spin';
+export { default as CameraGuide } from './CameraGuide';
