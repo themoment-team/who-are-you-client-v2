@@ -1,4 +1,6 @@
-export const cropImage = async (imageSrc: string, cropSize: number): Promise<string> => {
+import { type CardType } from '../types';
+
+export const cropImage = async (imageSrc: string, cardType?: CardType): Promise<string> => {
   const image = new Image();
   image.src = imageSrc;
 
@@ -10,17 +12,20 @@ export const cropImage = async (imageSrc: string, cropSize: number): Promise<str
     );
   }
 
+  const cropWidth = cardType === 'FOUR_CUT' ? 240 : 300;
+  const cropHeight = 300;
+
   const canvas = document.createElement('canvas');
-  canvas.width = cropSize;
-  canvas.height = cropSize;
+  canvas.width = cropWidth;
+  canvas.height = cropHeight;
 
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas context를 가져올 수 없습니다.');
 
-  const sx = (image.width - cropSize) / 2;
-  const sy = (image.height - cropSize) / 2;
+  const sx = (image.width - cropWidth) / 2;
+  const sy = (image.height - cropHeight) / 2;
 
-  ctx.drawImage(image, sx, sy, cropSize, cropSize, 0, 0, cropSize, cropSize);
+  ctx.drawImage(image, sx, sy, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
 
   return canvas.toDataURL('image/png');
 };
