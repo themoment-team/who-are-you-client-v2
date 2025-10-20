@@ -21,7 +21,7 @@ const AiConvertExampleCard = ({
 
   return (
     <div
-      className={`flex w-32 flex-col items-center gap-4 rounded-xl border border-solid border-[#222] p-4 ${selectedPrompt === title && 'bg-black'}`}
+      className={`flex w-32 cursor-pointer flex-col items-center gap-4 rounded-xl border border-solid border-[#222] p-4 ${selectedPrompt === title && 'bg-black'}`}
       onClick={handleOnClick}
     >
       <p
