@@ -1,12 +1,10 @@
-import type { SetStateAction } from 'react';
-
 import type { PromptType } from '../../types';
 
 interface AiConvertExampleCardProps {
   title: PromptType;
   img: string;
   selectedPrompt: PromptType;
-  setSelectedPrompt: React.Dispatch<SetStateAction<PromptType>>;
+  setSelectedPrompt: React.Dispatch<React.SetStateAction<PromptType>>;
 }
 
 const AiConvertExampleCard = ({

@@ -1,9 +1,6 @@
-import type React from 'react';
-import type { SetStateAction } from 'react';
-
 type RadioToggleProps = {
   isTrue: boolean;
-  setIsTrue: React.Dispatch<SetStateAction<boolean>>;
+  setIsTrue: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const RadioToggle = ({ isTrue, setIsTrue }: RadioToggleProps) => {
