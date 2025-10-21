@@ -20,11 +20,11 @@ const App = () => {
 
   const AiImageConvert = async (img: string) => {
     const newImageUrl = await postConvertImage(img, selectedPrompt);
-    // setImageUrls((prv) => ...newImageUrl);
+    setImageUrls((prv) => [...prv, newImageUrl]);
   };
 
   const handleAiConvert = () => {
-    // imageUrl.map((x) => AiImageConvert(x));
+    imageUrls.map((x) => AiImageConvert(x));
   };
 
   return (
