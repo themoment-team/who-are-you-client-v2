@@ -24,3 +24,19 @@ html {
     print-color-adjust: exact !important;
   }
 }
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-flash {
+  animation: flash 0.4s ease-out;
+}
