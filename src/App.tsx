@@ -26,8 +26,8 @@ const App = () => {
     setAiConvertImage((prv) => [...prv, newImageUrl]);
   };
 
-  const handleAiConvert = () => {
-    imageUrls.map((x) => AiImageConvert(x));
+  const handleAiConvert = async () => {
+    await Promise.all(imageUrls.map((x) => AiImageConvert(x)));
   };
 
   return (
