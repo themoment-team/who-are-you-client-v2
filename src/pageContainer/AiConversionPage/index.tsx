@@ -9,6 +9,9 @@ interface AiConversionPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
   cardType: CardType | undefined;
   imgs: string[];
+  selectedPrompt: PromptType;
+  setSelectedPrompt: React.Dispatch<React.SetStateAction<PromptType>>;
+  handleAiConvert: () => void;
 }
 
 interface convertExampleImagesType {
@@ -16,11 +19,16 @@ interface convertExampleImagesType {
   img: string;
 }
 
-const AiConversionPage = ({ setStep, cardType, imgs }: AiConversionPageProps) => {
+const AiConversionPage = ({
+  setStep,
+  cardType,
+  imgs,
+  selectedPrompt,
+  setSelectedPrompt,
+  handleAiConvert,
+}: AiConversionPageProps) => {
   const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const [selectedPrompt, setSelectedPrompt] = useState<PromptType>(null);
 
   const convertExampleImages: convertExampleImagesType[] = [
     { title: '디즈니', img: '/images/디즈니.png' },
@@ -33,7 +41,7 @@ const AiConversionPage = ({ setStep, cardType, imgs }: AiConversionPageProps) =>
   useEffect(() => {
     if (isAiConvert) setIsModalOpen(isAiConvert);
     else setSelectedPrompt(null);
-  }, [isAiConvert, setIsModalOpen]);
+  }, [isAiConvert, setIsModalOpen, setSelectedPrompt]);
 
   return (
     <div className="relative h-[61.5rem] w-[50rem]">
@@ -85,9 +93,12 @@ const AiConversionPage = ({ setStep, cardType, imgs }: AiConversionPageProps) =>
             </StepButton>
             <StepButton
               variant="next"
-              onClick={() =>
-                cardType === 'BUSINESS_CARD' ? setStep(STEP.INFO_INPUT) : setStep(STEP.THEME_SELECT)
-              }
+              onClick={() => {
+                if (cardType === 'BUSINESS_CARD') setStep(STEP.INFO_INPUT);
+                else setStep(STEP.THEME_SELECT);
+
+                handleAiConvert();
+              }}
             >
               다음으로
             </StepButton>
