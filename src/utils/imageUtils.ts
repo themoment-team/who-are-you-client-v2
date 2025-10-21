@@ -5,7 +5,7 @@ export interface CropOptions {
   cardType?: CardType;
 }
 
-export const cropImage = async ({ imageSrc, cardType }: CropOptions): Promise<string> => {
+export const getCroppedImage = async ({ imageSrc, cardType }: CropOptions): Promise<string> => {
   const image = new Image();
   image.src = imageSrc;
 

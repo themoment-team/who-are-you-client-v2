@@ -4,8 +4,8 @@ import Webcam from 'react-webcam';
 
 import { BusinessCardCameraGuide, FourCutCameraGuide } from '../../assets';
 import { StepButton } from '../../components';
-import { cropImage } from '../../hooks/useCropImage';
 import { type CardType, STEP, type Step } from '../../types';
+import { getCroppedImage } from '../../utils/imageUtils';
 
 interface CameraPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
@@ -34,7 +34,7 @@ const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
     if (!imageSrc) return;
 
     try {
-      const croppedImageUrl = await cropImage({ imageSrc, cardType });
+      const croppedImageUrl = await getCroppedImage({ imageSrc, cardType });
 
       if (isFourCut) {
         const newImages = [...capturedImages, croppedImageUrl];
