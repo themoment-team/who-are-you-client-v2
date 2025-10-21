@@ -1,6 +1,11 @@
 import { type CardType } from '../types';
 
-export const cropImage = async (imageSrc: string, cardType?: CardType): Promise<string> => {
+export interface CropOptions {
+  imageSrc: string;
+  cardType?: CardType;
+}
+
+export const cropImage = async ({ imageSrc, cardType }: CropOptions): Promise<string> => {
   const image = new Image();
   image.src = imageSrc;
 

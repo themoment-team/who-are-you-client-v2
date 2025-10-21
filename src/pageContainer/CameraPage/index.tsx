@@ -34,7 +34,7 @@ const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
     if (!imageSrc) return;
 
     try {
-      const croppedImageUrl = await cropImage(imageSrc, cardType);
+      const croppedImageUrl = await cropImage({ imageSrc, cardType });
 
       if (isFourCut) {
         const newImages = [...capturedImages, croppedImageUrl];
