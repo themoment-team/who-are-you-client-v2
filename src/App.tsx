@@ -15,7 +15,7 @@ const App = () => {
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<userInfoFormType | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-  
+
   return (
     <Provider>
       <div className="flex h-screen items-center justify-center bg-[#f8f8f8]">
