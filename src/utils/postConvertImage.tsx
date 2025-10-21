@@ -51,7 +51,7 @@ const postConvertImage = async (imageUrl: string, selectedPrompt: PromptType): P
     const url = img.data && img.data[0]?.url ? img.data[0].url : '';
     return url;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return '';
   }
 };
