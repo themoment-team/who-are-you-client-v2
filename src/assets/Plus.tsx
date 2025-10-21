@@ -1,7 +1,7 @@
-type PlusIconProps = {
+interface PlusIconProps {
   width?: string;
   height?: string;
-};
+}
 
 const Plus = ({ width = '1.75rem', height = '1.75rem' }: PlusIconProps) => (
   <svg

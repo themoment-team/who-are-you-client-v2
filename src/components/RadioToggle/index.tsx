@@ -1,7 +1,7 @@
-type RadioToggleProps = {
+interface RadioToggleProps {
   isTrue: boolean;
   setIsTrue: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 const RadioToggle = ({ isTrue, setIsTrue }: RadioToggleProps) => {
   const handleToggle = () => {
