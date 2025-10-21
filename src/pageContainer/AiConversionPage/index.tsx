@@ -8,7 +8,7 @@ import type { PromptType } from '../../types/prompt';
 interface AiConversionPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
   cardType: CardType | undefined;
-  imgs: string[];
+  imageUrls: string[];
   selectedPrompt: PromptType;
   setSelectedPrompt: React.Dispatch<React.SetStateAction<PromptType>>;
   handleAiConvert: () => void;
@@ -22,7 +22,7 @@ interface convertExampleImagesType {
 const AiConversionPage = ({
   setStep,
   cardType,
-  imgs,
+  imageUrls,
   selectedPrompt,
   setSelectedPrompt,
   handleAiConvert,
@@ -55,13 +55,13 @@ const AiConversionPage = ({
         </div>
 
         <div
-          className={`flex w-full items-center ${imgs.length === 1 ? 'justify-center' : 'justify-between'} pt-[2.25rem]`}
+          className={`flex w-full items-center ${imageUrls.length === 1 ? 'justify-center' : 'justify-between'} pt-[2.25rem]`}
         >
-          {imgs.map((x) => (
+          {imageUrls.map((x) => (
             <img
               key={x}
               src={x}
-              className={`${imgs.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-md`}
+              className={`${imageUrls.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-md`}
             />
           ))}
         </div>

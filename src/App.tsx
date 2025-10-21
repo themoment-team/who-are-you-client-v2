@@ -44,7 +44,7 @@ const App = () => {
             selectedPrompt={selectedPrompt}
             setSelectedPrompt={setSelectedPrompt}
             handleAiConvert={handleAiConvert}
-            imgs={imageUrls}
+            imageUrls={imageUrls}
           />
         )}
         {step === STEP.INFO_INPUT && (
