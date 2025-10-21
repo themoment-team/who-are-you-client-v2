@@ -16,11 +16,13 @@ const App = () => {
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
+  const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
+
   const [selectedPrompt, setSelectedPrompt] = useState<PromptType>(null);
 
   const AiImageConvert = async (img: string) => {
     const newImageUrl = await postConvertImage(img, selectedPrompt);
-    setImageUrls((prv) => [...prv, newImageUrl]);
+    setAiConvertImage((prv) => [...prv, newImageUrl]);
   };
 
   const handleAiConvert = () => {
@@ -41,6 +43,7 @@ const App = () => {
             selectedPrompt={selectedPrompt}
             setSelectedPrompt={setSelectedPrompt}
             handleAiConvert={handleAiConvert}
+            imgs={imageUrls}
           />
         )}
         {step === STEP.INFO_INPUT && <InfoInputPage setStep={setStep} />}
