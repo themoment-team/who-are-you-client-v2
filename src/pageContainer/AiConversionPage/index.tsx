@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Plus } from '../../assets';
-import { AiConvertExampleCard, RadioToggle, StepButton } from '../../components';
+import { AiConvertExampleCard, StepButton, Switch } from '../../components';
 import { type CardType, STEP, type Step } from '../../types';
 import type { PromptType } from '../../types/prompt';
 
@@ -69,7 +69,7 @@ const AiConversionPage = ({
         <div className="flex flex-col gap-6 pt-[3.09rem] pb-8">
           <div className="flex items-center gap-9">
             <p className="text-xl leading-[150%] font-bold text-black">AI 변환</p>
-            <RadioToggle isTrue={isAiConvert} setIsTrue={setIsAiConvert} />
+            <Switch isTrue={isAiConvert} setIsTrue={setIsAiConvert} />
           </div>
           {selectedPrompt && (
             <div className="flex gap-9">

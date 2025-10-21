@@ -1,9 +1,9 @@
-interface RadioToggleProps {
+interface SwitchProps {
   isTrue: boolean;
   setIsTrue: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const RadioToggle = ({ isTrue, setIsTrue }: RadioToggleProps) => {
+const Switch = ({ isTrue, setIsTrue }: SwitchProps) => {
   const handleToggle = () => {
     setIsTrue((e) => !e);
   };
@@ -23,4 +23,4 @@ const RadioToggle = ({ isTrue, setIsTrue }: RadioToggleProps) => {
   );
 };
 
-export default RadioToggle;
+export default Switch;
