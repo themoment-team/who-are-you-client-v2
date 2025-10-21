@@ -61,7 +61,7 @@ const AiConversionPage = ({
             <img
               key={x}
               src={x}
-              className={`${imgs.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[10.25rem] w-[10.25rem]'} rounded-md`}
+              className={`${imgs.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-md`}
             />
           ))}
         </div>
