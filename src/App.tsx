@@ -14,13 +14,13 @@ import { postConvertImage } from './utils';
 const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const [selectedPrompt, setSelectedPrompt] = useState<PromptType>(null);
 
   const AiImageConvert = async (img: string) => {
     const newImageUrl = await postConvertImage(img, selectedPrompt);
-    setImageUrl(newImageUrl);
+    // setImageUrls((prv) => ...newImageUrl);
   };
 
   const handleAiConvert = () => {
@@ -31,7 +31,9 @@ const App = () => {
     <Provider>
       <div className="flex h-screen items-center justify-center bg-[#f8f8f8]">
         {step === STEP.START && <StartPage setStep={setStep} setCardType={setCardType} />}
-        {step === STEP.CAMERA && <CameraPage setStep={setStep} setImageUrl={setImageUrl} />}
+        {step === STEP.CAMERA && (
+          <CameraPage setStep={setStep} setImageUrls={setImageUrls} cardType={cardType} />
+        )}
         {step === STEP.AI_CONVERSION && (
           <AiConversionPage
             setStep={setStep}
