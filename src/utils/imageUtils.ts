@@ -1,6 +1,6 @@
 import { type CardType } from '../types';
 
-export interface CropOptions {
+interface CropOptions {
   imageSrc: string;
   cardType?: CardType;
 }
