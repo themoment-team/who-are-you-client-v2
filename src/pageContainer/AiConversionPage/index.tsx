@@ -143,7 +143,15 @@ const AiConversionPage = ({
               >
                 AI로 변환하지 않을래요
               </StepButton>
-              <StepButton variant="next" onClick={() => setIsModalOpen(false)}>
+              <StepButton
+                variant="next"
+                onClick={() => {
+                  if (selectedPrompt === null) {
+                    setIsAiConvert(false);
+                  }
+                  setIsModalOpen(false);
+                }}
+              >
                 확인
               </StepButton>
             </div>
