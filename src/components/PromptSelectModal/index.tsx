@@ -43,11 +43,11 @@ const PromptSelectModal = ({
         </div>
 
         <div className="flex gap-4">
-          {convertExampleImages.map((x) => (
+          {convertExampleImages.map(({ title, img }) => (
             <AiConvertExampleCard
-              key={x.title}
-              title={x.title}
-              img={x.img}
+              key={title}
+              title={title}
+              img={img}
               selectedPrompt={selectedPrompt}
               setSelectedPrompt={setSelectedPrompt}
             />
