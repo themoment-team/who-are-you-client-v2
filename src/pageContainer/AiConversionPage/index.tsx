@@ -84,7 +84,7 @@ const AiConversionPage = ({
                 if (cardType === 'BUSINESS_CARD') setStep(STEP.INFO_INPUT);
                 else setStep(STEP.THEME_SELECT);
 
-                handleAiConvert();
+                if (selectedPrompt !== null) handleAiConvert();
               }}
             >
               다음으로
