@@ -5,7 +5,7 @@ interface SwitchProps {
 
 const Switch = ({ isTrue, setIsTrue }: SwitchProps) => {
   const handleToggle = () => {
-    setIsTrue((e) => !e);
+    setIsTrue((prev) => !prev);
   };
   return (
     <div
