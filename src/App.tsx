@@ -23,7 +23,7 @@ const App = () => {
 
   const AiImageConvert = async (img: string) => {
     const newImageUrl = await generateAiImage({ imageUrl: img, selectedPrompt });
-    setAiConvertImage((prv) => [...prv, newImageUrl]);
+    setAiConvertImage((prev) => [...prev, newImageUrl]);
   };
 
   const handleAiConvert = async () => {
