@@ -47,7 +47,7 @@ const AiConversionPage = ({
     <div className="relative h-[61.5rem] w-[50rem]">
       <div className="flex h-full w-full flex-col rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
         <div className="flex flex-col gap-4 pt-8">
-          <h1 className="text-4xl leading-none font-extrabold">AI 변환 여부 선택</h1>
+          <h1 className="text-4xl leading-none font-extrabold text-[#222]">AI 변환 여부 선택</h1>
           <p className="text-xl leading-[150%] font-medium text-[#666]">
             사진의 AI 변환 여부를 선택합니다.
             <br /> 선택한 키워드로 사진을 변환시킬 수 있습니다.
@@ -75,7 +75,7 @@ const AiConversionPage = ({
             <div className="flex gap-9">
               <p className="text-xl leading-[150%] font-bold text-black">AI 변환 키워드 </p>
               <div className="flex items-center gap-[0.88rem]">
-                <div className="flex items-center justify-center rounded-[0.625rem] border border-solid px-4 py-1">
+                <div className="flex items-center justify-center rounded-[0.625rem] border border-solid px-4 py-1 text-[#222]">
                   {selectedPrompt}
                 </div>
                 <div className="rotate-45" onClick={() => setIsModalOpen(true)}>
@@ -112,7 +112,9 @@ const AiConversionPage = ({
       >
         <div className="absolute right-0 bottom-0 left-0 flex h-[30.625rem] flex-col gap-9 rounded-3xl bg-white px-12 pt-12 pb-10">
           <div className="flex h-28 flex-col gap-4">
-            <h1 className="text-4xl leading-none font-extrabold">AI 변환 키워드 선택</h1>
+            <h1 className="text-4xl leading-none font-extrabold text-[#222]">
+              AI 변환 키워드 선택
+            </h1>
             <p className="text-xl leading-[150%] font-medium text-[#666]">
               AI 변환 키워드를 선택해주세요.
               <br />
