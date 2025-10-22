@@ -21,13 +21,13 @@ const App = () => {
 
   const [selectedPrompt, setSelectedPrompt] = useState<PromptType>(null);
 
-  const AiImageConvert = async (img: string) => {
-    const newImageUrl = await generateAiImage({ imageUrl: img, selectedPrompt });
+  const aiImageConvert = async (imageUrl: string) => {
+    const newImageUrl = await generateAiImage({ imageUrl: imageUrl, selectedPrompt });
     setAiConvertImage((prev) => [...prev, newImageUrl]);
   };
 
   const handleAiConvert = async () => {
-    await Promise.all(imageUrls.map((x) => AiImageConvert(x)));
+    await Promise.all(imageUrls.map((x) => aiImageConvert(x)));
   };
 
   return (
