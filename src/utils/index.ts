@@ -1,2 +1,2 @@
-export { default as postConvertImage } from './postConvertImage';
+export * from './generateAiImage';
 export * from './imageUtils';

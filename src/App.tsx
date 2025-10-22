@@ -9,7 +9,7 @@ import {
   ThemeSelectPage,
 } from './pageContainer';
 import { type CardType, type PromptType, STEP, type Step, type userInfoFormType } from './types';
-import { postConvertImage } from './utils';
+import generateAiImage from './utils/generateAiImage';
 
 const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
@@ -22,7 +22,7 @@ const App = () => {
   const [selectedPrompt, setSelectedPrompt] = useState<PromptType>(null);
 
   const AiImageConvert = async (img: string) => {
-    const newImageUrl = await postConvertImage(img, selectedPrompt);
+    const newImageUrl = await generateAiImage({ imageUrl: img, selectedPrompt });
     setAiConvertImage((prv) => [...prv, newImageUrl]);
   };
 

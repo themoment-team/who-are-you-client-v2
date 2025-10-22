@@ -10,7 +10,15 @@ const prompt = {
   레고: `A scene in LEGO style: made of colorful plastic bricks, blocky shapes with visible studs, glossy plastic texture, modular toy design, bright primary colors, highly detailed, resembling LEGO minifigures and LEGO structures`,
 } as const;
 
-const postConvertImage = async (imageUrl: string, selectedPrompt: PromptType): Promise<string> => {
+interface generateAiImageProps {
+  imageUrl: string;
+  selectedPrompt: PromptType;
+}
+
+const generateAiImage = async ({
+  imageUrl,
+  selectedPrompt,
+}: generateAiImageProps): Promise<string> => {
   try {
     const openai = new OpenAI({
       apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -56,4 +64,4 @@ const postConvertImage = async (imageUrl: string, selectedPrompt: PromptType): P
   }
 };
 
-export default postConvertImage;
+export default generateAiImage;
