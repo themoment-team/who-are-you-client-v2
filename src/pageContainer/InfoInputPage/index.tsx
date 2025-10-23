@@ -16,7 +16,7 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<userInfoFormType>({
     resolver: zodResolver(userInfoFormSchema),
     defaultValues: {
@@ -25,6 +25,7 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
       email: userInfo?.email ?? '',
       major: userInfo?.major ?? '',
     },
+    mode: 'onChange',
   });
 
   const handleStepBack = () => {
@@ -79,7 +80,7 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
         <StepButton variant="back" onClick={handleStepBack}>
           이전으로
         </StepButton>
-        <StepButton variant="next" onClick={handleSubmit(onSubmit)}>
+        <StepButton variant="next" onClick={handleSubmit(onSubmit)} disabled={!isValid}>
           다음으로
         </StepButton>
       </div>
