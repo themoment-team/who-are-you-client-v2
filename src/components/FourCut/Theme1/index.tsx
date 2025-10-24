@@ -1,4 +1,4 @@
-import { GSMLogoWithText } from '../../../assets';
+import { GSMLogoWithText, GwangjuFutureEducationExpo } from '../../../assets';
 import type { FourCutProps } from '../../../types';
 
 const FourCutTheme1 = ({ imageSrcs, onImageClick }: FourCutProps) => {
@@ -34,7 +34,10 @@ const FourCutTheme1 = ({ imageSrcs, onImageClick }: FourCutProps) => {
           />
         </div>
       </div>
-      <GSMLogoWithText />
+      <div className="flex items-center justify-between">
+        <GSMLogoWithText />
+        <GwangjuFutureEducationExpo />
+      </div>
     </div>
   );
 };

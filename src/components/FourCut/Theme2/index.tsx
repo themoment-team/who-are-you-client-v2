@@ -1,9 +1,9 @@
-import { GSMLogoWithText } from '../../../assets';
+import { GSMLogoWithText, GwangjuFutureEducationExpo } from '../../../assets';
 import type { FourCutProps } from '../../../types';
 
-const FourCutTheme2 = ({ imageSrcs, onImageClick }: FourCutProps) => {
+const FourCutTheme1 = ({ imageSrcs, onImageClick }: FourCutProps) => {
   return (
-    <div className="flex h-[14.8cm] w-[10cm] flex-col gap-6 bg-[#222] px-[1.125rem] py-[1.5rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:shadow-none">
+    <div className="flex h-[14.8cm] w-[10cm] flex-col gap-6 bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:shadow-none print:outline print:outline-[#CFCFCF]">
       <div className="flex flex-col items-center gap-[.9375rem]">
         <div className="flex gap-[.9375rem]">
           <img
@@ -34,9 +34,12 @@ const FourCutTheme2 = ({ imageSrcs, onImageClick }: FourCutProps) => {
           />
         </div>
       </div>
-      <GSMLogoWithText color="#3B3B3B" />
+      <div className="flex items-center justify-between">
+        <GSMLogoWithText />
+        <GwangjuFutureEducationExpo />
+      </div>
     </div>
   );
 };
 
-export default FourCutTheme2;
+export default FourCutTheme1;
