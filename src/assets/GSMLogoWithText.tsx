@@ -1,16 +1,5 @@
-interface GSMLogoWithTextProps {
-  color?: string;
-}
-
-const GSMLogoWithText = ({ color = '#999999' }: GSMLogoWithTextProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={98}
-    height={53}
-    viewBox="0 0 98 53"
-    fill={color}
-    fillOpacity={color === '#999999' ? 0.3 : 1}
-  >
+const GSMLogoWithText = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={98} height={53} viewBox="0 0 98 53" fill="#999999">
     <path d="M11.1761 16.886L18.4649 21.2911L11.1761 25.6962V16.886Z" />
     <path d="M18.4649 12.481V21.2911L11.1761 16.886L18.4649 12.481Z" />
     <path d="M18.4649 21.2911V30.1012L11.1761 25.6962L18.4649 21.2911Z" />

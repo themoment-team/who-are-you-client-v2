@@ -8,3 +8,4 @@ export { default as Plus } from './Plus';
 export { default as Spin } from './Spin';
 export { default as BusinessCardCameraGuide } from './BusinessCardCameraGuide';
 export { default as FourCutCameraGuide } from './FourCutCameraGuide';
+export { default as GwangjuFutureEducationExpo } from './GwangjuFutureEducationExpo';
