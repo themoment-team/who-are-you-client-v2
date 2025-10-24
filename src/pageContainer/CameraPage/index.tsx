@@ -58,7 +58,7 @@ const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
   return (
     <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
       <div className="mb-[3rem] flex flex-col gap-4">
-        <h1 className="text-[2.25rem] font-extrabold">
+        <h1 className="text-[2.25rem]/[2.25rem] font-semibold">
           {isFourCut ? '인생네컷 사진 촬영' : '명함 사진 촬영'}
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
