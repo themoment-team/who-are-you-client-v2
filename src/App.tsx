@@ -8,14 +8,22 @@ import {
   StartPage,
   ThemeSelectPage,
 } from './pageContainer';
-import { type CardType, type PromptType, STEP, type Step, type userInfoFormType } from './types';
+import {
+  type CardType,
+  type PromptType,
+  STEP,
+  type Step,
+  type convertImagePrompt,
+  type userInfoFormType,
+} from './types';
 import generateAiImage from './utils/generateAiImage';
 
 const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<userInfoFormType | null>(null);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+  const [imageUrls, setImageUrls] = useState<convertImagePrompt[]>([]);
 
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
 

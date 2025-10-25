@@ -92,8 +92,10 @@ const AiConversionPage = ({
           </div>
         </div>
       </div>
+
       {/* 프롬프트 선택 */}
       <PromptSelectModal
+        imageUrls={imageUrls}
         isModalOpen={isModalOpen}
         selectedPrompt={selectedPrompt}
         setSelectedPrompt={setSelectedPrompt}

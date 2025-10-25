@@ -5,11 +5,12 @@ import Webcam from 'react-webcam';
 import { BusinessCardCameraGuide, FourCutCameraGuide } from '../../assets';
 import { StepButton } from '../../components';
 import { type CardType, STEP, type Step } from '../../types';
+import type { convertImagePrompt } from '../../types/convertImagePrompt';
 import { getCroppedImage } from '../../utils';
 
 interface CameraPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
-  setImageUrls: React.Dispatch<React.SetStateAction<string[]>>;
+  setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
   cardType?: CardType;
 }
 
