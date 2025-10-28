@@ -27,15 +27,13 @@ const App = () => {
 
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
 
-  const [selectedPrompt, setSelectedPrompt] = useState<PromptType>(null);
-
-  const aiImageConvert = async (imageUrl: string) => {
-    const newImageUrl = await generateAiImage({ imageUrl: imageUrl, selectedPrompt });
+  const aiImageConvert = async (imageUrl: string, prompt: PromptType) => {
+    const newImageUrl = await generateAiImage({ imageUrl, selectedPrompt: prompt });
     setAiConvertImage((prev) => [...prev, newImageUrl]);
   };
 
   const handleAiConvert = async () => {
-    await Promise.all(imageUrls.map((x) => aiImageConvert(x)));
+    await Promise.all(imageUrls.map((x) => aiImageConvert(x.img, x.prompt!)));
   };
 
   return (
@@ -49,10 +47,9 @@ const App = () => {
           <AiConversionPage
             setStep={setStep}
             cardType={cardType}
-            selectedPrompt={selectedPrompt}
-            setSelectedPrompt={setSelectedPrompt}
             handleAiConvert={handleAiConvert}
             imageUrls={imageUrls}
+            setImageUrls={setImageUrls}
           />
         )}
         {step === STEP.INFO_INPUT && (

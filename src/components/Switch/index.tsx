@@ -1,11 +1,15 @@
+import type { convertImagePrompt } from '../../types';
+
 interface SwitchProps {
   isTrue: boolean;
   setIsTrue: React.Dispatch<React.SetStateAction<boolean>>;
+  setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
 }
 
-const Switch = ({ isTrue, setIsTrue }: SwitchProps) => {
+const Switch = ({ isTrue, setIsTrue, setImageUrls }: SwitchProps) => {
   const handleToggle = () => {
     setIsTrue((prev) => !prev);
+    setImageUrls((prev) => prev.map((item) => ({ ...item, prompt: null })));
   };
   return (
     <div

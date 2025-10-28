@@ -2,15 +2,14 @@ import { useEffect, useState } from 'react';
 
 import { Plus } from '../../assets';
 import { PromptSelectModal, StepButton, Switch } from '../../components';
-import { type CardType, STEP, type Step } from '../../types';
+import { type CardType, STEP, type Step, type convertImagePrompt } from '../../types';
 import type { PromptType } from '../../types/prompt';
 
 interface AiConversionPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
   cardType: CardType | undefined;
-  imageUrls: string[];
-  selectedPrompt: PromptType;
-  setSelectedPrompt: React.Dispatch<React.SetStateAction<PromptType>>;
+  imageUrls: convertImagePrompt[];
+  setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
   handleAiConvert: () => void;
 }
 
@@ -18,8 +17,7 @@ const AiConversionPage = ({
   setStep,
   cardType,
   imageUrls,
-  selectedPrompt,
-  setSelectedPrompt,
+  setImageUrls,
   handleAiConvert,
 }: AiConversionPageProps) => {
   const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
@@ -27,8 +25,7 @@ const AiConversionPage = ({
 
   useEffect(() => {
     if (isAiConvert) setIsModalOpen(isAiConvert);
-    else setSelectedPrompt(null);
-  }, [isAiConvert, setIsModalOpen, setSelectedPrompt]);
+  }, [isAiConvert, setIsModalOpen]);
 
   return (
     <div className="relative h-[61.5rem] w-[50rem]">
@@ -45,25 +42,38 @@ const AiConversionPage = ({
           className={`flex w-full items-center ${imageUrls.length === 1 ? 'justify-center' : 'justify-between'} pt-[2.25rem]`}
         >
           {imageUrls.map((x) => (
-            <img
-              key={x}
-              src={x}
-              className={`${imageUrls.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-md`}
-            />
+            <div key={x.img} className="relative">
+              <img
+                src={x.img}
+                className={`${imageUrls.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-xl`}
+              />
+              {x.prompt !== null && cardType === 'FOUR_CUT' && (
+                <div
+                  className={`absolute top-0 left-0 flex h-full w-full flex-col items-center justify-center rounded-xl bg-black/30`}
+                >
+                  <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
+                    AI 변환 키워드:
+                  </p>
+                  <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
+                    {x.prompt}
+                  </p>
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
         <div className="flex flex-col gap-6 pt-[3.09rem] pb-8">
           <div className="flex items-center gap-9">
             <p className="text-xl leading-[150%] font-bold text-black">AI 변환</p>
-            <Switch isTrue={isAiConvert} setIsTrue={setIsAiConvert} />
+            <Switch isTrue={isAiConvert} setIsTrue={setIsAiConvert} setImageUrls={setImageUrls} />
           </div>
-          {selectedPrompt && (
+          {imageUrls[0].prompt && cardType === 'BUSINESS_CARD' && (
             <div className="flex gap-9">
               <p className="text-xl leading-[150%] font-bold text-black">AI 변환 키워드 </p>
               <div className="flex items-center gap-[0.88rem]">
                 <div className="flex items-center justify-center rounded-[0.625rem] border border-solid px-4 py-1 text-[#222]">
-                  {selectedPrompt}
+                  {imageUrls[0].prompt}
                 </div>
                 <div className="rotate-45" onClick={() => setIsModalOpen(true)}>
                   <Plus width={'0.625rem'} height={'0.625rem'} />
@@ -84,7 +94,7 @@ const AiConversionPage = ({
                 if (cardType === 'BUSINESS_CARD') setStep(STEP.INFO_INPUT);
                 else setStep(STEP.THEME_SELECT);
 
-                if (selectedPrompt !== null) handleAiConvert();
+                if (imageUrls[0].prompt !== null) handleAiConvert();
               }}
             >
               다음으로
@@ -96,9 +106,8 @@ const AiConversionPage = ({
       {/* 프롬프트 선택 */}
       <PromptSelectModal
         imageUrls={imageUrls}
+        setImageUrls={setImageUrls}
         isModalOpen={isModalOpen}
-        selectedPrompt={selectedPrompt}
-        setSelectedPrompt={setSelectedPrompt}
         setIsAiConvert={setIsAiConvert}
         setIsModalOpen={setIsModalOpen}
       />
