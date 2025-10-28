@@ -40,9 +40,10 @@ const AiConversionPage = ({
 
         <div
           className={`flex w-full items-center ${imageUrls.length === 1 ? 'justify-center' : 'justify-between'} pt-[2.25rem]`}
+          onClick={isAiConvert ? () => setIsModalOpen(true) : undefined}
         >
           {imageUrls.map((x) => (
-            <div key={x.img} className="relative">
+            <div key={x.img} className="relative cursor-pointer">
               <img
                 src={x.img}
                 className={`${imageUrls.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-xl`}

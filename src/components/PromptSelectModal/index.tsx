@@ -55,7 +55,7 @@ const PromptSelectModal = ({
               {imageUrls.map((x) => (
                 <>
                   <div
-                    className={`${currentImage === x.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex items-center justify-center`}
+                    className={`${currentImage === x.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
                     onClick={() => setCurrentImage(x.img)}
                   >
                     <img

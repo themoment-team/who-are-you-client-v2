@@ -24,7 +24,7 @@ const AiConvertExampleCard = ({
   };
 
   return (
-    <div className="relative" onClick={handleOnClick}>
+    <div className="relative cursor-pointer" onClick={handleOnClick}>
       <div
         className={`flex w-32 cursor-pointer flex-col items-center gap-4 rounded-xl border border-solid border-[#222] p-4 transition-all duration-700 ${currentImageItem?.prompt === title && 'bg-black'}`}
       >
