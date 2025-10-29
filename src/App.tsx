@@ -46,10 +46,10 @@ const App = () => {
         {step === STEP.AI_CONVERSION && (
           <AiConversionPage
             setStep={setStep}
-            cardType={cardType}
-            convertAllImages={convertAllImages}
             imageUrls={imageUrls}
             setImageUrls={setImageUrls}
+            cardType={cardType}
+            convertAllImages={convertAllImages}
           />
         )}
         {step === STEP.INFO_INPUT && (

@@ -52,7 +52,7 @@ const PromptSelectModal = ({
               </p>
             </div>
             <div className="flex gap-4">
-              {imageUrls.map((imageUrl) => (
+              {imageUrls.map((imageUrl, index) => (
                 <>
                   <div
                     className={`${currentImage === imageUrl.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
@@ -61,6 +61,7 @@ const PromptSelectModal = ({
                     <img
                       src={imageUrl.img}
                       className={`rounded-xl ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'}`}
+                      alt={`${index}째 사진`}
                     />
                     {imageUrl.prompt !== null && (
                       <div

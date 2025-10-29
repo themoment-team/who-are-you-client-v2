@@ -46,6 +46,7 @@ const AiConversionPage = ({
               <img
                 src={imageUrl.img}
                 className={`${imageUrls.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-xl`}
+                alt={`${imageUrl.prompt} 변환`}
               />
               {imageUrl.prompt !== null && cardType === 'FOUR_CUT' && (
                 <div
@@ -66,7 +67,11 @@ const AiConversionPage = ({
         <div className="flex flex-col gap-6 pt-[3.09rem] pb-8">
           <div className="flex items-center gap-9">
             <p className="text-xl leading-[150%] font-bold text-black">AI 변환</p>
-            <Switch isTrue={isAiConvert} setIsTrue={setIsAiConvert} setImageUrls={setImageUrls} />
+            <Switch
+              isEnabled={isAiConvert}
+              setIsTrue={setIsAiConvert}
+              setImageUrls={setImageUrls}
+            />
           </div>
           {imageUrls[0].prompt && cardType === 'BUSINESS_CARD' && (
             <div className="flex gap-9">
