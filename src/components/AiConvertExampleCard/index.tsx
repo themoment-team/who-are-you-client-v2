@@ -15,7 +15,7 @@ const AiConvertExampleCard = ({
   setImageUrls,
   currentImage,
 }: AiConvertExampleCardProps) => {
-  const currentImageItem = imageUrls.find((item) => item.img === currentImage);
+  const currentImageData = imageUrls.find((item) => item.img === currentImage);
 
   const handleOnClick = () => {
     setImageUrls((prev) =>
@@ -26,16 +26,16 @@ const AiConvertExampleCard = ({
   return (
     <div className="relative cursor-pointer" onClick={handleOnClick}>
       <div
-        className={`flex w-32 cursor-pointer flex-col items-center gap-4 rounded-xl border border-solid border-[#222] p-4 transition-all duration-700 ${currentImageItem?.prompt === title && 'bg-black'}`}
+        className={`flex w-32 cursor-pointer flex-col items-center gap-4 rounded-xl border border-solid border-[#222] p-4 transition-all duration-700 ${currentImageData?.prompt === title && 'bg-black'}`}
       >
         <p
-          className={`text-center text-xl leading-[1.625rem] font-bold whitespace-nowrap text-[#222] ${currentImageItem?.prompt === title && 'text-white'}`}
+          className={`text-center text-xl leading-[1.625rem] font-bold whitespace-nowrap text-[#222] ${currentImageData?.prompt === title && 'text-white'}`}
         >
           {title}
         </p>
         <img src={img} className="h-24 w-24 rounded-xl" />
       </div>
-      {currentImageItem?.prompt !== null && currentImageItem?.prompt !== title && (
+      {currentImageData?.prompt !== null && currentImageData?.prompt !== title && (
         <div className="absolute inset-0 h-full w-32 rounded-xl bg-white/50 transition-opacity duration-500" />
       )}
     </div>

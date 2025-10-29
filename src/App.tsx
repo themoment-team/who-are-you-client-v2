@@ -27,13 +27,13 @@ const App = () => {
 
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
 
-  const aiImageConvert = async (imageUrl: string, prompt: PromptType) => {
+  const convertSingleImage = async (imageUrl: string, prompt: PromptType) => {
     const newImageUrl = await generateAiImage({ imageUrl, selectedPrompt: prompt });
     setAiConvertImage((prev) => [...prev, newImageUrl]);
   };
 
-  const handleAiConvert = async () => {
-    await Promise.all(imageUrls.map((x) => aiImageConvert(x.img, x.prompt!)));
+  const convertAllImages = async () => {
+    await Promise.all(imageUrls.map((x) => convertSingleImage(x.img, x.prompt!)));
   };
 
   return (
@@ -47,7 +47,7 @@ const App = () => {
           <AiConversionPage
             setStep={setStep}
             cardType={cardType}
-            handleAiConvert={handleAiConvert}
+            convertAllImages={convertAllImages}
             imageUrls={imageUrls}
             setImageUrls={setImageUrls}
           />
