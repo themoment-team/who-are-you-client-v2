@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Plus } from '../../assets';
 import { PromptSelectModal, StepButton, Switch } from '../../components';
 import { type CardType, STEP, type Step, type convertImagePrompt } from '../../types';
-import type { PromptType } from '../../types/prompt';
 
 interface AiConversionPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
@@ -42,13 +41,13 @@ const AiConversionPage = ({
           className={`flex w-full items-center ${imageUrls.length === 1 ? 'justify-center' : 'justify-between'} pt-[2.25rem]`}
           onClick={isAiConvert ? () => setIsModalOpen(true) : undefined}
         >
-          {imageUrls.map((x) => (
-            <div key={x.img} className="relative cursor-pointer">
+          {imageUrls.map((imageUrl) => (
+            <div key={imageUrl.img} className="relative cursor-pointer">
               <img
-                src={x.img}
+                src={imageUrl.img}
                 className={`${imageUrls.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-xl`}
               />
-              {x.prompt !== null && cardType === 'FOUR_CUT' && (
+              {imageUrl.prompt !== null && cardType === 'FOUR_CUT' && (
                 <div
                   className={`absolute top-0 left-0 flex h-full w-full flex-col items-center justify-center rounded-xl bg-black/30`}
                 >
@@ -56,7 +55,7 @@ const AiConversionPage = ({
                     AI 변환 키워드:
                   </p>
                   <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
-                    {x.prompt}
+                    {imageUrl.prompt}
                   </p>
                 </div>
               )}

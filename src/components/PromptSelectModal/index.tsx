@@ -11,9 +11,9 @@ interface PromptSelectModal {
   setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
 }
 
-interface convertExampleImagesType {
-  title: PromptType;
-  img: string;
+interface promptOptionType {
+  promptName: PromptType;
+  previewImageUrl: string;
 }
 
 const PromptSelectModal = ({
@@ -24,12 +24,12 @@ const PromptSelectModal = ({
   setImageUrls,
 }: PromptSelectModal) => {
   const [currentImage, setCurrentImage] = useState<string>(imageUrls[0].img);
-  const convertExampleImages: convertExampleImagesType[] = [
-    { title: '디즈니', img: '/images/디즈니.png' },
-    { title: '레고', img: '/images/레고.png' },
-    { title: '마인크래프트', img: '/images/마인크래프트.png' },
-    { title: '스누피', img: '/images/스누피.png' },
-    { title: '심슨', img: '/images/심슨.png' },
+  const promptOptions: promptOptionType[] = [
+    { promptName: '디즈니', previewImageUrl: '/images/디즈니.png' },
+    { promptName: '레고', previewImageUrl: '/images/레고.png' },
+    { promptName: '마인크래프트', previewImageUrl: '/images/마인크래프트.png' },
+    { promptName: '스누피', previewImageUrl: '/images/스누피.png' },
+    { promptName: '심슨', previewImageUrl: '/images/심슨.png' },
   ];
 
   const isBusinessCard = imageUrls.length === 1;
@@ -52,25 +52,25 @@ const PromptSelectModal = ({
               </p>
             </div>
             <div className="flex gap-4">
-              {imageUrls.map((x) => (
+              {imageUrls.map((imageUrl) => (
                 <>
                   <div
-                    className={`${currentImage === x.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
-                    onClick={() => setCurrentImage(x.img)}
+                    className={`${currentImage === imageUrl.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
+                    onClick={() => setCurrentImage(imageUrl.img)}
                   >
                     <img
-                      src={x.img}
-                      className={`rounded-xl ${currentImage === x.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'}`}
+                      src={imageUrl.img}
+                      className={`rounded-xl ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'}`}
                     />
-                    {x.prompt !== null && (
+                    {imageUrl.prompt !== null && (
                       <div
-                        className={`absolute ${currentImage === x.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'} flex flex-col items-center justify-center rounded-xl bg-black/30`}
+                        className={`absolute ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'} flex flex-col items-center justify-center rounded-xl bg-black/30`}
                       >
                         <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
                           AI 변환 키워드:
                         </p>
                         <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
-                          {x.prompt}
+                          {imageUrl.prompt}
                         </p>
                       </div>
                     )}
@@ -78,7 +78,7 @@ const PromptSelectModal = ({
                 </>
               ))}
             </div>
-            <div className="border-b border-solid border-[#666]" />{' '}
+            <div className="border-b border-solid border-[#666]" />
           </>
         )}
 
@@ -92,11 +92,11 @@ const PromptSelectModal = ({
         </div>
 
         <div className="flex gap-4">
-          {convertExampleImages.map(({ title, img }) => (
+          {promptOptions.map(({ promptName, previewImageUrl }) => (
             <AiConvertExampleCard
-              key={title}
-              title={title}
-              img={img}
+              key={promptName}
+              promptName={promptName}
+              previewImageUrl={previewImageUrl}
               imageUrls={imageUrls}
               setImageUrls={setImageUrls}
               currentImage={currentImage}
