@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import generateAiImage from './api/openai';
 import { Provider } from './lib';
 import {
   AiConversionPage,
@@ -16,7 +17,6 @@ import {
   type Step,
   type userInfoFormType,
 } from './types';
-import generateAiImage from './utils/generateAiImage';
 
 const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
