@@ -111,7 +111,7 @@ const PromptSelectModal = ({
               onClick={() => {
                 setIsAiConvert(false);
                 setIsModalOpen(false);
-                setImageUrls((prev) => prev.map((item) => ({ ...item, prompt: null })));
+                setImageUrls((prev) => prev.map((item) => ({ ...item, promptName: null })));
               }}
             >
               AI로 변환하지 않을래요
@@ -119,7 +119,7 @@ const PromptSelectModal = ({
             <StepButton
               variant="next"
               onClick={() => {
-                setIsModalOpen(false);
+                if (!imageUrls.some((x) => x.promptName === null)) setIsModalOpen(false);
               }}
             >
               확인
