@@ -42,13 +42,13 @@ const AiConversionPage = ({
           onClick={isAiConvert ? () => setIsModalOpen(true) : undefined}
         >
           {imageUrls.map((imageUrl) => (
-            <div key={imageUrl.img} className="relative cursor-pointer">
+            <div key={imageUrl.imageUrl} className="relative cursor-pointer">
               <img
-                src={imageUrl.img}
+                src={imageUrl.imageUrl}
                 className={`${imageUrls.length === 1 ? 'h-[18.75rem] w-[18.75rem]' : 'h-[12.8125rem] w-[10.25rem]'} rounded-xl`}
-                alt={`${imageUrl.prompt} 변환`}
+                alt={`${imageUrl.promptName} 변환`}
               />
-              {imageUrl.prompt !== null && cardType === 'FOUR_CUT' && (
+              {imageUrl.promptName !== null && cardType === 'FOUR_CUT' && (
                 <div
                   className={`absolute top-0 left-0 flex h-full w-full flex-col items-center justify-center rounded-xl bg-black/30`}
                 >
@@ -56,7 +56,7 @@ const AiConversionPage = ({
                     AI 변환 키워드:
                   </p>
                   <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
-                    {imageUrl.prompt}
+                    {imageUrl.promptName}
                   </p>
                 </div>
               )}
@@ -73,12 +73,12 @@ const AiConversionPage = ({
               setImageUrls={setImageUrls}
             />
           </div>
-          {imageUrls[0].prompt && cardType === 'BUSINESS_CARD' && (
+          {imageUrls[0].promptName && cardType === 'BUSINESS_CARD' && (
             <div className="flex gap-9">
               <p className="text-xl leading-[150%] font-bold text-black">AI 변환 키워드 </p>
               <div className="flex items-center gap-[0.88rem]">
                 <div className="flex items-center justify-center rounded-[0.625rem] border border-solid px-4 py-1 text-[#222]">
-                  {imageUrls[0].prompt}
+                  {imageUrls[0].promptName}
                 </div>
                 <div className="rotate-45" onClick={() => setIsModalOpen(true)}>
                   <Plus width={'0.625rem'} height={'0.625rem'} />
@@ -99,7 +99,7 @@ const AiConversionPage = ({
                 if (cardType === 'BUSINESS_CARD') setStep(STEP.INFO_INPUT);
                 else setStep(STEP.THEME_SELECT);
 
-                if (imageUrls[0].prompt !== null) convertAllImages();
+                if (imageUrls[0].promptName !== null) convertAllImages();
               }}
             >
               다음으로

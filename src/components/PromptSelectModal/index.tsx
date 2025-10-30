@@ -23,7 +23,7 @@ const PromptSelectModal = ({
   imageUrls,
   setImageUrls,
 }: PromptSelectModal) => {
-  const [currentImage, setCurrentImage] = useState<string>(imageUrls[0].img);
+  const [currentImage, setCurrentImage] = useState<string>(imageUrls[0].imageUrl);
   const promptOptions: PromptOptionType[] = [
     { promptName: '디즈니', previewImageUrl: '/images/디즈니.png' },
     { promptName: '레고', previewImageUrl: '/images/레고.png' },
@@ -54,24 +54,24 @@ const PromptSelectModal = ({
             <div className="flex gap-4">
               {imageUrls.map((imageUrl, index) => (
                 <div
-                  key={imageUrl.img}
-                  className={`${currentImage === imageUrl.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
-                  onClick={() => setCurrentImage(imageUrl.img)}
+                  key={imageUrl.imageUrl}
+                  className={`${currentImage === imageUrl.imageUrl && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
+                  onClick={() => setCurrentImage(imageUrl.imageUrl)}
                 >
                   <img
-                    src={imageUrl.img}
-                    className={`rounded-xl ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'}`}
+                    src={imageUrl.imageUrl}
+                    className={`rounded-xl ${currentImage === imageUrl.imageUrl ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'}`}
                     alt={`${index}째 사진`}
                   />
-                  {imageUrl.prompt !== null && (
+                  {imageUrl.promptName !== null && (
                     <div
-                      className={`absolute ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'} flex flex-col items-center justify-center rounded-xl bg-black/30`}
+                      className={`absolute ${currentImage === imageUrl.imageUrl ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'} flex flex-col items-center justify-center rounded-xl bg-black/30`}
                     >
                       <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
                         AI 변환 키워드:
                       </p>
                       <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
-                        {imageUrl.prompt}
+                        {imageUrl.promptName}
                       </p>
                     </div>
                   )}

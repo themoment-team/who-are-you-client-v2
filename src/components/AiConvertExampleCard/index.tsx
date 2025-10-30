@@ -15,14 +15,14 @@ const AiConvertExampleCard = ({
   setImageUrls,
   currentImage,
 }: AiConvertExampleCardProps) => {
-  const currentImageData = imageUrls.find((item) => item.img === currentImage);
-  const isSelectedPrompt = currentImageData?.prompt === promptName;
+  const currentImageData = imageUrls.find((item) => item.imageUrl === currentImage);
+  const isSelectedPrompt = currentImageData?.promptName === promptName;
   const shouldShowOverlay =
-    currentImageData?.prompt !== null && currentImageData?.prompt !== promptName;
+    currentImageData?.promptName !== null && currentImageData?.promptName !== promptName;
 
   const handleOnClick = () => {
     setImageUrls((prev) =>
-      prev.map((item) => (item.img === currentImage ? { ...item, prompt: promptName } : item)),
+      prev.map((item) => (item.imageUrl === currentImage ? { ...item, prompt: promptName } : item)),
     );
   };
 

@@ -33,7 +33,7 @@ const App = () => {
   };
 
   const convertAllImages = async () => {
-    await Promise.all(imageUrls.map((x) => convertSingleImage(x.img, x.prompt!)));
+    await Promise.all(imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName!)));
   };
 
   return (

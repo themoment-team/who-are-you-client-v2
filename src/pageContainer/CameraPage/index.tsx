@@ -41,13 +41,13 @@ const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
         setCapturedImages(newImages);
 
         if (newImages.length >= FOUR_CUT_TOTAL) {
-          setImageUrls(newImages.map((img) => ({ img, prompt: null })));
+          setImageUrls(newImages.map((imageUrl) => ({ imageUrl, promptName: null })));
           setStep(STEP.AI_CONVERSION);
         } else {
           setCurrentPhotoCount(newImages.length + 1);
         }
       } else {
-        setImageUrls([{ img: croppedImageUrl, prompt: null }]);
+        setImageUrls([{ imageUrl: croppedImageUrl, promptName: null }]);
         setStep(STEP.AI_CONVERSION);
       }
     } catch (err) {
