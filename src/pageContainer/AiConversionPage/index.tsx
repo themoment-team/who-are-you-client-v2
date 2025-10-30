@@ -30,7 +30,7 @@ const AiConversionPage = ({
     <div className="relative h-[61.5rem] w-[50rem]">
       <div className="flex h-full w-full flex-col rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
         <div className="flex flex-col gap-4 pt-8">
-          <h1 className="text-4xl leading-none font-extrabold text-[#222]">AI 변환 여부 선택</h1>
+          <h1 className="text-4xl leading-none font-[600] text-[#222]">AI 변환 여부 선택</h1>
           <p className="text-xl leading-[150%] font-medium text-[#666]">
             사진의 AI 변환 여부를 선택합니다.
             <br /> 선택한 키워드로 사진을 변환시킬 수 있습니다.
