@@ -68,8 +68,8 @@ const AiConversionPage = ({
           <div className="flex items-center gap-9">
             <p className="text-xl leading-[150%] font-bold text-black">AI 변환</p>
             <Switch
-              isEnabled={isAiConvert}
-              setIsTrue={setIsAiConvert}
+              isAiConvert={isAiConvert}
+              setIsAiConvert={setIsAiConvert}
               setImageUrls={setImageUrls}
             />
           </div>
