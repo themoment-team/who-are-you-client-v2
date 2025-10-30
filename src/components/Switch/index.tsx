@@ -9,7 +9,7 @@ interface SwitchProps {
 const Switch = ({ isAiConvert, setIsAiConvert, setImageUrls }: SwitchProps) => {
   const handleToggle = () => {
     setIsAiConvert((prev) => !prev);
-    setImageUrls((prev) => prev.map((item) => ({ ...item, prompt: null })));
+    setImageUrls((prev) => prev.map((item) => ({ ...item, promptName: null })));
   };
   return (
     <div
