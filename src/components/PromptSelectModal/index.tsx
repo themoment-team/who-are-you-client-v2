@@ -53,30 +53,29 @@ const PromptSelectModal = ({
             </div>
             <div className="flex gap-4">
               {imageUrls.map((imageUrl, index) => (
-                <>
-                  <div
-                    className={`${currentImage === imageUrl.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
-                    onClick={() => setCurrentImage(imageUrl.img)}
-                  >
-                    <img
-                      src={imageUrl.img}
-                      className={`rounded-xl ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'}`}
-                      alt={`${index}째 사진`}
-                    />
-                    {imageUrl.prompt !== null && (
-                      <div
-                        className={`absolute ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'} flex flex-col items-center justify-center rounded-xl bg-black/30`}
-                      >
-                        <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
-                          AI 변환 키워드:
-                        </p>
-                        <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
-                          {imageUrl.prompt}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </>
+                <div
+                  key={imageUrl.img}
+                  className={`${currentImage === imageUrl.img && 'h-[12.8125rem] w-[10.25rem] rounded-xl border border-solid'} relative flex cursor-pointer items-center justify-center`}
+                  onClick={() => setCurrentImage(imageUrl.img)}
+                >
+                  <img
+                    src={imageUrl.img}
+                    className={`rounded-xl ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'}`}
+                    alt={`${index}째 사진`}
+                  />
+                  {imageUrl.prompt !== null && (
+                    <div
+                      className={`absolute ${currentImage === imageUrl.img ? 'h-[12.0625rem] w-[9.625rem]' : 'h-[12.8125rem] w-[10.25rem]'} flex flex-col items-center justify-center rounded-xl bg-black/30`}
+                    >
+                      <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
+                        AI 변환 키워드:
+                      </p>
+                      <p className="text-[1.25rem] leading-[150%] font-semibold text-[#F6F6F6]">
+                        {imageUrl.prompt}
+                      </p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
             <div className="border-b border-solid border-[#666]" />
