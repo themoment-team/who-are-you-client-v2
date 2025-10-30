@@ -10,10 +10,10 @@ import {
 } from './pageContainer';
 import {
   type CardType,
+  type ConvertImagePrompt,
   type PromptType,
   STEP,
   type Step,
-  type convertImagePrompt,
   type userInfoFormType,
 } from './types';
 import generateAiImage from './utils/generateAiImage';
@@ -23,7 +23,7 @@ const App = () => {
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<userInfoFormType | null>(null);
 
-  const [imageUrls, setImageUrls] = useState<convertImagePrompt[]>([]);
+  const [imageUrls, setImageUrls] = useState<ConvertImagePrompt[]>([]);
 
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
 

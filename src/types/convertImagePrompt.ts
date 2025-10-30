@@ -1,6 +1,6 @@
 import type { PromptType } from '.';
 
-export interface convertImagePrompt {
+export interface ConvertImagePrompt {
   img: string;
   prompt: PromptType;
 }

@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { Plus } from '../../assets';
 import { PromptSelectModal, StepButton, Switch } from '../../components';
-import { type CardType, STEP, type Step, type convertImagePrompt } from '../../types';
+import { type CardType, type ConvertImagePrompt, STEP, type Step } from '../../types';
 
 interface AiConversionPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
   cardType: CardType | undefined;
-  imageUrls: convertImagePrompt[];
-  setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
+  imageUrls: ConvertImagePrompt[];
+  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   convertAllImages: () => void;
 }
 

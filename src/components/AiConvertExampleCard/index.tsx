@@ -1,10 +1,10 @@
-import type { PromptType, convertImagePrompt } from '../../types';
+import type { ConvertImagePrompt, PromptType } from '../../types';
 
 interface AiConvertExampleCardProps {
   promptName: PromptType;
   previewImageUrl: string;
-  imageUrls: convertImagePrompt[];
-  setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
+  imageUrls: ConvertImagePrompt[];
+  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   currentImage: string;
 }
 

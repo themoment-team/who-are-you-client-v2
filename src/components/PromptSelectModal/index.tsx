@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
 import { AiConvertExampleCard, StepButton } from '..';
-import type { PromptType, convertImagePrompt } from '../../types';
+import type { ConvertImagePrompt, PromptType } from '../../types';
 
 interface PromptSelectModal {
   isModalOpen: boolean;
   setIsAiConvert: React.Dispatch<React.SetStateAction<boolean>>;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  imageUrls: convertImagePrompt[];
-  setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
+  imageUrls: ConvertImagePrompt[];
+  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
 }
 
-interface promptOptionType {
+interface PromptOptionType {
   promptName: PromptType;
   previewImageUrl: string;
 }
@@ -24,7 +24,7 @@ const PromptSelectModal = ({
   setImageUrls,
 }: PromptSelectModal) => {
   const [currentImage, setCurrentImage] = useState<string>(imageUrls[0].img);
-  const promptOptions: promptOptionType[] = [
+  const promptOptions: PromptOptionType[] = [
     { promptName: '디즈니', previewImageUrl: '/images/디즈니.png' },
     { promptName: '레고', previewImageUrl: '/images/레고.png' },
     { promptName: '마인크래프트', previewImageUrl: '/images/마인크래프트.png' },

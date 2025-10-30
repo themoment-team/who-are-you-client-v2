@@ -1,9 +1,9 @@
-import type { convertImagePrompt } from '../../types';
+import type { ConvertImagePrompt } from '../../types';
 
 interface SwitchProps {
   isAiConvert: boolean;
   setIsAiConvert: React.Dispatch<React.SetStateAction<boolean>>;
-  setImageUrls: React.Dispatch<React.SetStateAction<convertImagePrompt[]>>;
+  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
 }
 
 const Switch = ({ isAiConvert, setIsAiConvert, setImageUrls }: SwitchProps) => {
