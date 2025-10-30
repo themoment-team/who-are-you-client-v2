@@ -28,12 +28,15 @@ const App = () => {
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
 
   const convertSingleImage = async (imageUrl: string, prompt: PromptType) => {
-    const newImageUrl = await generateAiImage({ imageUrl, selectedPrompt: prompt });
-    setAiConvertImage((prev) => [...prev, newImageUrl]);
+    const convertedImageUrl = await generateAiImage({ imageUrl, selectedPrompt: prompt });
+    return convertedImageUrl;
   };
 
   const convertAllImages = async () => {
-    await Promise.all(imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName!)));
+    const convertedImageUrls = await Promise.all(
+      imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName)),
+    );
+    setAiConvertImage(convertedImageUrls);
   };
 
   return (
