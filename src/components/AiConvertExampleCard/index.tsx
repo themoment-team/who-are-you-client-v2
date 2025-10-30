@@ -22,7 +22,9 @@ const AiConvertExampleCard = ({
 
   const handleOnClick = () => {
     setImageUrls((prev) =>
-      prev.map((item) => (item.imageUrl === currentImage ? { ...item, prompt: promptName } : item)),
+      prev.map((item) =>
+        item.imageUrl === currentImage ? { ...item, promptName: promptName } : item,
+      ),
     );
   };
 
