@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { AiConvertExampleCard, StepButton } from '..';
 import type { ConvertImagePrompt, PromptType } from '../../types';
@@ -33,6 +33,24 @@ const PromptSelectModal = ({
   ];
 
   const isBusinessCard = imageUrls.length === 1;
+
+  useEffect(() => {
+    const currentIndex = imageUrls.findIndex((item) => item.imageUrl === currentImage);
+    const nullPromptIndex = imageUrls.findIndex((item) => item.promptName === null);
+
+    if (nullPromptIndex !== -1) {
+      const nextNullIndex = imageUrls.findIndex(
+        (item, index) => index > currentIndex && item.promptName === null,
+      );
+
+      if (nextNullIndex !== -1) {
+        setCurrentImage(imageUrls[nextNullIndex].imageUrl);
+      } else {
+        setCurrentImage(imageUrls[nullPromptIndex].imageUrl);
+      }
+    }
+  }, [imageUrls]);
+
   return (
     <div
       className={`absolute inset-0 z-10 h-full w-full rounded-3xl bg-[rgba(0,0,0,0.25)] ${isModalOpen ? 'block' : 'hidden'}`}
