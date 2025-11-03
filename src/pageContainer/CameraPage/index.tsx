@@ -11,12 +11,18 @@ interface CameraPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
   setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   cardType?: CardType;
+  setHasAiConvertedOnce: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const VIDEO_CONSTRAINTS = { facingMode: 'user', width: 1280, height: 720 } as const;
 const FOUR_CUT_TOTAL = 4;
 
-const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
+const CameraPage = ({
+  setStep,
+  setImageUrls,
+  cardType,
+  setHasAiConvertedOnce,
+}: CameraPageProps) => {
   const webcamRef = useRef<Webcam>(null);
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [currentPhotoCount, setCurrentPhotoCount] = useState<number>(1);
@@ -53,6 +59,8 @@ const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
     } catch (err) {
       console.error('이미지 처리 오류:', err);
     }
+
+    setHasAiConvertedOnce(false);
   };
 
   return (

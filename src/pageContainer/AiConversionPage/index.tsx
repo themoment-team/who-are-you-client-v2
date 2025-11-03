@@ -10,6 +10,8 @@ interface AiConversionPageProps {
   imageUrls: ConvertImagePrompt[];
   setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   convertAllImages: () => void;
+  hasAiConvertedOnce: boolean;
+  setHasAiConvertedOnce: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AiConversionPage = ({
@@ -18,6 +20,8 @@ const AiConversionPage = ({
   imageUrls,
   setImageUrls,
   convertAllImages,
+  hasAiConvertedOnce,
+  setHasAiConvertedOnce,
 }: AiConversionPageProps) => {
   const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -99,7 +103,10 @@ const AiConversionPage = ({
                 if (cardType === 'BUSINESS_CARD') setStep(STEP.INFO_INPUT);
                 else setStep(STEP.THEME_SELECT);
 
-                if (imageUrls[0].promptName !== null) convertAllImages();
+                if (imageUrls[0].promptName !== null && !hasAiConvertedOnce) {
+                  setHasAiConvertedOnce(true);
+                  convertAllImages();
+                }
               }}
             >
               다음으로

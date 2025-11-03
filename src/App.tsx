@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import generateAiImage from './api/openai';
 import { Provider } from './lib';
@@ -25,6 +25,7 @@ const App = () => {
   const [imageUrls, setImageUrls] = useState<ConvertImagePrompt[]>([]);
   const [isAiConverting, setIsAiConverting] = useState<boolean>(false);
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
+  const [hasAiConvertedOnce, setHasAiConvertedOnce] = useState<boolean>(false);
 
   const convertSingleImage = async (imageUrl: string, selectedPrompt: PromptType) => {
     const convertedImageUrl = await generateAiImage({ imageUrl, selectedPrompt });
@@ -47,7 +48,12 @@ const App = () => {
       <div className="flex h-screen items-center justify-center bg-[#f8f8f8]">
         {step === STEP.START && <StartPage setStep={setStep} setCardType={setCardType} />}
         {step === STEP.CAMERA && (
-          <CameraPage setStep={setStep} setImageUrls={setImageUrls} cardType={cardType} />
+          <CameraPage
+            setStep={setStep}
+            setImageUrls={setImageUrls}
+            cardType={cardType}
+            setHasAiConvertedOnce={setHasAiConvertedOnce}
+          />
         )}
         {step === STEP.AI_CONVERSION && (
           <AiConversionPage
@@ -56,6 +62,8 @@ const App = () => {
             setImageUrls={setImageUrls}
             cardType={cardType}
             convertAllImages={convertAllImages}
+            hasAiConvertedOnce={hasAiConvertedOnce}
+            setHasAiConvertedOnce={setHasAiConvertedOnce}
           />
         )}
         {step === STEP.INFO_INPUT && (

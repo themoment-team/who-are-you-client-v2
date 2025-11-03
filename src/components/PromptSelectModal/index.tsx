@@ -33,7 +33,6 @@ const PromptSelectModal = ({
   ];
 
   const isBusinessCard = imageUrls.length === 1;
-
   return (
     <div
       className={`absolute inset-0 z-10 h-full w-full rounded-3xl bg-[rgba(0,0,0,0.25)] ${isModalOpen ? 'block' : 'hidden'}`}
