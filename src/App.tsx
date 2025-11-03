@@ -22,21 +22,24 @@ const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<userInfoFormType | null>(null);
-
   const [imageUrls, setImageUrls] = useState<ConvertImagePrompt[]>([]);
-
+  const [isAiConverting, setIsAiConverting] = useState<boolean>(false);
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
 
-  const convertSingleImage = async (imageUrl: string, prompt: PromptType) => {
-    const convertedImageUrl = await generateAiImage({ imageUrl, selectedPrompt: prompt });
+  const convertSingleImage = async (imageUrl: string, selectedPrompt: PromptType) => {
+    const convertedImageUrl = await generateAiImage({ imageUrl, selectedPrompt });
     return convertedImageUrl;
   };
 
   const convertAllImages = async () => {
+    if (isAiConverting) return;
+    else setIsAiConverting(true);
+
     const convertedImageUrls = await Promise.all(
       imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName)),
     );
     setAiConvertImage(convertedImageUrls);
+    setIsAiConverting(false);
   };
 
   return (
