@@ -80,7 +80,7 @@ const AiConversionPage = ({
                 <div className="flex items-center justify-center rounded-[0.625rem] border border-solid px-4 py-1 text-[#222]">
                   {imageUrls[0].promptName}
                 </div>
-                <div className="rotate-45" onClick={() => setIsModalOpen(true)}>
+                <div className="rotate-45 cursor-pointer" onClick={() => setIsModalOpen(true)}>
                   <Plus width={'0.625rem'} height={'0.625rem'} />
                 </div>
               </div>
