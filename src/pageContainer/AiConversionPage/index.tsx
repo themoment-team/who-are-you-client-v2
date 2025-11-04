@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Plus } from '../../assets';
 import { PromptSelectModal, StepButton, Switch } from '../../components';
@@ -28,9 +28,13 @@ const AiConversionPage = ({
   setIsAiConvert,
 }: AiConversionPageProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const prevIsAiConvertRef = useRef(isAiConvert);
 
   useEffect(() => {
-    if (isAiConvert) setIsModalOpen(isAiConvert);
+    if (!prevIsAiConvertRef.current && isAiConvert) {
+      setIsModalOpen(true);
+    }
+    prevIsAiConvertRef.current = isAiConvert;
   }, [isAiConvert, setIsModalOpen]);
 
   return (
