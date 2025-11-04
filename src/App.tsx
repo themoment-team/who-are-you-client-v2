@@ -44,6 +44,10 @@ const App = () => {
     setIsAiConverting(false);
   };
 
+  useEffect(() => {
+    setHasAiConvertedOnce(false);
+  }, [imageUrls]);
+
   return (
     <Provider>
       <div className="flex h-screen items-center justify-center bg-[#f8f8f8]">
