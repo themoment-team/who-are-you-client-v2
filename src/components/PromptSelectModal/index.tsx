@@ -35,6 +35,8 @@ const PromptSelectModal = ({
   const isBusinessCard = imageUrls.length === 1;
 
   useEffect(() => {
+    if (currentImage === imageUrls[0].imageUrl && imageUrls[0].promptName === null) return;
+
     const currentIndex = imageUrls.findIndex((item) => item.imageUrl === currentImage);
     const nullPromptIndex = imageUrls.findIndex((item) => item.promptName === null);
 
