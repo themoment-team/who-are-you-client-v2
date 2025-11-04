@@ -12,6 +12,8 @@ interface AiConversionPageProps {
   convertAllImages: () => void;
   hasAiConvertedOnce: boolean;
   setHasAiConvertedOnce: React.Dispatch<React.SetStateAction<boolean>>;
+  isAiConvert: boolean;
+  setIsAiConvert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AiConversionPage = ({
@@ -22,8 +24,9 @@ const AiConversionPage = ({
   convertAllImages,
   hasAiConvertedOnce,
   setHasAiConvertedOnce,
+  isAiConvert,
+  setIsAiConvert,
 }: AiConversionPageProps) => {
-  const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {

@@ -23,6 +23,7 @@ const App = () => {
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<userInfoFormType | null>(null);
   const [imageUrls, setImageUrls] = useState<ConvertImagePrompt[]>([]);
+  const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
   const [isAiConverting, setIsAiConverting] = useState<boolean>(false);
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
   const [hasAiConvertedOnce, setHasAiConvertedOnce] = useState<boolean>(false);
@@ -64,6 +65,8 @@ const App = () => {
             convertAllImages={convertAllImages}
             hasAiConvertedOnce={hasAiConvertedOnce}
             setHasAiConvertedOnce={setHasAiConvertedOnce}
+            isAiConvert={isAiConvert}
+            setIsAiConvert={setIsAiConvert}
           />
         )}
         {step === STEP.INFO_INPUT && (
