@@ -4,19 +4,25 @@ import Webcam from 'react-webcam';
 
 import { BusinessCardCameraGuide, FourCutCameraGuide } from '../../assets';
 import { StepButton } from '../../components';
-import { type CardType, STEP, type Step } from '../../types';
+import { type CardType, type ConvertImagePrompt, STEP, type Step } from '../../types';
 import { getCroppedImage } from '../../utils';
 
 interface CameraPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
-  setImageUrls: React.Dispatch<React.SetStateAction<string[]>>;
+  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   cardType?: CardType;
+  setHasAiConvertedOnce: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const VIDEO_CONSTRAINTS = { facingMode: 'user', width: 1280, height: 720 } as const;
 const FOUR_CUT_TOTAL = 4;
 
-const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
+const CameraPage = ({
+  setStep,
+  setImageUrls,
+  cardType,
+  setHasAiConvertedOnce,
+}: CameraPageProps) => {
   const webcamRef = useRef<Webcam>(null);
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [currentPhotoCount, setCurrentPhotoCount] = useState<number>(1);
@@ -41,24 +47,26 @@ const CameraPage = ({ setStep, setImageUrls, cardType }: CameraPageProps) => {
         setCapturedImages(newImages);
 
         if (newImages.length >= FOUR_CUT_TOTAL) {
-          setImageUrls(newImages);
+          setImageUrls(newImages.map((imageUrl) => ({ imageUrl, promptName: null })));
           setStep(STEP.AI_CONVERSION);
         } else {
           setCurrentPhotoCount(newImages.length + 1);
         }
       } else {
-        setImageUrls([croppedImageUrl]);
+        setImageUrls([{ imageUrl: croppedImageUrl, promptName: null }]);
         setStep(STEP.AI_CONVERSION);
       }
     } catch (err) {
       console.error('이미지 처리 오류:', err);
     }
+
+    setHasAiConvertedOnce(false);
   };
 
   return (
     <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
       <div className="mb-[3rem] flex flex-col gap-4">
-        <h1 className="text-[2.25rem] font-extrabold">
+        <h1 className="text-[2.25rem]/[2.25rem] font-semibold">
           {isFourCut ? '인생네컷 사진 촬영' : '명함 사진 촬영'}
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">

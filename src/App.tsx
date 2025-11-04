@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import generateAiImage from './api/openai';
 import { Provider } from './lib';
 import {
   AiConversionPage,
@@ -8,22 +9,70 @@ import {
   StartPage,
   ThemeSelectPage,
 } from './pageContainer';
-import { type CardType, STEP, type Step, type userInfoFormType } from './types';
+import {
+  type CardType,
+  type ConvertImagePrompt,
+  type PromptType,
+  STEP,
+  type Step,
+  type userInfoFormType,
+} from './types';
 
 const App = () => {
   const [step, setStep] = useState<Step>(STEP.START);
   const [cardType, setCardType] = useState<CardType | undefined>(undefined);
   const [userInfo, setUserInfo] = useState<userInfoFormType | null>(null);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<ConvertImagePrompt[]>([]);
+  const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
+  const [isAiConverting, setIsAiConverting] = useState<boolean>(false);
+  const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
+  const [hasAiConvertedOnce, setHasAiConvertedOnce] = useState<boolean>(false);
+
+  const convertSingleImage = async (imageUrl: string, selectedPrompt: PromptType) => {
+    const convertedImageUrl = await generateAiImage({ imageUrl, selectedPrompt });
+    return convertedImageUrl;
+  };
+
+  const convertAllImages = async () => {
+    if (isAiConverting) return;
+    else setIsAiConverting(true);
+
+    const convertedImageUrls = await Promise.all(
+      imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName)),
+    );
+    setAiConvertImage(convertedImageUrls);
+    setIsAiConverting(false);
+  };
+
+  useEffect(() => {
+    setHasAiConvertedOnce(false);
+  }, [imageUrls]);
 
   return (
     <Provider>
       <div className="flex h-screen items-center justify-center bg-[#f8f8f8]">
         {step === STEP.START && <StartPage setStep={setStep} setCardType={setCardType} />}
         {step === STEP.CAMERA && (
-          <CameraPage setStep={setStep} setImageUrls={setImageUrls} cardType={cardType} />
+          <CameraPage
+            setStep={setStep}
+            setImageUrls={setImageUrls}
+            cardType={cardType}
+            setHasAiConvertedOnce={setHasAiConvertedOnce}
+          />
         )}
-        {step === STEP.AI_CONVERSION && <AiConversionPage setStep={setStep} />}
+        {step === STEP.AI_CONVERSION && (
+          <AiConversionPage
+            setStep={setStep}
+            imageUrls={imageUrls}
+            setImageUrls={setImageUrls}
+            cardType={cardType}
+            convertAllImages={convertAllImages}
+            hasAiConvertedOnce={hasAiConvertedOnce}
+            setHasAiConvertedOnce={setHasAiConvertedOnce}
+            isAiConvert={isAiConvert}
+            setIsAiConvert={setIsAiConvert}
+          />
+        )}
         {step === STEP.INFO_INPUT && (
           <InfoInputPage userInfo={userInfo} setUserInfo={setUserInfo} setStep={setStep} />
         )}
