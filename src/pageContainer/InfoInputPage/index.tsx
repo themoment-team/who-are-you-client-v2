@@ -16,7 +16,7 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<userInfoFormType>({
     resolver: zodResolver(userInfoFormSchema),
     defaultValues: {
@@ -25,6 +25,7 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
       email: userInfo?.email ?? '',
       major: userInfo?.major ?? '',
     },
+    mode: 'onChange',
   });
 
   const handleStepBack = () => {
@@ -55,7 +56,7 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
 
   return (
     <div className="h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
-      <h1 className="text-[2.25rem]/[2.25rem] font-extrabold text-[#222]">명함 정보 입력</h1>
+      <h1 className="text-[2.25rem]/[2.25rem] font-semibold text-[#222]">명함 정보 입력</h1>
       <p className="mt-4 text-[1.25rem]/[1.875rem] font-medium text-[#666]">
         명함에 들어갈 정보를 입력해주세요.
         <br />
@@ -79,7 +80,7 @@ const InfoInputPage = ({ userInfo, setUserInfo, setStep }: InfoInputPageProps) =
         <StepButton variant="back" onClick={handleStepBack}>
           이전으로
         </StepButton>
-        <StepButton variant="next" onClick={handleSubmit(onSubmit)}>
+        <StepButton variant="next" onClick={handleSubmit(onSubmit)} disabled={!isValid}>
           다음으로
         </StepButton>
       </div>
