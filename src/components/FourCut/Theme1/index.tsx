@@ -36,7 +36,11 @@ const FourCutTheme1 = ({ imageSrcs, onImageClick }: FourCutProps) => {
       </div>
       <div className="flex items-center justify-between">
         <GSMLogoWithText />
-        <GwangjuFutureEducationExpo />
+        {import.meta.env.VITE_SHOW_EXPO_LOGO === 'true' && (
+          <div>
+            <GwangjuFutureEducationExpo />
+          </div>
+        )}
       </div>
     </div>
   );

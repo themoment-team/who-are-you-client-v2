@@ -1,9 +1,14 @@
 import { GSMLogoWithText, GwangjuFutureEducationExpo } from '../../../assets';
 import type { FourCutProps } from '../../../types';
 
-const FourCutTheme1 = ({ imageSrcs, onImageClick }: FourCutProps) => {
+const FourCutTheme2 = ({ imageSrcs, onImageClick }: FourCutProps) => {
   return (
-    <div className="flex h-[14.8cm] w-[10cm] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:shadow-none print:outline print:outline-[#CFCFCF]">
+    <div className="relative flex h-[14.8cm] w-[10cm] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:shadow-none print:outline print:outline-[#CFCFCF]">
+      <img
+        src="/images/four-cut-theme2-cover.png"
+        alt="cover image"
+        className="absolute top-0 left-0"
+      />
       <div className="flex flex-col items-center gap-[3rem]">
         <div className="flex gap-[.9375rem]">
           <img
@@ -34,12 +39,16 @@ const FourCutTheme1 = ({ imageSrcs, onImageClick }: FourCutProps) => {
           />
         </div>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="z-10 flex items-center justify-between">
         <GSMLogoWithText />
-        <GwangjuFutureEducationExpo />
+        {import.meta.env.VITE_SHOW_EXPO_LOGO === 'true' && (
+          <div>
+            <GwangjuFutureEducationExpo />
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default FourCutTheme1;
+export default FourCutTheme2;
