@@ -17,18 +17,41 @@ import {
 import {
   type BusinessCardProps,
   type CardType,
+  type ConvertImagePrompt,
   type FourCutProps,
+  type PromptType,
   STEP,
   type Step,
+  type userInfoFormType,
 } from '../../types';
 
 interface ThemeSelectPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
   cardType: CardType | undefined;
+  userInfo: userInfoFormType | null;
+  imageUrls: ConvertImagePrompt[];
+  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
+  aiConvertImage: string[];
+  setAiConvertImage: React.Dispatch<React.SetStateAction<string[]>>;
+  isAiConvert: boolean;
+  convertSingleImage: (imageUrl: string, selectedPrompt: PromptType) => Promise<string>;
+  isAiConverting: boolean;
 }
 
-const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
+const ThemeSelectPage = ({
+  setStep,
+  cardType,
+  userInfo,
+  imageUrls,
+  setImageUrls,
+  aiConvertImage,
+  setAiConvertImage,
+  isAiConvert,
+  convertSingleImage,
+  isAiConverting,
+}: ThemeSelectPageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [currentTheme, setCurrentTheme] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -52,7 +75,11 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
     : '@page {size: portrait;}';
   const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
-  const handleImageClick = () => {
+  // 실제 사용할 이미지 URL 결정 (AI 변환 여부에 따라)
+  const displayImageUrls = isAiConvert ? aiConvertImage : imageUrls.map((x) => x.imageUrl);
+
+  const handleImageClick = (index: number = 0) => {
+    setSelectedImageIndex(index);
     setIsModalOpen(true);
   };
 
@@ -69,31 +96,45 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   };
 
   const handlePreviousStep = () => {
-    setStep(STEP.INFO_INPUT);
+    if (isBusinessCard) {
+      setStep(STEP.INFO_INPUT);
+    } else {
+      setStep(STEP.AI_CONVERSION);
+    }
   };
 
+  // 실제 데이터로 명함 props 구성
   const businessCardData: BusinessCardProps = {
-    name: '홍길동',
-    major: 'UI/UX Designer',
-    email: 'honggildong@gmail.com',
-    tel: '010-1234-5678',
-    imageSrc: '/images/example.jpg',
-    onImageClick: handleImageClick,
+    name: userInfo?.name || '',
+    major: userInfo?.major || '',
+    email: userInfo?.email || '',
+    tel: userInfo?.tel || '',
+    imageUrl: displayImageUrls[0] || '',
+    onImageClick: () => handleImageClick(0),
   };
 
+  // 실제 데이터로 인생네컷 props 구성
   const fourCutData: FourCutProps = {
-    imageSrcs: [
-      '/images/example.jpg',
-      '/images/example.jpg',
-      '/images/example.jpg',
-      '/images/example.jpg',
-    ],
+    imageUrls: displayImageUrls.slice(0, 4),
     onImageClick: handleImageClick,
   };
 
   return (
     <div className="relative h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
-      {isModalOpen && <PhotoReselectModal cardType={cardType} onClose={handleModalClose} />}
+      {isModalOpen && (
+        <PhotoReselectModal
+          cardType={cardType}
+          selectedImageIndex={selectedImageIndex}
+          imageUrls={imageUrls}
+          setImageUrls={setImageUrls}
+          aiConvertImage={aiConvertImage}
+          setAiConvertImage={setAiConvertImage}
+          isAiConvert={isAiConvert}
+          convertSingleImage={convertSingleImage}
+          isAiConverting={isAiConverting}
+          onClose={handleModalClose}
+        />
+      )}
       <div
         className={`${
           isLandscapeBusinessCard ? 'mb-[2.125rem]' : isFourCut ? 'mb-[2.25rem]' : 'mb-[6.875rem]'

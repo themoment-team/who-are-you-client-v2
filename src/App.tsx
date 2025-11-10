@@ -76,7 +76,20 @@ const App = () => {
         {step === STEP.INFO_INPUT && (
           <InfoInputPage userInfo={userInfo} setUserInfo={setUserInfo} setStep={setStep} />
         )}
-        {step === STEP.THEME_SELECT && <ThemeSelectPage setStep={setStep} cardType={cardType} />}
+        {step === STEP.THEME_SELECT && (
+          <ThemeSelectPage
+            setStep={setStep}
+            cardType={cardType}
+            userInfo={userInfo}
+            imageUrls={imageUrls}
+            setImageUrls={setImageUrls}
+            aiConvertImage={aiConvertImage}
+            setAiConvertImage={setAiConvertImage}
+            isAiConvert={isAiConvert}
+            convertSingleImage={convertSingleImage}
+            isAiConverting={isAiConverting}
+          />
+        )}
       </div>
     </Provider>
   );
