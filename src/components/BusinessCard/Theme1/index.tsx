@@ -15,18 +15,24 @@ const BusinessCardTheme1 = ({
       <div className="z-10 flex flex-col justify-between">
         <div className="flex flex-col gap-[.1875rem]">
           <p className="text-[1rem] font-semibold tracking-[.04rem]">{name}</p>
-          <p className="h-[.75rem] text-[.625rem] leading-[.625rem] font-normal tracking-[.0125rem] text-[#888]">
-            {major}
-          </p>
+          {major && (
+            <p className="h-[.75rem] text-[.625rem] leading-[.625rem] font-normal tracking-[.0125rem] text-[#888]">
+              {major}
+            </p>
+          )}
           <ShortBar />
         </div>
         <div className="flex flex-col gap-[.3125rem]">
-          <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-            Major) {major}
-          </p>
-          <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-            Email) {email}
-          </p>
+          {major && (
+            <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
+              Major) {major}
+            </p>
+          )}
+          {email && (
+            <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
+              Email) {email}
+            </p>
+          )}
           <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
             Tel) {tel}
           </p>
