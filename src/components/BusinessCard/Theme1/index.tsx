@@ -1,5 +1,6 @@
 import { GSMLogo, ShortBar } from '../../../assets';
 import type { BusinessCardProps } from '../../../types';
+import { formatPhoneNumber } from '../../../utils';
 
 const BusinessCardTheme1 = ({
   name,
@@ -34,7 +35,7 @@ const BusinessCardTheme1 = ({
             </p>
           )}
           <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-            Tel) {tel}
+            Tel) {formatPhoneNumber(tel)}
           </p>
         </div>
       </div>
