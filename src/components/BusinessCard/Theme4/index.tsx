@@ -6,14 +6,14 @@ const BusinessCardTheme4 = ({
   major,
   email,
   tel,
-  imageSrc,
+  imageUrl,
   onImageClick,
 }: BusinessCardProps) => {
   return (
     <div className="relative flex h-[21.25rem] w-[11.8125rem] flex-col gap-[2.25rem] bg-white p-[1.75rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)] print:border print:border-[#CFCFCF] print:shadow-none">
       <GSMLogo top={264} left={24} />
       <img
-        src={imageSrc}
+        src={imageUrl}
         alt="image"
         className="h-[8.3125rem] w-[8.3125rem] cursor-pointer rounded-full object-cover object-center"
         onClick={onImageClick}

@@ -6,7 +6,7 @@ const BusinessCardTheme1 = ({
   major,
   email,
   tel,
-  imageSrc,
+  imageUrl,
   onImageClick,
 }: BusinessCardProps) => {
   return (
@@ -33,7 +33,7 @@ const BusinessCardTheme1 = ({
         </div>
       </div>
       <img
-        src={imageSrc}
+        src={imageUrl}
         alt="image"
         className="h-[8.3125rem] w-[8.3125rem] cursor-pointer rounded-[.2875rem] object-cover object-center"
         onClick={onImageClick}
