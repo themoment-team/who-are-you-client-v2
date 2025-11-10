@@ -99,7 +99,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
           isLandscapeBusinessCard ? 'mb-[2.125rem]' : isFourCut ? 'mb-[2.25rem]' : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
-        <h1 className="text-[2.25rem]/[2.25rem] font-extrabold text-[#222]">
+        <h1 className="text-[2.25rem]/[2.25rem] font-semibold text-[#222]">
           {cardTypeLabel} 테마 선택
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
