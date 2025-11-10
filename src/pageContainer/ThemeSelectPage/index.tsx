@@ -11,10 +11,6 @@ import {
   FourCutTheme1,
   FourCutTheme2,
   FourCutTheme3,
-  FourCutTheme4,
-  FourCutTheme5,
-  FourCutTheme6,
-  FourCutTheme7,
   PhotoReselectModal,
   StepButton,
 } from '../../components';
@@ -43,15 +39,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   const PORTRAIT_THEME_MAX_INDEX = 2;
   const themes = isBusinessCard
     ? [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4]
-    : [
-        FourCutTheme1,
-        FourCutTheme2,
-        FourCutTheme3,
-        FourCutTheme4,
-        FourCutTheme5,
-        FourCutTheme6,
-        FourCutTheme7,
-      ];
+    : [FourCutTheme1, FourCutTheme2, FourCutTheme3];
   const CurrentThemeComponent = themes[currentTheme] as React.FC<BusinessCardProps | FourCutProps>;
 
   const isPortraitBusinessCard = isBusinessCard && currentTheme < PORTRAIT_THEME_MAX_INDEX;
@@ -108,10 +96,10 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
       {isModalOpen && <PhotoReselectModal cardType={cardType} onClose={handleModalClose} />}
       <div
         className={`${
-          isLandscapeBusinessCard ? 'mb-[2.1563rem]' : isFourCut ? 'mb-[3rem]' : 'mb-[6.875rem]'
+          isLandscapeBusinessCard ? 'mb-[2.125rem]' : isFourCut ? 'mb-[2.25rem]' : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
-        <h1 className="text-[2.25rem]/[2.25rem] font-extrabold text-[#222]">
+        <h1 className="text-[2.25rem]/[2.25rem] font-semibold text-[#222]">
           {cardTypeLabel} 테마 선택
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
@@ -132,7 +120,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         </button>
         <div
           ref={contentRef}
-          className={`printable flex items-center gap-4 ${isPortraitBusinessCard ? 'print:flex-col print:pt-4' : 'print:pt-4 print:pl-4'}`}
+          className={`printable flex items-center justify-center gap-4 ${isBusinessCard ? 'p-4' : ''} ${isPortraitBusinessCard ? 'print:flex-col' : ''}`}
         >
           {isBusinessCard ? (
             <CurrentThemeComponent {...businessCardData} />
@@ -149,7 +137,7 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
           <Arrow flip />
         </button>
       </div>
-      <div className="mb-[3rem] flex justify-center gap-4">
+      <div className={`${isFourCut ? 'mb-[2.25rem]' : 'mb-[3rem]'} flex justify-center gap-4`}>
         {themes.map((_, index) => (
           <Dot key={index} active={index === currentTheme} />
         ))}
