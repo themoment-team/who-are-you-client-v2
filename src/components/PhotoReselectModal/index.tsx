@@ -10,9 +10,10 @@ interface PhotoReselectModalProps {
   cardType: CardType | undefined;
   selectedImageIndex: number;
   imageUrls: ConvertImagePrompt[];
-  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   aiConvertImage: string[];
   setAiConvertImage: React.Dispatch<React.SetStateAction<string[]>>;
+  aiConvertHistory: string[][];
+  setAiConvertHistory: React.Dispatch<React.SetStateAction<string[][]>>;
   isAiConvert: boolean;
   convertSingleImage: (imageUrl: string, selectedPrompt: PromptType) => Promise<string>;
   isAiConverting: boolean;
@@ -23,15 +24,19 @@ const PhotoReselectModal = ({
   cardType,
   selectedImageIndex,
   imageUrls,
-  setImageUrls,
   aiConvertImage,
   setAiConvertImage,
+  aiConvertHistory,
+  setAiConvertHistory,
   isAiConvert,
   convertSingleImage,
   isAiConverting,
   onClose,
 }: PhotoReselectModalProps) => {
   const [isRegenerating, setIsRegenerating] = useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string>(
+    aiConvertImage[selectedImageIndex],
+  );
 
   const isBusinessCard = cardType === 'BUSINESS_CARD';
   const cardTypeLabel = isBusinessCard ? '명함' : '인생네컷';
@@ -40,45 +45,35 @@ const PhotoReselectModal = ({
   const BUTTON_SIZE_CLASS = IMAGE_CLASS;
   const COMMON_BUTTON_CLASSES = `flex cursor-pointer flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8] ${BUTTON_SIZE_CLASS}`;
 
-  // 현재 표시할 이미지들 (AI 변환 여부에 따라)
-  const allImageUrls = isAiConvert ? aiConvertImage : imageUrls.map((x) => x.imageUrl);
-
-  // 선택한 이미지로 교체
-  const handleImageSelect = (targetImageUrl: string) => {
-    if (isAiConvert) {
-      // AI 변환된 이미지 배열에서 교체
-      const updatedImages = [...aiConvertImage];
-      const currentImage = updatedImages[selectedImageIndex];
-      const targetIndex = updatedImages.findIndex((url) => url === targetImageUrl);
-
-      if (targetIndex !== -1 && targetIndex !== selectedImageIndex) {
-        updatedImages[selectedImageIndex] = targetImageUrl;
-        updatedImages[targetIndex] = currentImage;
-        setAiConvertImage(updatedImages);
-        toast.success('이미지가 교체되었습니다!');
-      }
+  const getAvailableImages = () => {
+    if (isBusinessCard) {
+      const allHistoryImages = aiConvertHistory.flat();
+      return Array.from(new Set(allHistoryImages));
     } else {
-      // 원본 이미지 배열에서 교체
-      const updatedImages = [...imageUrls];
-      const currentImage = updatedImages[selectedImageIndex];
-      const targetIndex = updatedImages.findIndex((item) => item.imageUrl === targetImageUrl);
-
-      if (targetIndex !== -1 && targetIndex !== selectedImageIndex) {
-        updatedImages[selectedImageIndex] = {
-          ...updatedImages[selectedImageIndex],
-          imageUrl: targetImageUrl,
-        };
-        updatedImages[targetIndex] = {
-          ...updatedImages[targetIndex],
-          imageUrl: currentImage.imageUrl,
-        };
-        setImageUrls(updatedImages);
-        toast.success('이미지가 교체되었습니다!');
-      }
+      return aiConvertHistory[selectedImageIndex] || [];
     }
   };
 
-  // 이미지 재변환
+  const availableImages = getAvailableImages();
+
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImageUrl(imageUrl);
+  };
+
+  const handleConfirm = () => {
+    const currentImage = aiConvertImage[selectedImageIndex];
+    const isImageChanged = currentImage !== selectedImageUrl;
+
+    if (isImageChanged) {
+      const updatedImages = [...aiConvertImage];
+      updatedImages[selectedImageIndex] = selectedImageUrl;
+      setAiConvertImage(updatedImages);
+      toast.success('이미지가 교체되었습니다!');
+    }
+
+    onClose();
+  };
+
   const handleImageRegenerate = async () => {
     if (isRegenerating || isAiConverting) return;
 
@@ -90,11 +85,18 @@ const PhotoReselectModal = ({
         originalImage.promptName,
       );
 
-      if (isAiConvert) {
-        const updatedImages = [...aiConvertImage];
-        updatedImages[selectedImageIndex] = newConvertedImageUrl;
-        setAiConvertImage(updatedImages);
-      }
+      setAiConvertHistory((prev) => {
+        const newHistory = [...prev];
+        if (!newHistory[selectedImageIndex]) {
+          newHistory[selectedImageIndex] = [];
+        }
+        if (!newHistory[selectedImageIndex].includes(newConvertedImageUrl)) {
+          newHistory[selectedImageIndex].push(newConvertedImageUrl);
+        }
+        return newHistory;
+      });
+
+      setSelectedImageUrl(newConvertedImageUrl);
 
       toast.success('이미지가 재변환되었습니다!');
     } catch (error) {
@@ -119,14 +121,15 @@ const PhotoReselectModal = ({
           </p>
         </div>
         <div className="flex justify-center gap-6">
-          {/* 다른 이미지들 표시 */}
-          {allImageUrls.map((imageUrl, index) => {
-            if (index === selectedImageIndex) return null;
+          {availableImages.map((imageUrl, index) => {
+            const isSelected = imageUrl === selectedImageUrl;
             return (
               <button
                 key={index}
-                onClick={() => handleImageSelect(imageUrl)}
-                className={`cursor-pointer rounded-sm ${IMAGE_CLASS}`}
+                onClick={() => handleImageClick(imageUrl)}
+                className={`cursor-pointer rounded-sm ${IMAGE_CLASS} ${
+                  isSelected ? 'ring-4 ring-[#222]' : 'ring-2 ring-transparent hover:ring-gray-300'
+                }`}
                 aria-label={`이미지 ${index + 1} 선택`}
               >
                 <img
@@ -137,7 +140,6 @@ const PhotoReselectModal = ({
               </button>
             );
           })}
-          {/* 이미지 재변환 버튼 - AI 변환이 켜져있을 때만 표시 */}
           {isAiConvert && !isRegenerating && (
             <button
               onClick={handleImageRegenerate}
@@ -148,20 +150,19 @@ const PhotoReselectModal = ({
               <Plus />
             </button>
           )}
-          {/* 재변환 중 표시 */}
           {isRegenerating && (
             <div className={COMMON_BUTTON_CLASSES} aria-label="이미지 재변환 중">
-              <p className="text-[1rem]/[1rem] font-bold text-[#666]">
+              <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
                 이미지
                 <br />
-                재변환 중...
+                재변환 중
               </p>
               <Spin />
             </div>
           )}
         </div>
         <div className="flex justify-end">
-          <StepButton variant="next" onClick={onClose} disabled={isRegenerating}>
+          <StepButton variant="next" onClick={handleConfirm} disabled={isRegenerating}>
             확인
           </StepButton>
         </div>

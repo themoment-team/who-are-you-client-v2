@@ -30,9 +30,10 @@ interface ThemeSelectPageProps {
   cardType: CardType | undefined;
   userInfo: userInfoFormType | null;
   imageUrls: ConvertImagePrompt[];
-  setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   aiConvertImage: string[];
   setAiConvertImage: React.Dispatch<React.SetStateAction<string[]>>;
+  aiConvertHistory: string[][];
+  setAiConvertHistory: React.Dispatch<React.SetStateAction<string[][]>>;
   isAiConvert: boolean;
   convertSingleImage: (imageUrl: string, selectedPrompt: PromptType) => Promise<string>;
   isAiConverting: boolean;
@@ -43,9 +44,10 @@ const ThemeSelectPage = ({
   cardType,
   userInfo,
   imageUrls,
-  setImageUrls,
   aiConvertImage,
   setAiConvertImage,
+  aiConvertHistory,
+  setAiConvertHistory,
   isAiConvert,
   convertSingleImage,
   isAiConverting,
@@ -75,12 +77,13 @@ const ThemeSelectPage = ({
     : '@page {size: portrait;}';
   const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
-  // 실제 사용할 이미지 URL 결정 (AI 변환 여부에 따라)
   const displayImageUrls = isAiConvert ? aiConvertImage : imageUrls.map((x) => x.imageUrl);
 
   const handleImageClick = (index: number = 0) => {
-    setSelectedImageIndex(index);
-    setIsModalOpen(true);
+    if (isAiConvert) {
+      setSelectedImageIndex(index);
+      setIsModalOpen(true);
+    }
   };
 
   const handleModalClose = () => {
@@ -103,7 +106,6 @@ const ThemeSelectPage = ({
     }
   };
 
-  // 실제 데이터로 명함 props 구성
   const businessCardData: BusinessCardProps = {
     name: userInfo?.name || '',
     major: userInfo?.major || '',
@@ -113,7 +115,6 @@ const ThemeSelectPage = ({
     onImageClick: () => handleImageClick(0),
   };
 
-  // 실제 데이터로 인생네컷 props 구성
   const fourCutData: FourCutProps = {
     imageUrls: displayImageUrls.slice(0, 4),
     onImageClick: handleImageClick,
@@ -126,9 +127,10 @@ const ThemeSelectPage = ({
           cardType={cardType}
           selectedImageIndex={selectedImageIndex}
           imageUrls={imageUrls}
-          setImageUrls={setImageUrls}
           aiConvertImage={aiConvertImage}
           setAiConvertImage={setAiConvertImage}
+          aiConvertHistory={aiConvertHistory}
+          setAiConvertHistory={setAiConvertHistory}
           isAiConvert={isAiConvert}
           convertSingleImage={convertSingleImage}
           isAiConverting={isAiConverting}
@@ -137,7 +139,7 @@ const ThemeSelectPage = ({
       )}
       <div
         className={`${
-          isLandscapeBusinessCard ? 'mb-[2.125rem]' : isFourCut ? 'mb-[2.25rem]' : 'mb-[6.875rem]'
+          isLandscapeBusinessCard ? 'mb-[2.1563rem]' : isFourCut ? 'mb-[2.25rem]' : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
         <h1 className="text-[2.25rem]/[2.25rem] font-semibold text-[#222]">
@@ -145,10 +147,14 @@ const ThemeSelectPage = ({
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
           인쇄하실 {cardTypeLabel}의 테마를 선택해주세요.
-          <br />
-          {isBusinessCard
-            ? '명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.'
-            : '사진을 선택해서 교체할 수도 있어요.'}
+          {isAiConvert && (
+            <>
+              <br />
+              {isBusinessCard
+                ? '명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.'
+                : '사진을 선택해서 교체할 수도 있어요.'}
+            </>
+          )}
         </p>
       </div>
       <div

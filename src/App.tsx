@@ -26,6 +26,7 @@ const App = () => {
   const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
   const [isAiConverting, setIsAiConverting] = useState<boolean>(false);
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
+  const [aiConvertHistory, setAiConvertHistory] = useState<string[][]>([]);
   const [hasAiConvertedOnce, setHasAiConvertedOnce] = useState<boolean>(false);
 
   const convertSingleImage = async (imageUrl: string, selectedPrompt: PromptType) => {
@@ -41,11 +42,26 @@ const App = () => {
       imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName)),
     );
     setAiConvertImage(convertedImageUrls);
+
+    setAiConvertHistory((prev) => {
+      const newHistory = [...prev];
+      convertedImageUrls.forEach((url, index) => {
+        if (!newHistory[index]) {
+          newHistory[index] = [];
+        }
+        if (!newHistory[index].includes(url)) {
+          newHistory[index].push(url);
+        }
+      });
+      return newHistory;
+    });
+
     setIsAiConverting(false);
   };
 
   useEffect(() => {
     setHasAiConvertedOnce(false);
+    setAiConvertHistory([]);
   }, [imageUrls]);
 
   return (
@@ -82,9 +98,10 @@ const App = () => {
             cardType={cardType}
             userInfo={userInfo}
             imageUrls={imageUrls}
-            setImageUrls={setImageUrls}
             aiConvertImage={aiConvertImage}
             setAiConvertImage={setAiConvertImage}
+            aiConvertHistory={aiConvertHistory}
+            setAiConvertHistory={setAiConvertHistory}
             isAiConvert={isAiConvert}
             convertSingleImage={convertSingleImage}
             isAiConverting={isAiConverting}
