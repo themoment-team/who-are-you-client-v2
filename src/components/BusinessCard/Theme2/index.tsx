@@ -11,7 +11,7 @@ const BusinessCardTheme2 = ({
   onImageClick,
 }: BusinessCardProps) => {
   return (
-    <div className="relative flex h-[11.8125rem] w-[21.25rem] justify-between bg-white p-[1.75rem] pl-[1.4375rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)] print:border print:border-[#CFCFCF] print:shadow-none">
+    <div className="relative flex h-[11.8125rem] w-[21.25rem] justify-between bg-white p-[1.75rem] pl-[1.4375rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:border print:border-[#CFCFCF] print:shadow-none">
       <GSMLogo top={112} left={32} />
       <div className="z-10 flex gap-[.8125rem]">
         <LongBar />

@@ -3,7 +3,7 @@ import type { FourCutProps } from '../../../types';
 
 const FourCutTheme2 = ({ imageUrls, onImageClick }: FourCutProps) => {
   return (
-    <div className="relative flex h-[14.8cm] w-[10cm] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_20px_0_rgba(177,177,177,0.25)] print:shadow-none print:outline print:outline-[#CFCFCF]">
+    <div className="relative flex h-[14.8cm] w-[10cm] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none print:outline print:outline-[#CFCFCF]">
       <img
         src="/images/four-cut-theme2-cover.png"
         alt="cover image"
