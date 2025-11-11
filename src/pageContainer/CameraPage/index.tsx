@@ -12,6 +12,7 @@ interface CameraPageProps {
   setImageUrls: React.Dispatch<React.SetStateAction<ConvertImagePrompt[]>>;
   cardType?: CardType;
   setHasAiConvertedOnce: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAiConvert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const VIDEO_CONSTRAINTS = { facingMode: 'user', width: 1280, height: 720 } as const;
@@ -22,6 +23,7 @@ const CameraPage = ({
   setImageUrls,
   cardType,
   setHasAiConvertedOnce,
+  setIsAiConvert,
 }: CameraPageProps) => {
   const webcamRef = useRef<Webcam>(null);
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
@@ -48,12 +50,14 @@ const CameraPage = ({
 
         if (newImages.length >= FOUR_CUT_TOTAL) {
           setImageUrls(newImages.map((imageUrl) => ({ imageUrl, promptName: null })));
+          setIsAiConvert(false);
           setStep(STEP.AI_CONVERSION);
         } else {
           setCurrentPhotoCount(newImages.length + 1);
         }
       } else {
         setImageUrls([{ imageUrl: croppedImageUrl, promptName: null }]);
+        setIsAiConvert(false);
         setStep(STEP.AI_CONVERSION);
       }
     } catch (err) {

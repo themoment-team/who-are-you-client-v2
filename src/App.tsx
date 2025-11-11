@@ -61,7 +61,6 @@ const App = () => {
 
   useEffect(() => {
     setHasAiConvertedOnce(false);
-    setAiConvertHistory([]);
   }, [imageUrls]);
 
   return (
@@ -74,6 +73,7 @@ const App = () => {
             setImageUrls={setImageUrls}
             cardType={cardType}
             setHasAiConvertedOnce={setHasAiConvertedOnce}
+            setIsAiConvert={setIsAiConvert}
           />
         )}
         {step === STEP.AI_CONVERSION && (

@@ -63,7 +63,7 @@ const PromptSelectModal = ({
         {!isBusinessCard && (
           <>
             <div className="flex h-28 flex-col gap-4 font-[666]">
-              <h1 className="text-4xl leading-none font-extrabold text-[#222]">
+              <h1 className="text-4xl leading-none font-semibold text-[#222]">
                 AI로 변환시킬 사진 선택
               </h1>
               <p className="text-xl leading-[150%] font-medium text-[#666]">
