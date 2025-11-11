@@ -127,8 +127,8 @@ const PhotoReselectModal = ({
               <button
                 key={index}
                 onClick={() => handleImageClick(imageUrl)}
-                className={`cursor-pointer rounded-sm ${IMAGE_CLASS} ${
-                  isSelected ? 'ring-4 ring-[#222]' : 'ring-2 ring-transparent hover:ring-gray-300'
+                className={`cursor-pointer rounded-sm transition-opacity duration-200 ${IMAGE_CLASS} ${
+                  isSelected ? '' : 'opacity-50'
                 }`}
                 aria-label={`이미지 ${index + 1} 선택`}
               >
