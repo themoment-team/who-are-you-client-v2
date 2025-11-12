@@ -77,7 +77,11 @@ const ThemeSelectPage = ({
     : '@page {size: portrait;}';
   const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
-  const displayImageUrls = isAiConvert ? aiConvertImage : imageUrls.map((x) => x.imageUrl);
+  const displayImageUrls = isAiConvert
+    ? isAiConverting
+      ? imageUrls.map(() => '/images/example.png')
+      : aiConvertImage
+    : imageUrls.map((x) => x.imageUrl);
 
   const handleImageClick = (index: number = 0) => {
     if (isAiConvert) {
