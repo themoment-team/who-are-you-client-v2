@@ -11,5 +11,5 @@ export interface BusinessCardProps {
 
 export interface FourCutProps {
   imageUrls: string[];
-  onImageClick: () => void;
+  onImageClick: (index: number) => void;
 }

@@ -15,13 +15,13 @@ const FourCutTheme3 = ({ imageUrls, onImageClick }: FourCutProps) => {
             src={imageUrls[0]}
             alt="image 1"
             className="h-[12.625rem] w-[10.125rem] cursor-pointer object-cover object-center"
-            onClick={onImageClick}
+            onClick={() => onImageClick(0)}
           />
           <img
             src={imageUrls[1]}
             alt="image 2"
             className="h-[12.625rem] w-[10.125rem] cursor-pointer object-cover object-center"
-            onClick={onImageClick}
+            onClick={() => onImageClick(1)}
           />
         </div>
         <div className="flex gap-[.9375rem]">
@@ -29,13 +29,13 @@ const FourCutTheme3 = ({ imageUrls, onImageClick }: FourCutProps) => {
             src={imageUrls[2]}
             alt="image 3"
             className="h-[12.625rem] w-[10.125rem] cursor-pointer object-cover object-center"
-            onClick={onImageClick}
+            onClick={() => onImageClick(2)}
           />
           <img
             src={imageUrls[3]}
             alt="image 4"
             className="h-[12.625rem] w-[10.125rem] cursor-pointer object-cover object-center"
-            onClick={onImageClick}
+            onClick={() => onImageClick(3)}
           />
         </div>
       </div>
