@@ -7,9 +7,11 @@ export interface BusinessCardProps {
   tel: string;
   imageUrl: string;
   onImageClick: () => void;
+  isClickable?: boolean;
 }
 
 export interface FourCutProps {
   imageUrls: string[];
   onImageClick: (index: number) => void;
+  isClickable?: boolean;
 }

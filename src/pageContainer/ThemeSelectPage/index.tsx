@@ -117,11 +117,13 @@ const ThemeSelectPage = ({
     tel: userInfo?.tel || '',
     imageUrl: displayImageUrls[0] || '',
     onImageClick: () => handleImageClick(0),
+    isClickable: isAiConvert,
   };
 
   const fourCutData: FourCutProps = {
     imageUrls: displayImageUrls.slice(0, 4),
     onImageClick: handleImageClick,
+    isClickable: isAiConvert,
   };
 
   return (
