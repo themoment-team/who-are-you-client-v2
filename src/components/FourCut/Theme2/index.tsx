@@ -7,7 +7,7 @@ const FourCutTheme2 = ({ imageUrls, onImageClick }: FourCutProps) => {
       <img
         src="/images/four-cut-theme2-cover.png"
         alt="cover image"
-        className="absolute top-0 left-0"
+        className="pointer-events-none absolute top-0 left-0"
       />
       <div className="flex flex-col items-center gap-[3rem]">
         <div className="flex gap-[.9375rem]">
