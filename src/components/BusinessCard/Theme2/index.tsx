@@ -1,6 +1,6 @@
 import { GSMLogo, LongBar } from '../../../assets';
 import type { BusinessCardProps } from '../../../types';
-import { formatPhoneNumber } from '../../../utils';
+import BusinessCardContactInfo from '../BusinessCardContactInfo';
 
 const BusinessCardTheme2 = ({
   name,
@@ -24,21 +24,7 @@ const BusinessCardTheme2 = ({
               </p>
             )}
           </div>
-          <div className="flex flex-col gap-[.3125rem]">
-            {major && (
-              <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-                Major) {major}
-              </p>
-            )}
-            {email && (
-              <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-                Email) {email}
-              </p>
-            )}
-            <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-              Tel) {formatPhoneNumber(tel)}
-            </p>
-          </div>
+          <BusinessCardContactInfo major={major} email={email} tel={tel} />
         </div>
       </div>
       <img
