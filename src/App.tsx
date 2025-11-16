@@ -28,6 +28,7 @@ const App = () => {
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
   const [aiConvertHistory, setAiConvertHistory] = useState<string[][]>([]);
   const [hasAiConvertedOnce, setHasAiConvertedOnce] = useState<boolean>(false);
+  const [convertingIndices, setConvertingIndices] = useState<Set<number>>(new Set());
 
   const convertSingleImage = async (imageUrl: string, selectedPrompt: PromptType) => {
     const convertedImageUrl = await generateAiImage({ imageUrl, selectedPrompt });
@@ -36,10 +37,20 @@ const App = () => {
 
   const convertAllImages = async () => {
     if (isAiConverting) return;
-    else setIsAiConverting(true);
+    setIsAiConverting(true);
+
+    setConvertingIndices(new Set(imageUrls.map((_, index) => index)));
 
     const convertedImageUrls = await Promise.all(
-      imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName)),
+      imageUrls.map(async (x, index) => {
+        const url = await convertSingleImage(x.imageUrl, x.promptName);
+        setConvertingIndices((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(index);
+          return newSet;
+        });
+        return url;
+      }),
     );
     setAiConvertImage(convertedImageUrls);
 
@@ -105,6 +116,8 @@ const App = () => {
             isAiConvert={isAiConvert}
             convertSingleImage={convertSingleImage}
             isAiConverting={isAiConverting}
+            convertingIndices={convertingIndices}
+            setConvertingIndices={setConvertingIndices}
           />
         )}
       </div>

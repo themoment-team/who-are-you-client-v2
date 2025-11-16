@@ -37,6 +37,8 @@ interface ThemeSelectPageProps {
   isAiConvert: boolean;
   convertSingleImage: (imageUrl: string, selectedPrompt: PromptType) => Promise<string>;
   isAiConverting: boolean;
+  convertingIndices: Set<number>;
+  setConvertingIndices: React.Dispatch<React.SetStateAction<Set<number>>>;
 }
 
 const ThemeSelectPage = ({
@@ -51,6 +53,8 @@ const ThemeSelectPage = ({
   isAiConvert,
   convertSingleImage,
   isAiConverting,
+  convertingIndices,
+  setConvertingIndices,
 }: ThemeSelectPageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
@@ -78,13 +82,16 @@ const ThemeSelectPage = ({
   const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
   const displayImageUrls = isAiConvert
-    ? isAiConverting
-      ? imageUrls.map(() => '/images/example.png')
-      : aiConvertImage
+    ? imageUrls.map((_, index) => {
+        if (convertingIndices.has(index)) {
+          return '/images/example.png';
+        }
+        return aiConvertImage[index] || '/images/example.png';
+      })
     : imageUrls.map((x) => x.imageUrl);
 
   const handleImageClick = (index: number = 0) => {
-    if (isAiConvert) {
+    if (isAiConvert && !convertingIndices.has(index)) {
       setSelectedImageIndex(index);
       setIsModalOpen(true);
     }
@@ -117,13 +124,14 @@ const ThemeSelectPage = ({
     tel: userInfo?.tel || '',
     imageUrl: displayImageUrls[0] || '',
     onImageClick: () => handleImageClick(0),
-    isClickable: isAiConvert,
+    isClickable: isAiConvert && !convertingIndices.has(0),
   };
 
   const fourCutData: FourCutProps = {
     imageUrls: displayImageUrls.slice(0, 4),
     onImageClick: handleImageClick,
     isClickable: isAiConvert,
+    convertingIndices,
   };
 
   return (
@@ -140,6 +148,7 @@ const ThemeSelectPage = ({
           isAiConvert={isAiConvert}
           convertSingleImage={convertSingleImage}
           isAiConverting={isAiConverting}
+          setConvertingIndices={setConvertingIndices}
           onClose={handleModalClose}
         />
       )}

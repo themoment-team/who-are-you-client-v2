@@ -17,6 +17,7 @@ interface PhotoReselectModalProps {
   isAiConvert: boolean;
   convertSingleImage: (imageUrl: string, selectedPrompt: PromptType) => Promise<string>;
   isAiConverting: boolean;
+  setConvertingIndices: React.Dispatch<React.SetStateAction<Set<number>>>;
   onClose: () => void;
 }
 
@@ -31,6 +32,7 @@ const PhotoReselectModal = ({
   isAiConvert,
   convertSingleImage,
   isAiConverting,
+  setConvertingIndices,
   onClose,
 }: PhotoReselectModalProps) => {
   const [isRegenerating, setIsRegenerating] = useState(false);
@@ -78,6 +80,8 @@ const PhotoReselectModal = ({
     if (isRegenerating || isAiConverting) return;
 
     setIsRegenerating(true);
+    setConvertingIndices((prev) => new Set(prev).add(selectedImageIndex));
+
     try {
       const originalImage = imageUrls[selectedImageIndex];
       const newConvertedImageUrl = await convertSingleImage(
@@ -96,6 +100,12 @@ const PhotoReselectModal = ({
         return newHistory;
       });
 
+      setAiConvertImage((prev) => {
+        const newImages = [...prev];
+        newImages[selectedImageIndex] = newConvertedImageUrl;
+        return newImages;
+      });
+
       setSelectedImageUrl(newConvertedImageUrl);
 
       toast.success('이미지가 재변환되었습니다!');
@@ -104,6 +114,11 @@ const PhotoReselectModal = ({
       toast.error('이미지 재변환에 실패했습니다. 다시 시도해주세요.');
     } finally {
       setIsRegenerating(false);
+      setConvertingIndices((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(selectedImageIndex);
+        return newSet;
+      });
     }
   };
 
@@ -162,7 +177,7 @@ const PhotoReselectModal = ({
           )}
         </div>
         <div className="flex justify-end">
-          <StepButton variant="next" onClick={handleConfirm} disabled={isRegenerating}>
+          <StepButton variant="next" onClick={handleConfirm}>
             확인
           </StepButton>
         </div>

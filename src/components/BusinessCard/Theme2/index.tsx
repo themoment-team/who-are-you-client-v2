@@ -9,6 +9,7 @@ const BusinessCardTheme2 = ({
   tel,
   imageUrl,
   onImageClick,
+  isClickable = true,
 }: BusinessCardProps) => {
   return (
     <div className="relative flex h-[11.8125rem] w-[21.25rem] justify-between bg-white p-[1.75rem] pl-[1.4375rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:border print:border-[#CFCFCF] print:shadow-none">
@@ -30,8 +31,8 @@ const BusinessCardTheme2 = ({
       <img
         src={imageUrl}
         alt="image"
-        className="h-[8.3125rem] w-[8.3125rem] cursor-pointer rounded-[.2875rem] object-cover object-center"
-        onClick={onImageClick}
+        className={`h-[8.3125rem] w-[8.3125rem] rounded-[.2875rem] object-cover object-center ${isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+        onClick={isClickable ? onImageClick : undefined}
       />
     </div>
   );

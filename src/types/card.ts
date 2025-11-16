@@ -14,4 +14,5 @@ export interface FourCutProps {
   imageUrls: string[];
   onImageClick: (index: number) => void;
   isClickable?: boolean;
+  convertingIndices?: Set<number>;
 }
