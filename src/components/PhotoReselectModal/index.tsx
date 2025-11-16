@@ -45,7 +45,7 @@ const PhotoReselectModal = ({
 
   const IMAGE_CLASS = isBusinessCard ? 'h-[8rem] w-[8rem]' : 'h-[12.8125rem] w-[10.25rem]';
   const BUTTON_SIZE_CLASS = IMAGE_CLASS;
-  const COMMON_BUTTON_CLASSES = `flex cursor-pointer flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8] ${BUTTON_SIZE_CLASS}`;
+  const COMMON_BUTTON_CLASSES = `flex flex-shrink-0 cursor-pointer flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8] ${BUTTON_SIZE_CLASS}`;
 
   const getAvailableImages = () => {
     if (isBusinessCard) {
@@ -135,14 +135,14 @@ const PhotoReselectModal = ({
             없을 경우 이미지 재변환으로 새로운 이미지를 생성할 수 있습니다.
           </p>
         </div>
-        <div className="flex justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-9">
           {availableImages.map((imageUrl, index) => {
             const isSelected = imageUrl === selectedImageUrl;
             return (
               <button
                 key={index}
                 onClick={() => handleImageClick(imageUrl)}
-                className={`cursor-pointer rounded-sm transition-opacity duration-200 ${IMAGE_CLASS} ${
+                className={`flex-shrink-0 cursor-pointer rounded-sm transition-opacity duration-200 ${IMAGE_CLASS} ${
                   isSelected ? '' : 'opacity-50'
                 }`}
                 aria-label={`이미지 ${index + 1} 선택`}
