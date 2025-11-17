@@ -5,11 +5,14 @@ export interface BusinessCardProps {
   major: string;
   email: string;
   tel: string;
-  imageSrc: string;
+  imageUrl: string;
   onImageClick: () => void;
+  isClickable?: boolean;
 }
 
 export interface FourCutProps {
-  imageSrcs: string[];
-  onImageClick: () => void;
+  imageUrls: string[];
+  onImageClick: (index: number) => void;
+  isClickable?: boolean;
+  convertingIndices?: Set<number>;
 }

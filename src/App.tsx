@@ -26,7 +26,9 @@ const App = () => {
   const [isAiConvert, setIsAiConvert] = useState<boolean>(false);
   const [isAiConverting, setIsAiConverting] = useState<boolean>(false);
   const [aiConvertImage, setAiConvertImage] = useState<string[]>([]);
+  const [aiConvertHistory, setAiConvertHistory] = useState<string[][]>([]);
   const [hasAiConvertedOnce, setHasAiConvertedOnce] = useState<boolean>(false);
+  const [convertingIndices, setConvertingIndices] = useState<Set<number>>(new Set());
 
   const convertSingleImage = async (imageUrl: string, selectedPrompt: PromptType) => {
     const convertedImageUrl = await generateAiImage({ imageUrl, selectedPrompt });
@@ -35,12 +37,36 @@ const App = () => {
 
   const convertAllImages = async () => {
     if (isAiConverting) return;
-    else setIsAiConverting(true);
+    setIsAiConverting(true);
+
+    setConvertingIndices(new Set(imageUrls.map((_, index) => index)));
 
     const convertedImageUrls = await Promise.all(
-      imageUrls.map((x) => convertSingleImage(x.imageUrl, x.promptName)),
+      imageUrls.map(async (x, index) => {
+        const url = await convertSingleImage(x.imageUrl, x.promptName);
+        setConvertingIndices((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(index);
+          return newSet;
+        });
+        return url;
+      }),
     );
     setAiConvertImage(convertedImageUrls);
+
+    setAiConvertHistory((prev) => {
+      const newHistory = [...prev];
+      convertedImageUrls.forEach((url, index) => {
+        if (!newHistory[index]) {
+          newHistory[index] = [];
+        }
+        if (!newHistory[index].includes(url)) {
+          newHistory[index].push(url);
+        }
+      });
+      return newHistory;
+    });
+
     setIsAiConverting(false);
   };
 
@@ -58,6 +84,7 @@ const App = () => {
             setImageUrls={setImageUrls}
             cardType={cardType}
             setHasAiConvertedOnce={setHasAiConvertedOnce}
+            setIsAiConvert={setIsAiConvert}
           />
         )}
         {step === STEP.AI_CONVERSION && (
@@ -76,7 +103,23 @@ const App = () => {
         {step === STEP.INFO_INPUT && (
           <InfoInputPage userInfo={userInfo} setUserInfo={setUserInfo} setStep={setStep} />
         )}
-        {step === STEP.THEME_SELECT && <ThemeSelectPage setStep={setStep} cardType={cardType} />}
+        {step === STEP.THEME_SELECT && (
+          <ThemeSelectPage
+            setStep={setStep}
+            cardType={cardType}
+            userInfo={userInfo}
+            imageUrls={imageUrls}
+            aiConvertImage={aiConvertImage}
+            setAiConvertImage={setAiConvertImage}
+            aiConvertHistory={aiConvertHistory}
+            setAiConvertHistory={setAiConvertHistory}
+            isAiConvert={isAiConvert}
+            convertSingleImage={convertSingleImage}
+            isAiConverting={isAiConverting}
+            convertingIndices={convertingIndices}
+            setConvertingIndices={setConvertingIndices}
+          />
+        )}
       </div>
     </Provider>
   );

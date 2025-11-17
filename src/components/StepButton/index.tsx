@@ -6,7 +6,7 @@ interface StepButtonProps {
 }
 
 const StepButton = ({ variant, onClick, children, disabled = false }: StepButtonProps) => {
-  const baseStyles = 'cursor-pointer font-medium transition-all ease-out';
+  const baseStyles = 'font-medium transition-all ease-out';
 
   const variantStyles = {
     back: 'decoration-skip-ink-none text-[1.25rem]/[1.875rem] text-[#888] underline duration-100 [text-underline-position:from-font] hover:text-[#222]',
@@ -17,10 +17,19 @@ const StepButton = ({ variant, onClick, children, disabled = false }: StepButton
     ? 'opacity-30'
     : 'hover:bg-[#222] hover:font-[600] hover:text-white';
 
+  const cursorStyle = disabled ? 'cursor-not-allowed' : 'cursor-pointer';
+
+  const handleClick = () => {
+    if (!disabled) {
+      onClick();
+    }
+  };
+
   return (
     <button
-      className={`${baseStyles} ${variantStyles[variant]} ${variant === 'next' ? nextStateStyles : ''}`}
-      onClick={onClick}
+      className={`${baseStyles} ${cursorStyle} ${variantStyles[variant]} ${variant === 'next' ? nextStateStyles : ''}`}
+      onClick={handleClick}
+      disabled={disabled}
     >
       {children}
     </button>

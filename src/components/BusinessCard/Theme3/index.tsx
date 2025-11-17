@@ -1,42 +1,50 @@
-import { GSMLogo, ShortBar } from '../../../assets';
+import { GSMLogo, ShortBar, Spin } from '../../../assets';
 import type { BusinessCardProps } from '../../../types';
+import BusinessCardContactInfo from '../BusinessCardContactInfo';
 
 const BusinessCardTheme3 = ({
   name,
   major,
   email,
   tel,
-  imageSrc,
+  imageUrl,
   onImageClick,
+  isClickable = true,
 }: BusinessCardProps) => {
   return (
-    <div className="relative flex h-[21.25rem] w-[11.8125rem] flex-col gap-[2.25rem] bg-white p-[1.75rem] shadow-[0_2px_6px_0_rgba(209,209,209,0.25)] print:border print:border-[#CFCFCF] print:shadow-none">
+    <div className="relative flex h-[21.25rem] w-[11.8125rem] flex-col gap-[2.25rem] bg-white p-[1.75rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:border print:border-[#CFCFCF] print:shadow-none">
       <GSMLogo top={264} left={24} />
-      <img
-        src={imageSrc}
-        alt="image"
-        className="h-[8.3125rem] w-[8.3125rem] cursor-pointer rounded-[.2875rem] object-cover object-center"
-        onClick={onImageClick}
-      />
+      {imageUrl === '/images/example.png' ? (
+        <div
+          className="flex h-[8.3125rem] w-[8.3125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-[.2875rem] bg-[#F8F8F8]"
+          aria-label="이미지 재변환 중"
+        >
+          <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
+            이미지
+            <br />
+            재변환 중
+          </p>
+          <Spin />
+        </div>
+      ) : (
+        <img
+          src={imageUrl}
+          alt="image"
+          className={`h-[8.3125rem] w-[8.3125rem] rounded-[.2875rem] object-cover object-center ${isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+          onClick={isClickable ? onImageClick : undefined}
+        />
+      )}
       <div className="z-10 flex h-full flex-col justify-between">
         <div className="flex flex-col gap-[.1875rem]">
           <p className="text-[1rem] font-semibold tracking-[.04rem]">{name}</p>
-          <p className="h-[.75rem] text-[.625rem] leading-[.625rem] font-normal tracking-[.0125rem] text-[#888]">
-            {major}
-          </p>
+          {major && (
+            <p className="h-[.75rem] text-[.625rem] leading-[.625rem] font-normal tracking-[.0125rem] text-[#888]">
+              {major}
+            </p>
+          )}
           <ShortBar />
         </div>
-        <div className="flex flex-col gap-[.3125rem]">
-          <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-            Major) {major}
-          </p>
-          <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-            Email) {email}
-          </p>
-          <p className="text-[.5313rem]/[.5906rem] font-normal tracking-[.0106rem] text-[#494949]">
-            Tel) {tel}
-          </p>
-        </div>
+        <BusinessCardContactInfo major={major} email={email} tel={tel} />
       </div>
     </div>
   );

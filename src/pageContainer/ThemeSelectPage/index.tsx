@@ -17,18 +17,47 @@ import {
 import {
   type BusinessCardProps,
   type CardType,
+  type ConvertImagePrompt,
   type FourCutProps,
+  type PromptType,
   STEP,
   type Step,
+  type userInfoFormType,
 } from '../../types';
 
 interface ThemeSelectPageProps {
   setStep: React.Dispatch<React.SetStateAction<Step>>;
   cardType: CardType | undefined;
+  userInfo: userInfoFormType | null;
+  imageUrls: ConvertImagePrompt[];
+  aiConvertImage: string[];
+  setAiConvertImage: React.Dispatch<React.SetStateAction<string[]>>;
+  aiConvertHistory: string[][];
+  setAiConvertHistory: React.Dispatch<React.SetStateAction<string[][]>>;
+  isAiConvert: boolean;
+  convertSingleImage: (imageUrl: string, selectedPrompt: PromptType) => Promise<string>;
+  isAiConverting: boolean;
+  convertingIndices: Set<number>;
+  setConvertingIndices: React.Dispatch<React.SetStateAction<Set<number>>>;
 }
 
-const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
+const ThemeSelectPage = ({
+  setStep,
+  cardType,
+  userInfo,
+  imageUrls,
+  aiConvertImage,
+  setAiConvertImage,
+  aiConvertHistory,
+  setAiConvertHistory,
+  isAiConvert,
+  convertSingleImage,
+  isAiConverting,
+  convertingIndices,
+  setConvertingIndices,
+}: ThemeSelectPageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [currentTheme, setCurrentTheme] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -52,8 +81,20 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
     : '@page {size: portrait;}';
   const reactToPrintFn = useReactToPrint({ contentRef, pageStyle });
 
-  const handleImageClick = () => {
-    setIsModalOpen(true);
+  const displayImageUrls = isAiConvert
+    ? imageUrls.map((_, index) => {
+        if (convertingIndices.has(index)) {
+          return '/images/example.png';
+        }
+        return aiConvertImage[index] || '/images/example.png';
+      })
+    : imageUrls.map((x) => x.imageUrl);
+
+  const handleImageClick = (index: number = 0) => {
+    if (isAiConvert && !convertingIndices.has(index)) {
+      setSelectedImageIndex(index);
+      setIsModalOpen(true);
+    }
   };
 
   const handleModalClose = () => {
@@ -69,34 +110,51 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
   };
 
   const handlePreviousStep = () => {
-    setStep(STEP.INFO_INPUT);
+    if (isBusinessCard) {
+      setStep(STEP.INFO_INPUT);
+    } else {
+      setStep(STEP.AI_CONVERSION);
+    }
   };
 
   const businessCardData: BusinessCardProps = {
-    name: '홍길동',
-    major: 'UI/UX Designer',
-    email: 'honggildong@gmail.com',
-    tel: '010-1234-5678',
-    imageSrc: '/images/example.jpg',
-    onImageClick: handleImageClick,
+    name: userInfo?.name || '',
+    major: userInfo?.major || '',
+    email: userInfo?.email || '',
+    tel: userInfo?.tel || '',
+    imageUrl: displayImageUrls[0] || '',
+    onImageClick: () => handleImageClick(0),
+    isClickable: isAiConvert && !convertingIndices.has(0),
   };
 
   const fourCutData: FourCutProps = {
-    imageSrcs: [
-      '/images/example.jpg',
-      '/images/example.jpg',
-      '/images/example.jpg',
-      '/images/example.jpg',
-    ],
+    imageUrls: displayImageUrls.slice(0, 4),
     onImageClick: handleImageClick,
+    isClickable: isAiConvert,
+    convertingIndices,
   };
 
   return (
     <div className="relative h-[61.5rem] w-[50rem] rounded-[1.5rem] border-0 bg-white px-[3rem] py-[5rem] shadow-[0_2px_6px_0_rgba(214,214,214,0.25)]">
-      {isModalOpen && <PhotoReselectModal cardType={cardType} onClose={handleModalClose} />}
+      {isModalOpen && (
+        <PhotoReselectModal
+          cardType={cardType}
+          selectedImageIndex={selectedImageIndex}
+          imageUrls={imageUrls}
+          aiConvertImage={aiConvertImage}
+          setAiConvertImage={setAiConvertImage}
+          aiConvertHistory={aiConvertHistory}
+          setAiConvertHistory={setAiConvertHistory}
+          isAiConvert={isAiConvert}
+          convertSingleImage={convertSingleImage}
+          isAiConverting={isAiConverting}
+          setConvertingIndices={setConvertingIndices}
+          onClose={handleModalClose}
+        />
+      )}
       <div
         className={`${
-          isLandscapeBusinessCard ? 'mb-[2.125rem]' : isFourCut ? 'mb-[2.25rem]' : 'mb-[6.875rem]'
+          isLandscapeBusinessCard ? 'mb-[2.1563rem]' : isFourCut ? 'mb-[2.25rem]' : 'mb-[6.875rem]'
         } flex flex-col gap-4`}
       >
         <h1 className="text-[2.25rem]/[2.25rem] font-semibold text-[#222]">
@@ -104,10 +162,14 @@ const ThemeSelectPage = ({ setStep, cardType }: ThemeSelectPageProps) => {
         </h1>
         <p className="text-[1.25rem]/[1.875rem] font-medium text-[#666]">
           인쇄하실 {cardTypeLabel}의 테마를 선택해주세요.
-          <br />
-          {isBusinessCard
-            ? '명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.'
-            : '사진을 선택해서 교체할 수도 있어요.'}
+          {isAiConvert && (
+            <>
+              <br />
+              {isBusinessCard
+                ? '명함에 들어간 사진을 바꾸고 싶다면 사진을 클릭해주세요.'
+                : '사진을 선택해서 교체할 수도 있어요.'}
+            </>
+          )}
         </p>
       </div>
       <div
