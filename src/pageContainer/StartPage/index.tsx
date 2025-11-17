@@ -22,9 +22,9 @@ const StartPage = ({ setStep, setCardType }: StartPageProps) => {
       <div className="flex flex-col gap-4">
         <h1 className="text-[4rem]/[4rem] font-black text-[#222]">WHO ARE YOU</h1>
         <p className="text-[1.25rem]/[1.75rem] font-medium text-[#666]">
-          AI로 변환한 사진으로 인생네컷을 찍거나
+          AI 기술을 통해 변환된 사진으로 명함과 인생네컷을 제작할 수 있는
           <br />
-          명함을 만들어 보세요. 약 5분동안 진행됩니다.
+          체험형 서비스입니다. 손쉽게 나만의 AI 작업물을 완성해보세요!
         </p>
       </div>
 
