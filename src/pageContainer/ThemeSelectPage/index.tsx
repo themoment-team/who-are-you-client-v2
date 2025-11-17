@@ -11,6 +11,9 @@ import {
   FourCutTheme1,
   FourCutTheme2,
   FourCutTheme3,
+  FourCutTheme4,
+  FourCutTheme5,
+  FourCutTheme6,
   PhotoReselectModal,
   StepButton,
 } from '../../components';
@@ -68,7 +71,7 @@ const ThemeSelectPage = ({
   const PORTRAIT_THEME_MAX_INDEX = 2;
   const themes = isBusinessCard
     ? [BusinessCardTheme1, BusinessCardTheme2, BusinessCardTheme3, BusinessCardTheme4]
-    : [FourCutTheme1, FourCutTheme2, FourCutTheme3];
+    : [FourCutTheme1, FourCutTheme2, FourCutTheme3, FourCutTheme4, FourCutTheme5, FourCutTheme6];
   const CurrentThemeComponent = themes[currentTheme] as React.FC<BusinessCardProps | FourCutProps>;
 
   const isPortraitBusinessCard = isBusinessCard && currentTheme < PORTRAIT_THEME_MAX_INDEX;
