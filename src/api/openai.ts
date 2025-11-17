@@ -33,7 +33,7 @@ const generateAiImage = async ({
           content: [
             {
               type: 'text',
-              text: 'Please describe this picture in English in great detail, without using markdown. Especially focus on the build and gender.',
+              text: 'Please describe this picture in English in great detail, without using markdown.',
             },
             {
               type: 'image_url',
