@@ -1,4 +1,4 @@
-import { GSMLogo, LongBar } from '../../../assets';
+import { GSMLogo, LongBar, Spin } from '../../../assets';
 import type { BusinessCardProps } from '../../../types';
 import BusinessCardContactInfo from '../BusinessCardContactInfo';
 
@@ -28,12 +28,26 @@ const BusinessCardTheme2 = ({
           <BusinessCardContactInfo major={major} email={email} tel={tel} />
         </div>
       </div>
-      <img
-        src={imageUrl}
-        alt="image"
-        className={`h-[8.3125rem] w-[8.3125rem] rounded-[.2875rem] object-cover object-center ${isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-        onClick={isClickable ? onImageClick : undefined}
-      />
+      {imageUrl === '/images/example.png' ? (
+        <div
+          className="flex h-[8.3125rem] w-[8.3125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-[.2875rem] bg-[#F8F8F8]"
+          aria-label="이미지 재변환 중"
+        >
+          <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
+            이미지
+            <br />
+            재변환 중
+          </p>
+          <Spin />
+        </div>
+      ) : (
+        <img
+          src={imageUrl}
+          alt="image"
+          className={`h-[8.3125rem] w-[8.3125rem] rounded-[.2875rem] object-cover object-center ${isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+          onClick={isClickable ? onImageClick : undefined}
+        />
+      )}
     </div>
   );
 };
