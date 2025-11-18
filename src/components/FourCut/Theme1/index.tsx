@@ -6,20 +6,21 @@ const FourCutTheme1 = ({
   onImageClick,
   isClickable = true,
   convertingIndices,
+  aiConvertHistory,
 }: FourCutProps) => {
   return (
-    <div className="flex h-[34.6875rem] w-[23.4375rem] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none print:outline print:outline-[#CFCFCF]">
+    <div className="flex h-[34.6875rem] w-[23.4375rem] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none">
       <div className="flex flex-col items-center gap-[.9375rem]">
         <div className="flex gap-[.9375rem]">
           {imageUrls[0] === '/images/example.png' ? (
             <div
               className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label="이미지 재변환 중"
+              aria-label={`이미지 ${aiConvertHistory?.[0]?.length ? '재' : ''}변환 중`}
             >
               <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
                 이미지
                 <br />
-                재변환 중
+                {aiConvertHistory?.[0]?.length ? '재' : ''}변환 중
               </p>
               <Spin />
             </div>
@@ -36,12 +37,12 @@ const FourCutTheme1 = ({
           {imageUrls[1] === '/images/example.png' ? (
             <div
               className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label="이미지 재변환 중"
+              aria-label={`이미지 ${aiConvertHistory?.[1]?.length ? '재' : ''}변환 중`}
             >
               <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
                 이미지
                 <br />
-                재변환 중
+                {aiConvertHistory?.[1]?.length ? '재' : ''}변환 중
               </p>
               <Spin />
             </div>
@@ -60,12 +61,12 @@ const FourCutTheme1 = ({
           {imageUrls[2] === '/images/example.png' ? (
             <div
               className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label="이미지 재변환 중"
+              aria-label={`이미지 ${aiConvertHistory?.[2]?.length ? '재' : ''}변환 중`}
             >
               <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
                 이미지
                 <br />
-                재변환 중
+                {aiConvertHistory?.[2]?.length ? '재' : ''}변환 중
               </p>
               <Spin />
             </div>
@@ -82,12 +83,12 @@ const FourCutTheme1 = ({
           {imageUrls[3] === '/images/example.png' ? (
             <div
               className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label="이미지 재변환 중"
+              aria-label={`이미지 ${aiConvertHistory?.[3]?.length ? '재' : ''}변환 중`}
             >
               <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
                 이미지
                 <br />
-                재변환 중
+                {aiConvertHistory?.[3]?.length ? '재' : ''}변환 중
               </p>
               <Spin />
             </div>

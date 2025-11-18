@@ -10,6 +10,7 @@ const BusinessCardTheme3 = ({
   imageUrl,
   onImageClick,
   isClickable = true,
+  aiConvertHistory,
 }: BusinessCardProps) => {
   return (
     <div className="relative flex h-[21.25rem] w-[11.8125rem] flex-col gap-[2.25rem] bg-white p-[1.75rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:border print:border-[#CFCFCF] print:shadow-none">
@@ -17,12 +18,12 @@ const BusinessCardTheme3 = ({
       {imageUrl === '/images/example.png' ? (
         <div
           className="flex h-[8.3125rem] w-[8.3125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-[.2875rem] bg-[#F8F8F8]"
-          aria-label="이미지 재변환 중"
+          aria-label={`이미지 ${aiConvertHistory?.[0]?.length ? '재' : ''}변환 중`}
         >
           <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
             이미지
             <br />
-            재변환 중
+            {aiConvertHistory?.[0]?.length ? '재' : ''}변환 중
           </p>
           <Spin />
         </div>
