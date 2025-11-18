@@ -8,7 +8,10 @@ interface InputFormItemProps extends React.InputHTMLAttributes<HTMLInputElement>
 }
 
 const InputFormItem = forwardRef<HTMLInputElement, InputFormItemProps>(
-  ({ inputTitle, placeholder, errorMessage, required = false, ...rest }, ref) => {
+  (
+    { inputTitle, placeholder, errorMessage, required = false, value, onChange, onBlur, ...rest },
+    ref,
+  ) => {
     return (
       <div className="flex flex-col">
         <label className="mb-[0.75rem] flex items-center px-[0.25rem] text-[#222]">
@@ -26,11 +29,14 @@ const InputFormItem = forwardRef<HTMLInputElement, InputFormItemProps>(
 
         <input
           ref={ref}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
           placeholder={placeholder}
           className={`rounded-[0.75rem] border p-[1rem] text-[1rem]/[1rem] font-medium placeholder-[#888] transition-colors duration-[150ms] ease-[cubic-bezier(0.97,-0.02,0.03,1)] outline-none ${
             errorMessage
               ? 'border-[#FF0002] text-[#222]'
-              : 'border-[#888] text-[#888] hover:border-[#666] hover:text-[#666] hover:placeholder-[#666] focus:border-[#222] focus:bg-[#F8F8F8] focus:text-[#222] focus:placeholder-[#222]'
+              : 'border-[#888] text-[#222] hover:border-[#666] hover:text-[#222] focus:border-[#222] focus:bg-[#F8F8F8] focus:text-[#222]'
           }`}
           {...rest}
         />
