@@ -1,20 +1,20 @@
 import { GSMLogoWithText, GwangjuFutureEducationExpo, Spin } from '../../../assets';
 import type { FourCutProps } from '../../../types';
 
-const FourCutTheme2 = ({
+const FourCutTheme6 = ({
   imageUrls,
   onImageClick,
   isClickable = true,
   convertingIndices,
 }: FourCutProps) => {
   return (
-    <div className="relative flex h-[34.6875rem] w-[23.4375rem] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] pt-[2.125rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none">
+    <div className="relative flex h-[34.6875rem] w-[23.4375rem] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] pt-[2.25rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none print:outline print:outline-[#CFCFCF]">
       <img
-        src="/images/four-cut-theme3-cover.png"
+        src="/images/four-cut-theme6-cover.png"
         alt="cover image"
         className="pointer-events-none absolute top-0 left-0"
       />
-      <div className="flex flex-col items-center gap-[1.5313rem]">
+      <div className="flex flex-col items-center gap-[.9375rem]">
         <div className="flex gap-[.9375rem]">
           {imageUrls[0] === '/images/example.png' ? (
             <div
@@ -120,4 +120,4 @@ const FourCutTheme2 = ({
   );
 };
 
-export default FourCutTheme2;
+export default FourCutTheme6;

@@ -8,13 +8,13 @@ const FourCutTheme2 = ({
   convertingIndices,
 }: FourCutProps) => {
   return (
-    <div className="relative flex h-[34.6875rem] w-[23.4375rem] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] pt-[2.125rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none">
+    <div className="relative flex h-[34.6875rem] w-[23.4375rem] flex-col justify-between bg-white px-[1.125rem] py-[1.5rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none">
       <img
-        src="/images/four-cut-theme3-cover.png"
+        src="/images/four-cut-theme4-cover.png"
         alt="cover image"
         className="pointer-events-none absolute top-0 left-0"
       />
-      <div className="flex flex-col items-center gap-[1.5313rem]">
+      <div className="flex flex-col items-center gap-[1.7813rem]">
         <div className="flex gap-[.9375rem]">
           {imageUrls[0] === '/images/example.png' ? (
             <div
