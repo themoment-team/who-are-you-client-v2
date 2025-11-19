@@ -87,13 +87,8 @@ const AiConversionPage = ({
           {imageUrls[0].promptName && cardType === 'BUSINESS_CARD' && (
             <div className="flex gap-9">
               <p className="text-xl leading-[150%] font-bold text-black">AI 변환 키워드 </p>
-              <div className="flex items-center gap-[0.88rem]">
-                <div className="flex items-center justify-center rounded-[0.625rem] border border-solid px-4 py-1 text-[#222]">
-                  {imageUrls[0].promptName}
-                </div>
-                <div className="rotate-45 cursor-pointer" onClick={() => setIsModalOpen(true)}>
-                  <Plus width={'0.625rem'} height={'0.625rem'} />
-                </div>
+              <div className="flex items-center justify-center rounded-[0.625rem] border border-solid px-4 py-1 text-[#222] cursor-pointer" onClick={() => setIsModalOpen(true)}>
+                {imageUrls[0].promptName}
               </div>
             </div>
           )}
