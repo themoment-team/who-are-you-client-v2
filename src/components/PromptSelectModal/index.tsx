@@ -137,6 +137,7 @@ const PromptSelectModal = ({
             </StepButton>
             <StepButton
               variant="next"
+              disabled={imageUrls.some((item) => item.promptName === null)}
               onClick={() => {
                 if (!imageUrls.some((x) => x.promptName === null)) setIsModalOpen(false);
               }}
