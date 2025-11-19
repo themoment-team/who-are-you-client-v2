@@ -128,6 +128,7 @@ const ThemeSelectPage = ({
     imageUrl: displayImageUrls[0] || '',
     onImageClick: () => handleImageClick(0),
     isClickable: isAiConvert && !convertingIndices.has(0),
+    aiConvertHistory,
   };
 
   const fourCutData: FourCutProps = {
@@ -135,6 +136,7 @@ const ThemeSelectPage = ({
     onImageClick: handleImageClick,
     isClickable: isAiConvert,
     convertingIndices,
+    aiConvertHistory,
   };
 
   return (
@@ -211,7 +213,7 @@ const ThemeSelectPage = ({
         <StepButton variant="back" onClick={handlePreviousStep}>
           이전으로
         </StepButton>
-        <StepButton variant="next" onClick={reactToPrintFn}>
+        <StepButton variant="next" onClick={reactToPrintFn} disabled={convertingIndices.size > 0}>
           인쇄하기
         </StepButton>
       </div>

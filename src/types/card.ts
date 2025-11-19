@@ -8,6 +8,7 @@ export interface BusinessCardProps {
   imageUrl: string;
   onImageClick: () => void;
   isClickable?: boolean;
+  aiConvertHistory?: string[][];
 }
 
 export interface FourCutProps {
@@ -15,4 +16,5 @@ export interface FourCutProps {
   onImageClick: (index: number) => void;
   isClickable?: boolean;
   convertingIndices?: Set<number>;
+  aiConvertHistory?: string[][];
 }
