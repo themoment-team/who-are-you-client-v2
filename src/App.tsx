@@ -114,7 +114,7 @@ const App = () => {
       // 프롬프트만 변경된 경우 hasAiConvertedOnce만 false로 설정
       setHasAiConvertedOnce(false);
     }
-  }, [imageUrls, previousImageUrls]);
+  }, [imageUrls]);
 
   return (
     <Provider>
