@@ -26,7 +26,7 @@ const generateAiImage = async ({
     });
 
     const visionResponse = await openai.chat.completions.create({
-      model: 'chatgpt-4o-latest',
+      model: 'gpt-4o',
       messages: [
         {
           role: 'user',
@@ -49,9 +49,13 @@ const generateAiImage = async ({
 
     const imageDescription = visionResponse.choices[0]?.message.content;
 
+    if (!selectedPrompt || !prompt[selectedPrompt]) {
+      return '';
+    }
+
     const img = await openai.images.generate({
       model: 'dall-e-3',
-      prompt: `2D Anime-style ${prompt[selectedPrompt!]} for One image this style: ${imageDescription}`,
+      prompt: `2D Anime-style ${prompt[selectedPrompt]} for One image this style: ${imageDescription}`,
       n: 1,
       size: '1024x1024',
     });
