@@ -31,9 +31,9 @@ const generateAiImage = async ({
 
     const img = await openai.images.edit({
       model: 'gpt-image-2.5-flare-2026-09-08',
-      quality: 'low',
+      quality: 'medium',
       image: imageFile,
-      prompt: `Redraw the person in this photo in the following style, keeping their pose, hairstyle, outfit and composition. ${prompt[selectedPrompt!]}`,
+      prompt: `Redraw the person in this photo in the following style. Keep the person clearly recognizable: preserve their face shape, facial features, hairstyle and hair color, glasses and accessories, expression, pose, outfit and overall composition. ${prompt[selectedPrompt!]} If the style description conflicts with the person's actual appearance, keep the person's actual appearance.`,
       n: 1,
       size: '1024x1024',
     });
