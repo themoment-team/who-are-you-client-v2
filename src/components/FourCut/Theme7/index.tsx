@@ -1,5 +1,12 @@
-import { GSMLogoWithText, GwangjuFutureEducationExpo, Spin } from '../../../assets';
 import type { FourCutProps } from '../../../types';
+import FourCutFooter from '../FourCutFooter';
+import FourCutPhotoGrid from '../FourCutPhotoGrid';
+
+// 캐릭터 PNG는 저장소에 포함하지 않으므로, 별도로 넣은 환경에서만 env로 켬
+const CHARACTER_SRC =
+  import.meta.env.VITE_USE_THEME7_CHARACTER_IMAGE === 'true'
+    ? '/images/four-cut-theme7-character.png'
+    : '/images/four-cut-theme7-character.svg';
 
 const FourCutTheme7 = ({
   imageUrls,
@@ -12,121 +19,23 @@ const FourCutTheme7 = ({
     <div className="relative flex h-[34.6875rem] w-[23.4375rem] flex-col justify-between bg-[#FFD3E2] bg-[url('/images/four-cut-theme7-bg.svg')] bg-cover px-[1.125rem] py-[1.5rem] pt-[2.25rem] shadow-[0_2px_6px_0_rgba(209,209,209,1)] print:shadow-none">
       <img
         src="/images/four-cut-theme7-cover.svg"
-        alt="cover image"
+        alt=""
         className="pointer-events-none absolute top-0 left-0 z-10 h-full w-full"
       />
       <img
-        src="/images/four-cut-theme7-character.png"
-        alt="character"
+        src={CHARACTER_SRC}
+        alt=""
         className="pointer-events-none absolute bottom-[.75rem] left-1/2 z-10 h-[4.375rem] max-w-[8rem] -translate-x-1/2 object-contain"
-        onError={(e) => {
-          // 캐릭터 사진이 없으면 기본 캐릭터로 대체
-          const fallback = '/images/four-cut-theme7-character.svg';
-          if (!e.currentTarget.src.endsWith(fallback)) e.currentTarget.src = fallback;
-        }}
       />
-      <div className="flex flex-col items-center gap-[.9375rem]">
-        <div className="flex gap-[.9375rem]">
-          {imageUrls[0] === '/images/example.png' ? (
-            <div
-              className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label={`이미지 ${aiConvertHistory?.[0]?.length ? '재' : ''}변환 중`}
-            >
-              <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
-                이미지
-                <br />
-                {aiConvertHistory?.[0]?.length ? '재' : ''}변환 중
-              </p>
-              <Spin />
-            </div>
-          ) : (
-            <img
-              src={imageUrls[0]}
-              alt="image 1"
-              className={`h-[12.6563rem] w-[10.125rem] object-cover object-center ${isClickable && !convertingIndices?.has(0) ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-              onClick={
-                isClickable && !convertingIndices?.has(0) ? () => onImageClick(0) : undefined
-              }
-            />
-          )}
-          {imageUrls[1] === '/images/example.png' ? (
-            <div
-              className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label={`이미지 ${aiConvertHistory?.[1]?.length ? '재' : ''}변환 중`}
-            >
-              <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
-                이미지
-                <br />
-                {aiConvertHistory?.[1]?.length ? '재' : ''}변환 중
-              </p>
-              <Spin />
-            </div>
-          ) : (
-            <img
-              src={imageUrls[1]}
-              alt="image 2"
-              className={`h-[12.6563rem] w-[10.125rem] object-cover object-center ${isClickable && !convertingIndices?.has(1) ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-              onClick={
-                isClickable && !convertingIndices?.has(1) ? () => onImageClick(1) : undefined
-              }
-            />
-          )}
-        </div>
-        <div className="flex gap-[.9375rem]">
-          {imageUrls[2] === '/images/example.png' ? (
-            <div
-              className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label={`이미지 ${aiConvertHistory?.[2]?.length ? '재' : ''}변환 중`}
-            >
-              <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
-                이미지
-                <br />
-                {aiConvertHistory?.[2]?.length ? '재' : ''}변환 중
-              </p>
-              <Spin />
-            </div>
-          ) : (
-            <img
-              src={imageUrls[2]}
-              alt="image 3"
-              className={`h-[12.6563rem] w-[10.125rem] object-cover object-center ${isClickable && !convertingIndices?.has(2) ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-              onClick={
-                isClickable && !convertingIndices?.has(2) ? () => onImageClick(2) : undefined
-              }
-            />
-          )}
-          {imageUrls[3] === '/images/example.png' ? (
-            <div
-              className="flex h-[12.6563rem] w-[10.125rem] flex-shrink-0 cursor-not-allowed flex-col items-center justify-center gap-4 rounded-sm bg-[#F8F8F8]"
-              aria-label={`이미지 ${aiConvertHistory?.[3]?.length ? '재' : ''}변환 중`}
-            >
-              <p className="text-center text-[1rem]/[1rem] font-bold text-[#666]">
-                이미지
-                <br />
-                {aiConvertHistory?.[3]?.length ? '재' : ''}변환 중
-              </p>
-              <Spin />
-            </div>
-          ) : (
-            <img
-              src={imageUrls[3]}
-              alt="image 4"
-              className={`h-[12.6563rem] w-[10.125rem] object-cover object-center ${isClickable && !convertingIndices?.has(3) ? 'cursor-pointer' : 'cursor-not-allowed'}`}
-              onClick={
-                isClickable && !convertingIndices?.has(3) ? () => onImageClick(3) : undefined
-              }
-            />
-          )}
-        </div>
-      </div>
-      <div className="z-10 flex items-center justify-between">
-        <GSMLogoWithText />
-        {import.meta.env.VITE_SHOW_EXPO_LOGO === 'true' && (
-          <div>
-            <GwangjuFutureEducationExpo />
-          </div>
-        )}
-      </div>
+      <FourCutPhotoGrid
+        imageUrls={imageUrls}
+        onImageClick={onImageClick}
+        isClickable={isClickable}
+        convertingIndices={convertingIndices}
+        aiConvertHistory={aiConvertHistory}
+        rowGapClassName="gap-[.9375rem]"
+      />
+      <FourCutFooter />
     </div>
   );
 };
