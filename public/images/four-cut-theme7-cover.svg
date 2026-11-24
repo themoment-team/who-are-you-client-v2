@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="555" viewBox="0 0 375 555">
+  <defs>
+    <g id="bow">
+      <path d="M0 0 C -6 -11 -22 -13 -22 0 C -22 13 -6 11 0 0 Z" fill="#E60039" stroke="#3B1F24" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M0 0 C 6 -11 22 -13 22 0 C 22 13 6 11 0 0 Z" fill="#E60039" stroke="#3B1F24" stroke-width="1.8" stroke-linejoin="round" />
+      <ellipse cx="-13" cy="-1" rx="4" ry="3" fill="#FFFFFF" fill-opacity="0.45" />
+      <ellipse cx="0" cy="0" rx="5.5" ry="6.5" fill="#E60039" stroke="#3B1F24" stroke-width="1.8" />
+    </g>
+    <path id="heart" d="M0 7 C -11 -1 -9 -11 -3.5 -10 C -1.5 -9.6 0 -8 0 -6.5 C 0 -8 1.5 -9.6 3.5 -10 C 9 -11 11 -1 0 7 Z" />
+    <path id="sparkle" d="M0 -6 C 1 -1 1 -1 6 0 C 1 1 1 1 0 6 C -1 1 -1 1 -6 0 C -1 -1 -1 -1 0 -6 Z" />
+  </defs>
+
+  <!-- 상단 하트 -->
+  <use href="#heart" transform="translate(84 18) scale(0.8)" fill="#FF5C8A" />
+  <use href="#heart" transform="translate(291 18) scale(0.8)" fill="#FF5C8A" />
+
+  <!-- 사진 모서리 리본 -->
+  <use href="#bow" transform="translate(28 42) rotate(-20) scale(0.85)" />
+  <use href="#bow" transform="translate(347 450) rotate(18) scale(0.85)" />
+
+  <!-- 사진 사이 하트 -->
+  <use href="#heart" transform="translate(187.5 246) scale(1.4)" fill="#FF5C8A" stroke="#FFFFFF" stroke-width="2" />
+
+  <!-- 가장자리 장식 -->
+  <use href="#heart" transform="translate(9 150) scale(0.6)" fill="#E60039" />
+  <use href="#sparkle" transform="translate(9 330)" fill="#FFFFFF" />
+  <use href="#heart" transform="translate(366 120) scale(0.6)" fill="#FF8FB1" />
+  <use href="#sparkle" transform="translate(366 300)" fill="#FFFFFF" />
+  <use href="#heart" transform="translate(366 380) scale(0.5)" fill="#E60039" />
+
+  <!-- 하단 장식 -->
+  <use href="#sparkle" transform="translate(126 488) scale(0.9)" fill="#FFFFFF" />
+  <use href="#heart" transform="translate(118 516) scale(0.6)" fill="#FF5C8A" />
+  <use href="#bow" transform="translate(252 498) rotate(10) scale(0.55)" />
+  <use href="#sparkle" transform="translate(258 524) scale(0.7)" fill="#FFFFFF" />
+</svg>

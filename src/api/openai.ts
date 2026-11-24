@@ -6,7 +6,7 @@ const prompt = {
   디즈니: `A 3D animated portrait in the exact style of a Disney or Pixar character, inspired by movies like Tangled, Frozen, and Encanto. The character has extremely large and expressive eyes, a small nose, soft rounded facial features, and slightly exaggerated proportions. The skin is flawless and glowing, with soft lighting and a dreamy fairytale color palette. The expression is kind and charming, like a Disney princess or prince. Rendered with cinematic lighting and studio-quality background. Stylized, not realistic. Disney 3D animation look, not anime or cartoon.`,
   마인크래프트: `Convert this image into Minecraft style: voxel art, pixelated blocks, low resolution textures, cubic shapes, blocky environment, bright lighting, 2D Minecraft aesthetic. Not divided, but forming a single mass.`,
   스누피: `Face illustration in Peanuts cartoon style, minimal lines, round head, small dot eyes, simple mouth, flat colors, inspired by Snoopy and Charlie Brown comics. No shading, no realism.`,
-  심슨: `Convert this person into a character in *The Simpsons* TV show. Use flat 2D cartoon style with thick black outlines and a limited color palette. The character must have bright yellow skin, large round white eyes with black pupils, a wide overbite, and a comically exaggerated facial expression. Style the hair in blocky or spiky cartoon shapes. Use only flat shading — no gradients or 3D effects. Ensure the character looks like it belongs in a screenshot from The Simpsons, standing in Springfield with the show's signature humor and satirical American cartoon vibe. No realism, no anime, no webtoon — only classic Simpsons art style.`,
+  심슨: `Draw this person as an original character in a classic American TV sitcom cartoon style. Use flat 2D cartoon style with thick black outlines and a limited, saturated color palette. The character must have bright yellow skin, large round white eyes with small black pupils, a slight overbite, and a friendly, cheerful expression. Style the hair in simple blocky or spiky cartoon shapes. Use only flat shading — no gradients or 3D effects. Plain, simple suburban background. No realism, no anime, no webtoon.`,
   레고: `Transform the person into a LEGO Minifigure character with a cylindrical head, printed face, blocky body, LEGO-style hair, and glossy plastic colors; do not create a brick-built scene, focus only on the character.`,
 } as const;
 
@@ -25,39 +25,22 @@ const generateAiImage = async ({
       dangerouslyAllowBrowser: true,
     });
 
-    const visionResponse = await openai.chat.completions.create({
-      model: 'chatgpt-4o-latest',
-      messages: [
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'text',
-              text: 'Please describe this picture in English in great detail, without using markdown.',
-            },
-            {
-              type: 'image_url',
-              image_url: {
-                url: imageUrl,
-              },
-            },
-          ],
-        },
-      ],
-      max_tokens: 1000,
-    });
+    // 촬영 이미지는 data URL이므로 업로드 가능한 File로 변환
+    const imageBlob = await (await fetch(imageUrl)).blob();
+    const imageFile = new File([imageBlob], 'photo.png', { type: imageBlob.type });
 
-    const imageDescription = visionResponse.choices[0]?.message.content;
-
-    const img = await openai.images.generate({
-      model: 'dall-e-3',
-      prompt: `2D Anime-style ${prompt[selectedPrompt!]} for One image this style: ${imageDescription}`,
+    const img = await openai.images.edit({
+      model: 'gpt-image-2.5-flare-2026-09-08',
+      quality: 'medium',
+      image: imageFile,
+      prompt: `Redraw the person in this photo in the following style. Keep the person clearly recognizable: preserve their face shape, facial features, hairstyle and hair color, glasses and accessories, expression, pose, outfit and overall composition. ${prompt[selectedPrompt!]} If the style description conflicts with the person's actual appearance, keep the person's actual appearance.`,
       n: 1,
       size: '1024x1024',
     });
 
-    const url = img.data && img.data[0]?.url ? img.data[0].url : '';
-    return url;
+    // gpt-image 계열은 url 대신 base64(b64_json)로만 응답
+    const b64 = img.data?.[0]?.b64_json;
+    return b64 ? `data:image/png;base64,${b64}` : '';
   } catch (err) {
     console.error(err);
     return '';
